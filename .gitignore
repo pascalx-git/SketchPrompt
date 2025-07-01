@@ -1,0 +1,26 @@
+# Node modules and logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+out/
+dist/
+.vscode-test/
+*.vsix
+
+# Vite/React build output
+media/sketching.js
+media/sketching.js.map
+media/sketching.css
+media/*.js
+media/*.js.map
+media/*.css
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/

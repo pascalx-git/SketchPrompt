@@ -1,0 +1,121 @@
+{
+  "name": "sketchprompt",
+  "displayName": "SketchPrompt",
+  "description": "Sketching inside Cursor IDE for visual thinking and AI prompting",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ptlola/SketchPrompt.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:sketchprompt.openCanvas"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sketchprompt.openCanvas",
+        "title": "SketchPrompt: Open Canvas"
+      },
+      {
+        "command": "sketchprompt.newSketch",
+        "title": "SketchPrompt: New Sketch"
+      }
+    ],
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "sketchPromptPanel",
+          "title": "SketchPrompt",
+          "icon": "media/SketchPrompt-Logo-64px-square.png"
+        }
+      ]
+    },
+    "views": {
+      "sketchPromptPanel": [
+        {
+          "id": "sketchPromptView",
+          "name": "Canvas",
+          "type": "webview"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "sketchprompt.openCanvas",
+          "when": "view == sketchPromptView",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "sketchprompt.openCanvas",
+          "when": "true"
+        }
+      ]
+    },
+    "customEditors": [
+      {
+        "viewType": "sketchprompt.editor",
+        "displayName": "SketchPrompt Editor",
+        "selector": [
+          {
+            "filenamePattern": "**/*.sketchprompt"
+          }
+        ]
+      }
+    ],
+    "languages": [
+      {
+        "id": "sketchprompt",
+        "aliases": [
+          "SketchPrompt"
+        ],
+        "extensions": [
+          ".sketchprompt"
+        ],
+        "configuration": "./sketchprompt-language-configuration.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile && npm run build-webview",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "build-webview": "vite build",
+    "watch-webview": "vite build --watch",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "16.x",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.6.0",
+    "eslint": "^8.0.0",
+    "glob": "^8.0.0",
+    "mocha": "^10.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^6.3.5",
+    "vsce": "^2.0.0"
+  },
+  "dependencies": {
+    "@tldraw/tldraw": "^2.0.0-alpha.17",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
