@@ -1,4 +1,4 @@
-# SketchPrompt
+# ![SketchPrompt Logo](media/SketchPrompt-Logo-32px-square.png) SketchPrompt
 
 A Cursor IDE extension that provides rich sketching capabilities for visual thinking and AI prompting.
 
