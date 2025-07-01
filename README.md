@@ -1,15 +1,14 @@
 # SketchPrompt
 
-A Cursor IDE extension that provides rich sketching capabilities for visual thinking and AI prompting using TLDraw.
+A Cursor IDE extension that provides rich sketching capabilities for visual thinking and AI prompting.
 
 ## Features
 
 - **Rich Sketching**: Full TLDraw integration with shapes, text, drawing tools, and more
+- **Structured Data Understanding**: Cursor can read and analyze the raw JSON structure of `.sketchprompt` files, providing deep semantic understanding beyond just visual content
 - **File Persistence**: Save and load sketches as `.sketchprompt` files
-- **Copy to Prompt**: Export sketches as images and insert them into your documents
+- **Copy to Prompt**: Export sketches as images and seamlessly insert them into your prompts
 - **Custom Editor**: Dedicated editor for `.sketchprompt` files
-- **Panel Integration**: Access sketching tools from the side panel
-- **Dark/Light Theme Support**: Automatically adapts to your IDE theme
 
 ## Installation
 

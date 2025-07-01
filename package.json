@@ -3,6 +3,7 @@
   "displayName": "SketchPrompt",
   "description": "Sketching inside Cursor IDE for visual thinking and AI prompting",
   "version": "0.0.1",
+  "icon": "media/SketchPrompt-Logo-64px-square.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/ptlola/SketchPrompt.git"
@@ -60,6 +61,13 @@
           "command": "sketchprompt.openCanvas",
           "when": "true"
         }
+      ],
+      "explorer/context": [
+        {
+          "command": "sketchprompt.newSketch",
+          "when": "explorerResourceIsFolder",
+          "group": "navigation"
+        }
       ]
     },
     "customEditors": [
@@ -73,6 +81,13 @@
         ]
       }
     ],
+    "icons": [
+      {
+        "id": "sketchprompt-file",
+        "description": "SketchPrompt file icon",
+        "path": "./media/SketchPrompt-Logo-64px-square.png"
+      }
+    ],
     "languages": [
       {
         "id": "sketchprompt",
@@ -82,7 +97,8 @@
         "extensions": [
           ".sketchprompt"
         ],
-        "configuration": "./sketchprompt-language-configuration.json"
+        "configuration": "./sketchprompt-language-configuration.json",
+        "icon": "sketchprompt-file"
       }
     ]
   },
@@ -99,7 +115,7 @@
   "devDependencies": {
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.0",
-    "@types/node": "16.x",
+    "@types/node": "^20.19.2",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "@types/vscode": "^1.74.0",
@@ -114,8 +130,8 @@
     "vsce": "^2.0.0"
   },
   "dependencies": {
-    "@tldraw/tldraw": "^2.0.0-alpha.17",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "tldraw": "^3.13.4"
   }
 }

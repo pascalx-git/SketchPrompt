@@ -36,6 +36,9 @@ export class SketchPromptProvider implements vscode.WebviewViewProvider {
 					case 'exportSketch':
 						this._exportSketch(message.data);
 						return;
+					case 'newSketch':
+						vscode.commands.executeCommand('sketchprompt.newSketch');
+						return;
 				}
 			}
 		);
@@ -54,7 +57,7 @@ export class SketchPromptProvider implements vscode.WebviewViewProvider {
 			<head>
 				<meta charset="UTF-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}' 'unsafe-eval'; img-src data: blob:;">
+				<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tldraw.com; style-src ${webview.cspSource} 'unsafe-inline' https://cdn.tldraw.com; script-src 'nonce-${nonce}' 'unsafe-eval' https://cdn.tldraw.com; img-src data: blob: https://cdn.tldraw.com; font-src https://cdn.tldraw.com; connect-src https://cdn.tldraw.com;">
 				<title>SketchPrompt Sketching Canvas</title>
 				<link rel="stylesheet" href="${styleUri}">
 				<style>
@@ -66,10 +69,56 @@ export class SketchPromptProvider implements vscode.WebviewViewProvider {
 						overflow: hidden;
 						background: var(--vscode-editor-background, #222);
 					}
+					
+					/* Make TLDraw menus wider and show more items */
+					.tlui-menu {
+						min-width: 320px !important;
+						max-width: 400px !important;
+					}
+					
+					.tlui-menu__content {
+						min-width: 320px !important;
+					}
+					
+					/* Ensure menu items don't get hidden under "more" button */
+					.tlui-menu__group {
+						display: flex !important;
+						flex-direction: column !important;
+					}
+					
+					.tlui-menu__item {
+						display: flex !important;
+						align-items: center !important;
+					}
+					#new-sketch-btn {
+						display: block;
+						width: 90%;
+						margin: 24px auto 16px auto;
+						padding: 18px 0;
+						font-size: 1.4em;
+						font-weight: bold;
+						background: var(--vscode-button-background, #007acc);
+						color: var(--vscode-button-foreground, #fff);
+						border: none;
+						border-radius: 8px;
+						cursor: pointer;
+						box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+						transition: background 0.2s;
+					}
+					#new-sketch-btn:hover {
+						background: var(--vscode-button-hoverBackground, #005a9e);
+					}
 				</style>
 			</head>
 			<body>
+				<button id="new-sketch-btn">+ New Sketch</button>
 				<div id="sketching-container"></div>
+				<script nonce="${nonce}">
+					const vscode = acquireVsCodeApi();
+					document.getElementById('new-sketch-btn').onclick = () => {
+						vscode.postMessage({ command: 'newSketch' });
+					};
+				</script>
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</body>
 			</html>`;

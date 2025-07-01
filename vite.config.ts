@@ -3,13 +3,13 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
-  root: './media',
+  root: './media/src',
   build: {
-    outDir: './media',
+    outDir: '../',
     emptyOutDir: false,
     rollupOptions: {
       input: {
-        sketching: resolve(__dirname, 'media/sketching-app.tsx'),
+        sketching: resolve(__dirname, 'media/src/sketching-app.tsx'),
       },
       output: {
         entryFileNames: 'sketching.js',
@@ -27,7 +27,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'media')
+      '@': resolve(__dirname, 'media/src')
     }
   }
 }); 

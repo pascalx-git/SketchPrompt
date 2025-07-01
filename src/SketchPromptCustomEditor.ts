@@ -42,30 +42,48 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
       switch (message.type) {
         case 'saveSketch': {
           try {
-            const edit = new vscode.WorkspaceEdit();
-            edit.replace(document.uri, new vscode.Range(0, 0, document.lineCount, 0), JSON.stringify(message.data, null, 2));
-            await vscode.workspace.applyEdit(edit);
-            await document.save();
-          } catch (error) {
-            console.error('Failed to save sketch:', error);
-          }
+            // Only save if the document is not untitled
+            if (document.uri.scheme === 'file') {
+              const edit = new vscode.WorkspaceEdit();
+              edit.replace(document.uri, new vscode.Range(0, 0, document.lineCount, 0), JSON.stringify(message.data, null, 2));
+              await vscode.workspace.applyEdit(edit);
+              await document.save();
+            } else {
+              // For untitled documents, just store the data in memory
+              console.log('Document is untitled, storing data in memory');
+            }
+                      } catch (error) {
+              console.error('Failed to save sketch:', error);
+              // Don't show error for untitled documents
+              if (document.uri.scheme === 'file') {
+                const errorMessage = error instanceof Error ? error.message : String(error);
+                vscode.window.showErrorMessage(`Failed to save sketch: ${errorMessage}`);
+              }
+            }
           break;
         }
         case 'requestSketch': {
           sendSketchData();
           break;
         }
-        case 'copyToPrompt': {
-          // Handle copy to prompt functionality
-          const editor = vscode.window.activeTextEditor;
-          if (editor) {
-            const position = editor.selection.active;
-            editor.edit(editBuilder => {
-              editBuilder.insert(position, `\n<!-- SketchPrompt Sketch -->\n![Sketch](${message.data.imageUrl})\n\n`);
-            });
-          } else {
-            vscode.window.showInformationMessage('No active editor to copy sketch to');
+        case 'copyToClipboard': {
+          // Handle copy to clipboard functionality
+          try {
+            // The clipboard operation is handled in the webview
+            // This is just for user feedback
+            vscode.window.showInformationMessage('Image copied to clipboard! You can now paste it in chat.');
+          } catch (error) {
+            console.error('Failed to copy to clipboard:', error);
+            vscode.window.showErrorMessage('Failed to copy image to clipboard');
           }
+          break;
+        }
+        case 'showInfo': {
+          vscode.window.showInformationMessage(message.message);
+          break;
+        }
+        case 'showError': {
+          vscode.window.showErrorMessage(message.message);
           break;
         }
       }
@@ -91,7 +109,7 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}' 'unsafe-eval'; img-src data: blob:;">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tldraw.com; style-src ${webview.cspSource} 'unsafe-inline' https://cdn.tldraw.com; script-src 'nonce-${nonce}' 'unsafe-eval' https://cdn.tldraw.com; img-src data: blob: https://cdn.tldraw.com; font-src https://cdn.tldraw.com; connect-src https://cdn.tldraw.com;">
         <title>SketchPrompt Editor</title>
         <link rel="stylesheet" href="${styleUri}">
         <style>
@@ -102,6 +120,27 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
             padding: 0;
             overflow: hidden;
             background: var(--vscode-editor-background, #222);
+          }
+          
+          /* Make TLDraw menus wider and show more items */
+          .tlui-menu {
+            min-width: 320px !important;
+            max-width: 400px !important;
+          }
+          
+          .tlui-menu__content {
+            min-width: 320px !important;
+          }
+          
+          /* Ensure menu items don't get hidden under "more" button */
+          .tlui-menu__group {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          
+          .tlui-menu__item {
+            display: flex !important;
+            align-items: center !important;
           }
         </style>
       </head>
