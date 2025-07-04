@@ -1,10 +1,20 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
+import { AIProviderManager } from './ai/AIProviderManager';
+import { PromptBuilder } from './ai/PromptBuilder';
+import { ResponseParser } from './response/ResponseParser';
 
 export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider {
   public static readonly viewType = 'sketchprompt.editor';
+  private aiManager: AIProviderManager;
+  private promptBuilder: PromptBuilder;
+  private responseParser: ResponseParser;
 
-  constructor(private readonly context: vscode.ExtensionContext) {}
+  constructor(private readonly context: vscode.ExtensionContext) {
+    this.aiManager = new AIProviderManager();
+    this.promptBuilder = new PromptBuilder();
+    this.responseParser = new ResponseParser();
+  }
 
   public async resolveCustomTextEditor(
     document: vscode.TextDocument,
@@ -86,6 +96,14 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
           vscode.window.showErrorMessage(message.message);
           break;
         }
+        case 'aiRequest': {
+          this.handleAIRequest(message.data, webviewPanel);
+          break;
+        }
+        case 'insertToEditor': {
+          this.insertToActiveEditor(message.content);
+          break;
+        }
       }
     });
 
@@ -98,6 +116,76 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
     webviewPanel.onDidDispose(() => {
       changeDocDisposable.dispose();
     });
+  }
+
+  private async handleAIRequest(data: any, webviewPanel: vscode.WebviewPanel): Promise<void> {
+    try {
+      // Convert image array back to Uint8Array
+      const imageBuffer = new Uint8Array(data.image);
+      
+      // Build the prompt using the template and context
+      const prompt = this.promptBuilder.buildPrompt(
+        data.templateId || 'custom',
+        data.prompt,
+        {
+          canvasSize: { width: 800, height: 600 }, // This would be passed from the webview
+          projectType: 'web', // This could be detected from workspace
+          additionalContext: 'Generated from SketchPrompt'
+        }
+      );
+
+      // Make AI request
+      const response = await this.aiManager.generateFromSketch({
+        image: imageBuffer,
+        prompt: prompt,
+        context: {
+          canvasSize: { width: 800, height: 600 },
+          projectType: 'web'
+        },
+        options: {
+          maxTokens: 4000,
+          temperature: 0.7,
+          responseFormat: data.templateId?.includes('analysis') ? 'analysis' : 'code'
+        }
+      }, data.provider);
+
+      // Parse the response
+      const parsedResponse = this.responseParser.parse(response.content);
+
+      // Send response back to webview
+      webviewPanel.webview.postMessage({
+        type: 'aiResponse',
+        response: {
+          content: response.content,
+          type: response.type,
+          metadata: response.metadata
+        }
+      });
+
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      
+      // Send error back to webview
+      webviewPanel.webview.postMessage({
+        type: 'aiError',
+        error: errorMessage
+      });
+
+      // Also show in VS Code
+      vscode.window.showErrorMessage(`AI request failed: ${errorMessage}`);
+    }
+  }
+
+  private insertToActiveEditor(content: string): void {
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+      const position = editor.selection.active;
+      editor.edit((editBuilder: vscode.TextEditorEdit) => {
+        editBuilder.insert(position, content);
+      });
+    } else {
+      vscode.window.showInformationMessage('No active editor to insert content into');
+    }
   }
 
   private getHtmlForWebview(webview: vscode.Webview): string {

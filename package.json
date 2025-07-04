@@ -28,8 +28,59 @@
       {
         "command": "sketchprompt.newSketch",
         "title": "SketchPrompt: New Sketch"
+      },
+      {
+        "command": "sketchprompt.configureAI",
+        "title": "SketchPrompt: Configure AI Providers"
       }
     ],
+    "configuration": {
+      "title": "SketchPrompt",
+      "properties": {
+        "sketchprompt.openai.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API Key for AI-powered sketch analysis",
+          "scope": "application"
+        },
+        "sketchprompt.openai.model": {
+          "type": "string",
+          "default": "gpt-4o",
+          "enum": ["gpt-4o", "gpt-4-turbo", "gpt-4-vision-preview"],
+          "description": "OpenAI model to use for analysis",
+          "scope": "application"
+        },
+        "sketchprompt.openai.maxTokens": {
+          "type": "number",
+          "default": 4000,
+          "minimum": 100,
+          "maximum": 8000,
+          "description": "Maximum tokens for AI responses",
+          "scope": "application"
+        },
+        "sketchprompt.openai.temperature": {
+          "type": "number",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 2,
+          "description": "Temperature for AI responses (0 = deterministic, 2 = very creative)",
+          "scope": "application"
+        },
+        "sketchprompt.ai.defaultProvider": {
+          "type": "string",
+          "default": "openai",
+          "enum": ["openai"],
+          "description": "Default AI provider to use",
+          "scope": "application"
+        },
+        "sketchprompt.ai.autoExportSelection": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically use selected elements when sending to AI",
+          "scope": "application"
+        }
+      }
+    },
     "viewsContainers": {
       "panel": [
         {
