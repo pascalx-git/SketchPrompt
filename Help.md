@@ -1,0 +1,52 @@
+# SketchPrompt Help & Usage Guide
+
+## What is SketchPrompt?
+SketchPrompt is a Cursor-native extension that lets you sketch ideas, UI flows, and diagrams directly inside Cursor IDE. It uses TLDraw for a rich, visual sketching experience, and is designed for visual thinkers, designers, and developer/design hybrids.
+
+## Key Features
+- **Rich Sketching**: Draw, annotate, and design with TLDraw tools
+- **Auto-Save & File Persistence**: Your sketches are saved as `.sketchprompt` files in your workspace
+- **AI-Ready**: Sketches are stored in a structured JSON format for easy AI analysis
+- **Custom Editor**: Dedicated editor for `.sketchprompt` files
+- **Real-time Sync**: Auto-reload when files change externally
+- **Collaboration Ready**: Foundation for future multi-user and AI-assisted sketching
+
+## Installation
+1. Clone the repository
+2. Run `npm install`
+3. Build: `npm run vscode:prepublish`
+4. Package: `npx vsce package`
+5. Install the `.vsix` file in Cursor IDE
+
+## How to Use
+### Creating a New Sketch
+- Open the command palette (`Cmd/Ctrl + Shift + P`)
+- Run **"SketchPrompt: New Sketch"**
+- Or right-click in the file explorer and select **"SketchPrompt: New Sketch"**
+- A new `.sketchprompt` file will be created in the `SketchPrompt` folder
+- The file opens in the SketchPrompt editor
+
+### Editing Sketches
+- Open any `.sketchprompt` file to edit it visually
+- All changes are auto-saved
+
+### Getting Help
+- Run **"SketchPrompt: Help"** from the command palette to open this help file
+- [See the README for more details](README.md)
+
+## Roadmap & Vision
+- **AI-Assisted Sketching**: Generate prompts and suggestions from your sketches
+- **Real-Time Collaboration**: Multi-user sketching and feedback
+- **Cloud Sync & Sharing**: Share sketches and sync across devices
+
+## Who is this for?
+- UX/product designers
+- Prompt engineers
+- Developer/design hybrids
+- Anyone who thinks visually
+
+## License
+MIT
+
+---
+For the latest updates, see the [GitHub repo](https://github.com/pascalx-git/SketchPrompt)

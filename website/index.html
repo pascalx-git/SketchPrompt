@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SketchPrompt - Visual Thinking for AI Collaboration</title>
+    <meta name="description" content="A powerful Cursor IDE extension for visual thinking and AI prompting. Sketch ideas and seamlessly collaborate with AI.">
+    <meta name="keywords" content="SketchPrompt, Cursor IDE, AI collaboration, visual thinking, sketching, TLDraw">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sketch-prompt.com/">
+    <meta property="og:title" content="SketchPrompt - Visual Thinking for AI Collaboration">
+    <meta property="og:description" content="A powerful Cursor IDE extension for visual thinking and AI prompting. Sketch ideas and seamlessly collaborate with AI.">
+    <meta property="og:image" content="https://sketch-prompt.com/images/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sketch-prompt.com/">
+    <meta property="twitter:title" content="SketchPrompt - Visual Thinking for AI Collaboration">
+    <meta property="twitter:description" content="A powerful Cursor IDE extension for visual thinking and AI prompting. Sketch ideas and seamlessly collaborate with AI.">
+    <meta property="twitter:image" content="https://sketch-prompt.com/images/og-image.png">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="SketchPrompt" class="logo">
+                <span class="logo-text">SketchPrompt</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#installation">Installation</a>
+                <a href="#usage">Usage</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="https://github.com/pascalx-git/SketchPrompt" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Visual Thinking for 
+                    <span class="gradient-text">AI Collaboration</span>
+                </h1>
+                <p class="hero-description">
+                    A powerful Cursor IDE extension that lets you sketch ideas and seamlessly collaborate with AI. 
+                    Sketch > Copy > Paste into Cursor Chat. Done.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#installation" class="btn btn-primary">Get Started</a>
+                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/hero-screenshot.png" alt="SketchPrompt in action" class="screenshot">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Rich Sketching</h3>
+                    <p>Full TLDraw integration with shapes, text, drawing tools, and more for comprehensive visual thinking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>Robust Auto-Save</h3>
+                    <p>Content-aware saving with debounced operations and file-watching for seamless workflow.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Ready</h3>
+                    <p>Structured JSON format for AI analysis and collaboration, making your sketches AI-friendly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h3>File Persistence</h3>
+                    <p>Save and load sketches as `.sketchprompt` files with full version control support.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Copy to Prompt</h3>
+                    <p>Export sketches as images and seamlessly insert into your AI prompts with one click.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Custom Editor</h3>
+                    <p>Dedicated editor for `.sketchprompt` files with syntax highlighting and smart features.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="installation" class="installation">
+        <div class="container">
+            <h2 class="section-title">Quick Installation</h2>
+            <div class="installation-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Clone Repository</h3>
+                        <code>git clone https://github.com/pascalx-git/SketchPrompt.git</code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Install Dependencies</h3>
+                        <code>npm install</code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Build Extension</h3>
+                        <code>npm run vscode:prepublish</code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Package Extension</h3>
+                        <code>npx vsce package</code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Install in Cursor</h3>
+                        <p>Install the generated `.vsix` file in Cursor IDE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Section -->
+    <section id="usage" class="usage">
+        <div class="container">
+            <h2 class="section-title">How to Use</h2>
+            <div class="usage-content">
+                <div class="usage-text">
+                    <h3>Creating a New Sketch</h3>
+                    <ul>
+                        <li>Open the command palette (<code>Cmd/Ctrl + Shift + P</code>)</li>
+                        <li>Run <strong>"SketchPrompt: New Sketch"</strong></li>
+                        <li>Or right-click in the file explorer and select <strong>"SketchPrompt: New Sketch"</strong></li>
+                        <li>A new <code>.sketchprompt</code> file will be created in the <code>SketchPrompt</code> folder</li>
+                    </ul>
+                    
+                    <h3>Editing Sketches</h3>
+                    <ul>
+                        <li>Open any <code>.sketchprompt</code> file to edit it visually</li>
+                        <li>All changes are auto-saved</li>
+                        <li>Use the rich drawing tools to create your visual ideas</li>
+                    </ul>
+                    
+                    <h3>AI Collaboration</h3>
+                    <ul>
+                        <li>Export your sketch as an image</li>
+                        <li>Copy and paste directly into Cursor Chat</li>
+                        <li>Get AI assistance based on your visual ideas</li>
+                    </ul>
+                </div>
+                <div class="usage-image">
+                    <img src="images/usage-demo.png" alt="SketchPrompt usage demonstration" class="demo-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="roadmap">
+        <div class="container">
+            <h2 class="section-title">Future Roadmap</h2>
+            <div class="roadmap-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 1</div>
+                    <h3>AI-Assisted Sketching</h3>
+                    <p>AI integration layer for automated suggestions, AI-triggered file changes with visual indicators, and contextual prompt generation from sketch content.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 2</div>
+                    <h3>Real-Time Collaboration</h3>
+                    <p>Multi-user sketching with conflict resolution, user presence indicators and cursor sharing, WebSocket-based real-time communication.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-phase">Phase 3</div>
+                    <h3>Cloud Sync & Sharing</h3>
+                    <p>Cloud storage integration (Firebase, Supabase), shareable links and permission-based access, version control and edit history.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your AI Workflow?</h2>
+            <p>Start sketching your ideas and collaborating with AI like never before.</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/pascalx-git/SketchPrompt" target="_blank" class="btn btn-primary">Get Started</a>
+                <a href="https://github.com/pascalx-git/SketchPrompt/issues" target="_blank" class="btn btn-secondary">Report Issues</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.png" alt="SketchPrompt" class="logo">
+                        <span class="logo-text">SketchPrompt</span>
+                    </div>
+                    <p>Visual thinking for AI collaboration</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <a href="https://github.com/pascalx-git/SketchPrompt" target="_blank">GitHub</a>
+                    <a href="https://github.com/pascalx-git/SketchPrompt/issues" target="_blank">Issues</a>
+                    <a href="https://github.com/pascalx-git/SketchPrompt/blob/main/LICENSE" target="_blank">License</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="https://tldraw.dev" target="_blank">TLDraw</a>
+                    <a href="https://cursor.sh" target="_blank">Cursor IDE</a>
+                    <a href="https://github.com/pascalx-git/SketchPrompt/blob/main/Help.md" target="_blank">Help</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SketchPrompt. MIT License. Built with ❤️ for the AI community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

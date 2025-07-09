@@ -1,16 +1,21 @@
 # ![SketchPrompt Logo](media/SketchPrompt-Logo-32px-square.png) SketchPrompt
 
-A Cursor IDE extension that provides rich sketching capabilities for visual thinking and AI prompting.
+[See Help & Usage Guide →](Help.md)
 
-## Features
+A powerful Cursor IDE extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat. Done. Expect more crazy powerful features in the future.
 
-- **Rich Sketching**: Full TLDraw integration with shapes, text, drawing tools, and more
-- **Structured Data Understanding**: Cursor can read and analyze the raw JSON structure of `.sketchprompt` files, providing deep semantic understanding beyond just visual content
-- **File Persistence**: Save and load sketches as `.sketchprompt` files
-- **Copy to Prompt**: Export sketches as images and seamlessly insert them into your prompts
-- **Custom Editor**: Dedicated editor for `.sketchprompt` files
+## ✨ Features
 
-## Installation
+- **🎨 Rich Sketching**: Full TLDraw integration with shapes, text, drawing tools, and more
+- **💾 Robust Auto-Save**: Content-aware saving with debounced operations and file-watching
+- **🤖 AI-Ready**: Structured JSON format for AI analysis and collaboration
+- **📁 File Persistence**: Save and load sketches as `.sketchprompt` files with version control
+- **📋 Copy to Prompt**: Export sketches as images and seamlessly insert into your prompts
+- **🎯 Custom Editor**: Dedicated editor for `.sketchprompt` files with syntax highlighting
+- **🔄 Real-time Sync**: File-watching with external change detection and auto-reload
+- **👥 Collaboration Ready**: Foundation for multi-user and AI-assisted sketching
+
+## 🚀 Installation
 
 1. Clone this repository
 2. Install dependencies: `npm install`
@@ -18,29 +23,34 @@ A Cursor IDE extension that provides rich sketching capabilities for visual thin
 4. Package the extension: `npx vsce package`
 5. Install the `.vsix` file in Cursor IDE
 
-## Usage
+## 📖 Usage
 
 ### Creating a New Sketch
 
-1. Open the command palette (`Cmd/Ctrl + Shift + P`)
-2. Run "SketchPrompt: New Sketch"
-3. A new `.sketchprompt` file will be created in the `sketchprompt` folder
-4. The file will open in the SketchPrompt editor
+- Open the command palette (`Cmd/Ctrl + Shift + P`)
+- Run **"SketchPrompt: New Sketch"**
+- Or right-click in the file explorer and select **"SketchPrompt: New Sketch"**
+- A new `.sketchprompt` file will be created in the `SketchPrompt` folder
+- The file will open in the SketchPrompt editor
 
-### Using the Panel
+### Editing Sketches
 
-1. Open the SketchPrompt panel from the sidebar
-2. Use the sketching tools to create your visual
-3. Click "Copy to Prompt" to export as an image and insert into your active document
-4. Click "Export PNG" to download the sketch as a PNG file
+- Open any `.sketchprompt` file to edit it visually
+- All changes are auto-saved
 
-### Working with .sketchprompt Files
+### Getting Help
+
+- Run **"SketchPrompt: Help"** from the command palette to open the local `Help.md` file in your workspace.
+- The `Help.md` file contains usage tips and a link to the [GitHub repo](https://github.com/pascalx-git/SketchPrompt) for the latest updates.
+
+## Working with .sketchprompt Files
 
 - `.sketchprompt` files are automatically opened in the SketchPrompt editor
-- Sketches are automatically saved as you work
-- Files contain JSON data that can be version controlled
+- **Smart Auto-Save**: Only saves when content actually changes (not on mouse movement)
+- **File Watching**: Automatically reloads when files are modified externally
+- **JSON Format**: Files contain structured data that can be version controlled and analyzed by AI
 
-## Development
+## 🔧 Development
 
 ### Building
 
@@ -67,23 +77,61 @@ npm run watch
 
 ### Testing
 
-1. Press `F5` in VS Code to launch the extension in debug mode
+1. Press `F5` in Cursor to launch the extension in debug mode
 2. Create a new sketch and test the functionality
 3. Check the developer console for any errors
 
-## Architecture
+## 🏗️ Architecture
 
 - **Extension**: TypeScript-based VS Code extension
 - **Webview**: React app with TLDraw integration
 - **Build**: Vite for webview bundling, TypeScript for extension compilation
+- **Auto-Save**: Debounced, content-aware saving with deep equality checks
+- **File Watching**: Self-trigger suppression to prevent reload loops
 
-## Dependencies
+## 🔮 Roadmap
 
-- `@tldraw/tldraw`: Rich sketching library
+### Phase 1: AI-Assisted Sketching (Next)
+- AI integration layer for automated suggestions
+- AI-triggered file changes with visual indicators
+- Contextual prompt generation from sketch content
+
+### Phase 2: Real-Time Collaboration
+- Multi-user sketching with conflict resolution
+- User presence indicators and cursor sharing
+- WebSocket-based real-time communication
+
+### Phase 3: Cloud Sync & Sharing
+- Cloud storage integration (Firebase, Supabase)
+- Shareable links and permission-based access
+- Version control and edit history
+
+## 📦 Dependencies
+
+- `tldraw`: Rich sketching library
 - `react` & `react-dom`: UI framework
 - `vite`: Build tool for the webview
 - `typescript`: Extension development
 
-## License
+## 📄 License
 
 MIT
+
+## Licensing & Attribution
+
+SketchPrompt is licensed under the MIT License. This project bundles the TLDraw SDK, which is licensed separately by tldraw, Inc. and is subject to its own terms. By using SketchPrompt, you agree to comply with both the MIT License and the TLDraw SDK License.
+
+- [See LICENSE file for full details](LICENSE)
+- [TLDraw SDK License](https://tldraw.dev/legal/tldraw-license)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly in Cursor
+5. Submit a pull request
+
+---
+
+**Version**: 0.0.2 | **Last Updated**: July 2024 | **Compatibility**: Cursor IDE

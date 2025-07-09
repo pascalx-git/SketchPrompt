@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024 SketchPrompt
+Copyright (c) 2024 PascalX
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -18,4 +18,61 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
+SOFTWARE.
+
+---
+
+# TLDraw SDK License (Bundled Component)
+
+This project includes the TLDraw SDK, which is licensed separately by tldraw, Inc. and is subject to the following terms. By using this software, you agree to comply with the TLDraw SDK License in addition to the MIT License above.
+
+---
+
+[Full TLDraw SDK License](https://tldraw.dev/legal/tldraw-license)
+
+Copyright tldraw Inc.
+
+## Permissions
+
+Subject to the following conditions, you are permitted to:
+
+* Use the Software in your commercial or non-commercial projects.
+* Modify the Software to suit your needs.
+* Bundle the Software with your own projects.
+* Submit modifications of the Software to tldraw.
+
+## Conditions
+
+In exchange for these permissions, you agree:
+
+* Not to disable, hide, remove, or alter the Watermark.
+* Not to disable, change, or interfere with the license key validation process that governs the display of the Watermark.
+* Not to remove any copyright or other notices from the Software.
+* Not to make the Software available under a license that supersedes or negates the effect of this License.
+* Not to distribute the Software or modifications of the Software as a standalone product, but only as part of another application.
+* To include a verbatim copy of this License in any distribution of the Software.
+* To comply with tldraw's trademark policy.
+
+## Disclaimer of Warranties
+
+The Software is provided "AS IS," without any warranties. This includes any implied warranties of merchantability, fitness for a particular purpose, or non-infringement. You must pass this disclaimer on whenever you distribute the Software or derivative works.
+
+## Limitation of Liability
+
+tldraw is not liable for any damages related to the Software or this License, including direct, indirect, special, or incidental damages, to the fullest extent permitted by law. You must pass this limitation of liability on whenever you distribute the Software or derivative works.
+
+## Governing Law
+
+This License is governed by the laws of Delaware, and the parties consent to exclusive jurisdiction in Delaware courts. The parties waive all defenses of lack of personal jurisdiction and forum non-conveniens.
+
+## Reservation of Rights
+
+tldraw reserves all rights not expressly granted to you in this License. tldraw owns all right, title, and interest in and to the Software.
+
+## Alternative License
+
+For alternative licensing, please contact sales@tldraw.com. If you wish to use the tldraw SDK without displaying the Watermark, please visit https://tldraw.dev/#pricing to purchase a Business License.
+
+---
+
+For more, see: https://tldraw.dev/legal/tldraw-license 

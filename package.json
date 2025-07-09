@@ -1,19 +1,33 @@
 {
   "name": "sketchprompt",
+  "publisher": "PascalX",
   "displayName": "SketchPrompt",
-  "description": "Sketching inside Cursor IDE for visual thinking and AI prompting",
-  "version": "0.0.1",
+  "description": "A powerful Cursor IDE extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat. Done.",
+  "version": "0.1.0",
   "icon": "media/SketchPrompt-Logo-64px-square.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ptlola/SketchPrompt.git"
+    "url": "https://github.com/pascalx-git/SketchPrompt.git"
   },
   "license": "MIT",
   "engines": {
     "vscode": "^1.74.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Visualization",
+    "Productivity"
+  ],
+  "keywords": [
+    "sketching",
+    "drawing",
+    "visual",
+    "tldraw",
+    "diagrams",
+    "prompts",
+    "ai",
+    "collaboration",
+    "cursor"
   ],
   "activationEvents": [
     "onCommand:sketchprompt.openCanvas"
@@ -22,54 +36,14 @@
   "contributes": {
     "commands": [
       {
-        "command": "sketchprompt.openCanvas",
-        "title": "SketchPrompt: Open Canvas"
-      },
-      {
         "command": "sketchprompt.newSketch",
         "title": "SketchPrompt: New Sketch"
+      },
+      {
+        "command": "sketchprompt.help",
+        "title": "SketchPrompt: Help"
       }
     ],
-    "viewsContainers": {
-      "panel": [
-        {
-          "id": "sketchPromptPanel",
-          "title": "SketchPrompt",
-          "icon": "media/SketchPrompt-Logo-64px-square.png"
-        }
-      ]
-    },
-    "views": {
-      "sketchPromptPanel": [
-        {
-          "id": "sketchPromptView",
-          "name": "Canvas",
-          "type": "webview"
-        }
-      ]
-    },
-    "menus": {
-      "view/title": [
-        {
-          "command": "sketchprompt.openCanvas",
-          "when": "view == sketchPromptView",
-          "group": "navigation"
-        }
-      ],
-      "commandPalette": [
-        {
-          "command": "sketchprompt.openCanvas",
-          "when": "true"
-        }
-      ],
-      "explorer/context": [
-        {
-          "command": "sketchprompt.newSketch",
-          "when": "explorerResourceIsFolder",
-          "group": "navigation"
-        }
-      ]
-    },
     "customEditors": [
       {
         "viewType": "sketchprompt.editor",
@@ -81,13 +55,6 @@
         ]
       }
     ],
-    "icons": [
-      {
-        "id": "sketchprompt-file",
-        "description": "SketchPrompt file icon",
-        "path": "./media/SketchPrompt-Logo-64px-square.png"
-      }
-    ],
     "languages": [
       {
         "id": "sketchprompt",
@@ -97,8 +64,7 @@
         "extensions": [
           ".sketchprompt"
         ],
-        "configuration": "./sketchprompt-language-configuration.json",
-        "icon": "sketchprompt-file"
+        "configuration": "./sketchprompt-language-configuration.json"
       }
     ]
   },
