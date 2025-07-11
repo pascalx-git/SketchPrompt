@@ -1,4 +1,4 @@
-# ![SketchPrompt Logo](media/SketchPrompt-Logo-32px-square.png) SketchPrompt
+# ![SketchPrompt Logo](media/logo.svg) SketchPrompt
 
 [See Help & Usage Guide →](Help.md)
 

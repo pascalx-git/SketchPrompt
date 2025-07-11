@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: #f8f9fb;
+}
+
+.canvas-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.canvas-area {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+} 

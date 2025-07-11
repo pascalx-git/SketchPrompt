@@ -1,0 +1,73 @@
+.custom-toolbar {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+  z-index: 20;
+}
+.toolbar-btn {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.toolbar-btn:hover {
+  background: #f0f0f0;
+}
+.toolbar-divider {
+  width: 1px;
+  height: 24px;
+  background: #eee;
+  margin: 0 8px;
+}
+.toolbar-avatar img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.custom-comment {
+  position: absolute;
+  top: 120px;
+  left: 40px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 16px;
+  min-width: 260px;
+  z-index: 10;
+}
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.comment-author {
+  font-weight: 600;
+}
+.comment-body {
+  margin-bottom: 8px;
+  color: #333;
+}
+.comment-input {
+  width: 100%;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 1em;
+} 

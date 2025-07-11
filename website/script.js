@@ -1,38 +1,267 @@
-// Mobile Navigation Toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    
-    if (navToggle && navLinks) {
-        navToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            navToggle.classList.toggle('active');
-        });
+// Cycling hero value prop/fact
+const cyclingTexts = [
+  'brainstorming with AI',
+  'explaining your code',
+  'debugging visually',
+  'teaching or learning',
+  'collaborating with teammates',
+  'communicating with AI'
+];
+const cyclingFacts = [
+  'Did you know 60% of people are visual thinkers?',
+  'Visuals are processed 60,000x faster than text.',
+  'Sketching boosts memory and understanding.',
+  'AI understands better with visual context.',
+  'Sketching saves time over typing long prompts.'
+];
+
+// Remove typewriter effect for hero
+// (No code needed here anymore)
+
+// Research-backed facts with footnotes
+const researchFacts = [
+    {
+        text: 'Pictures beat words for memory. After three days, people recall <em>65%</em> of what they saw in images versus only <em>10%</em> of text—the classic <em>picture-superiority effect</em>.',
+        sources: [1, 2]
+    },
+    {
+        text: 'Brains run on dual coding. We store information in two channels—verbal <em>and</em> visual—so combining sketch + text roughly <strong>doubles recall potential</strong> (Paivio\'s Dual-Coding Theory).',
+        sources: [3, 4]
+    },
+    {
+        text: 'Visual note-taking locks in learning. Studies at Princeton/UCLA show students who doodle concepts outperform typists on conceptual recall, thanks to deeper processing.',
+        sources: [5]
+    },
+    {
+        text: 'Most of us are visual learners. Roughly <strong>65% of the population</strong> process new information fastest through visuals, making sketches the default language for two-thirds of users.',
+        sources: [6]
+    },
+    {
+        text: 'Sketching turbo-charges idea generation. Experimental "brain-sketching" sessions spark <em>more</em> and <em>better</em> concepts than talking alone by triggering reinterpretation loops.',
+        sources: [7, 8]
+    },
+    {
+        text: 'Low-fidelity sketches invite brutal honesty. Users feel less pressure and give richer feedback when they see quick hand drawings versus polished comps.',
+        sources: [9]
+    },
+    {
+        text: 'Paper prototypes cut dev time. Low-fi sketches let teams validate flows "in minutes, not days," speeding testing velocity and focusing feedback on essentials.',
+        sources: [10, 11]
+    },
+    {
+        text: 'Engineers who sketch debug faster. Drawing systems on a whiteboard improves problem-solving and creativity for software teams.',
+        sources: [12]
+    },
+    {
+        text: 'Sketching clarifies complex data. Data-viz designers report sketch first to explore, choose and communicate stories before touching code.',
+        sources: [13]
+    },
+    {
+        text: 'AI-assisted sketching is already boosting ideation. Early research on human–AI "co-creative" sketch partners shows higher concept breadth and depth in design sessions.',
+        sources: [14]
+    }
+];
+
+// Source URLs for footnotes
+const sourceUrls = {
+    1: { url: 'https://www.nngroup.com/articles/picture-superiority-effect/?utm_source=chatgpt.com', title: 'The Picture-Superiority Effect: Harness the Power of Visuals - NN/g' },
+    2: { url: 'https://en.wikipedia.org/wiki/Picture_superiority_effect?utm_source=chatgpt.com', title: 'Picture superiority effect - Wikipedia' },
+    3: { url: 'https://plato.stanford.edu/archIves/sum2020/entries/mental-imagery/theories-memory.html?utm_source=chatgpt.com', title: 'Dual Coding and Common Coding Theories of Memory' },
+    4: { url: 'https://en.wikipedia.org/wiki/Dual-coding_theory?utm_source=chatgpt.com', title: 'Dual-coding theory - Wikipedia' },
+    5: { url: 'https://inkfactorystudio.com/blog/powerful-science-behind-visual-notetaking/?utm_source=chatgpt.com', title: 'The Powerful Science Behind Visual Note-Taking - Ink Factory Studio' },
+    6: { url: 'https://www.shiftelearning.com/blog/bid/350326/studies-confirm-the-power-of-visuals-in-elearning?utm_source=chatgpt.com', title: 'Studies Confirm the Power of Visuals to Engage Your Audience in ...' },
+    7: { url: 'https://www.sciencedirect.com/science/article/abs/pii/S0142694X22000795?utm_source=chatgpt.com', title: 'Sketching and context: Exploring creativity in idea generation groups' },
+    8: { url: 'https://www.researchgate.net/publication/221629367_Functions_of_sketching_in_design_idea_generation_meetings?utm_source=chatgpt.com', title: '(PDF) Functions of sketching in design idea generation meetings' },
+    9: { url: 'https://www.nngroup.com/articles/ux-prototype-hi-lo-fidelity/?utm_source=chatgpt.com', title: 'UX Prototypes: Low Fidelity vs. High Fidelity - NN/g' },
+    10: { url: 'https://www.interaction-design.org/literature/article/prototyping-learn-eight-common-methods-and-best-practices?srsltid=AfmBOooo_LsNjMOV4KQabqGfox8p2KdBvRwzF2ZjRCmUwZk6meIMMtcH&utm_source=chatgpt.com', title: '5 Common Low-Fidelity Prototypes and Their Best Practices | IxDF' },
+    11: { url: 'https://thegood.com/insights/what-is-prototyping/?utm_source=chatgpt.com', title: 'What Is Prototyping And Why Is Mid Fidelity Its Unsung Hero In ...' },
+    12: { url: 'https://nicolas.brousse.info/blog/creativity-and-resourcefulness/?utm_source=chatgpt.com', title: 'Why Every Software Engineer Should Learn How to Draw' },
+    13: { url: 'https://medium.com/%40tjanmichela/the-importance-of-sketching-in-data-visualization-78320c62e403?utm_source=chatgpt.com', title: 'The Importance of Sketching in Data Visualization | by Michela Tjan' },
+    14: { url: 'https://graduateschool.charlotte.edu/cognitive-study-design-ideation-ai-based-co-creative-sketching-partner?utm_source=chatgpt.com', title: 'THE COGNITIVE STUDY OF DESIGN IDEATION IN AN AI-BASED ...' }
+};
+
+// Variables for fact cycling
+let currentFactIndex = 0;
+let funFactElement = null;
+let indicatorDots = null;
+let factInterval = null;
+
+function cycleFunFact() {
+    if (!funFactElement || !indicatorDots || indicatorDots.length === 0) {
+        console.log('Elements not found, trying to initialize...');
+        initializeFactCycling();
+        return;
     }
     
-    // Close mobile menu when clicking on a link
-    const navLinksItems = document.querySelectorAll('.nav-links a');
-    navLinksItems.forEach(link => {
-        link.addEventListener('click', function() {
-            navLinks.classList.remove('active');
-            navToggle.classList.remove('active');
-        });
+    console.log('Cycling to fact index:', currentFactIndex);
+    
+    funFactElement.style.opacity = '0';
+    
+    // Update indicator dots
+    indicatorDots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentFactIndex);
     });
+    
+    setTimeout(() => {
+        currentFactIndex = (currentFactIndex + 1) % researchFacts.length;
+        const fact = researchFacts[currentFactIndex];
+        
+        console.log('Showing fact:', fact.text.substring(0, 50) + '...');
+        
+        // Create the footnote links
+        const footnoteLinks = fact.sources.map(sourceNum => 
+            `<sup class="footnote-link" data-sources="${sourceNum}">${sourceNum}</sup>`
+        ).join('');
+        
+        // Update the fact text with footnotes
+        funFactElement.innerHTML = fact.text + footnoteLinks;
+        funFactElement.style.opacity = '1';
+        
+        // Re-attach click handlers to new footnote links
+        attachFootnoteHandlers();
+    }, 300);
+}
+
+function initializeFactCycling() {
+    funFactElement = document.querySelector('.fun-fact-text');
+    indicatorDots = document.querySelectorAll('.indicator-dot');
+    
+    console.log('Initializing fact cycling...');
+    console.log('Fun fact element found:', funFactElement);
+    console.log('Indicator dots found:', indicatorDots.length);
+    
+    if (funFactElement && indicatorDots.length > 0) {
+        // Set initial state to match the first fact
+        currentFactIndex = 0;
+        
+        // Update the initial fact to match our array
+        const initialFact = researchFacts[0];
+        const footnoteLinks = initialFact.sources.map(sourceNum => 
+            `<sup class="footnote-link" data-sources="${sourceNum}">${sourceNum}</sup>`
+        ).join('');
+        funFactElement.innerHTML = initialFact.text + footnoteLinks;
+        
+        // Update indicator dots
+        indicatorDots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentFactIndex);
+        });
+        
+        // Attach handlers to existing footnotes
+        attachFootnoteHandlers();
+        
+        // Start the cycling
+        if (factInterval) {
+            clearInterval(factInterval);
+        }
+        factInterval = setInterval(cycleFunFact, 4000);
+        
+        // Initial cycle after 2 seconds
+        setTimeout(cycleFunFact, 2000);
+    } else {
+        console.log('Elements still not found, will retry...');
+        setTimeout(initializeFactCycling, 1000);
+    }
+}
+
+function attachFootnoteHandlers() {
+    const footnotes = document.querySelectorAll('.footnote-link');
+    footnotes.forEach(footnote => {
+        // Remove existing handlers to avoid duplicates
+        footnote.removeEventListener('click', handleFootnoteClick);
+        // Add new handler
+        footnote.addEventListener('click', handleFootnoteClick);
+    });
+}
+
+function handleFootnoteClick(e) {
+    e.preventDefault();
+    const sourceNum = this.getAttribute('data-sources');
+    const source = sourceUrls[sourceNum];
+    if (source) {
+        window.open(source.url, '_blank');
+    }
+}
+
+// Global click handler for footnotes (fallback)
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('footnote-link')) {
+        handleFootnoteClick.call(e.target, e);
+    }
 });
 
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offsetTop = target.offsetTop - 80; // Account for fixed navbar
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
+// Existing JS (tabs, split button, nav, smooth scroll, etc.)
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing fact cycling...');
+    initializeFactCycling();
+    
+    // Split button dropdown
+  // Split button dropdown
+  const splitBtnToggle = document.querySelector('.split-btn-toggle');
+  const splitBtnDropdown = document.querySelector('.split-btn-dropdown');
+  if (splitBtnToggle && splitBtnDropdown) {
+    splitBtnToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      splitBtnDropdown.classList.toggle('open');
     });
+    document.addEventListener('click', function() {
+      splitBtnDropdown.classList.remove('open');
+    });
+  }
+
+  // Tab functionality for installation section
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabPanes = document.querySelectorAll('.tab-pane');
+  tabButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const targetTab = this.getAttribute('data-tab');
+      const tabContainer = this.closest('.installation-tabs, .section-tabs');
+      
+      // Remove active class from all buttons and panes in this container
+      tabContainer.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      tabContainer.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      
+      // Add active class to clicked button and target pane
+      this.classList.add('active');
+      const targetPane = tabContainer.querySelector(`#${targetTab}-tab`);
+      if (targetPane) {
+        targetPane.classList.add('active');
+      }
+      
+      // Reinitialize fact cycling if "Why" tab is shown
+      if (targetTab === 'why') {
+        console.log('Why tab shown, reinitializing fact cycling...');
+        setTimeout(initializeFactCycling, 100);
+      }
+    });
+  });
+
+  // Mobile Navigation Toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function() {
+      navLinks.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
+  }
+  const navLinksItems = document.querySelectorAll('.nav-links a');
+  navLinksItems.forEach(link => {
+    link.addEventListener('click', function() {
+      navLinks.classList.remove('active');
+      navToggle.classList.remove('active');
+    });
+  });
+
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
 });
 
 // Navbar background on scroll

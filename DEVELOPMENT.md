@@ -30,35 +30,27 @@ This creates a `.vsix` file that can be installed manually in Cursor.
 ## Publishing to Cursor
 
 ### Current Status
-Cursor uses the OpenVSX registry, not the official VS Code Marketplace. Extensions published to OpenVSX automatically appear in Cursor's marketplace after a sync period.
+Cursor uses its own marketplace for extensions. Extensions can be published directly to Cursor's marketplace.
 
 ### Publishing Steps
 
-1. **Create OpenVSX Account**
-   - Go to [OpenVSX Registry](https://open-vsx.org)
-   - Sign up for an account
-   - Create a publisher namespace
-
-2. **Install OpenVSX CLI**
+1. **Build the Extension**
    ```bash
-   npm install -g @openvsx/cli
+   npm run compile
+   npx vsce package
    ```
 
-3. **Login and Publish**
-   ```bash
-   ovsx login <your-namespace>
-   ovsx publish
-   ```
+2. **Manual Installation (Current Method)**
+   For immediate testing or distribution:
+   1. Build the extension: `npx vsce package`
+   2. Share the `.vsix` file
+   3. Users can install via Cursor's "Install from VSIX" option
 
-4. **Wait for Cursor Sync**
-   - Extensions typically appear in Cursor within 24-48 hours
-   - No additional steps needed on Cursor's side
-
-### Manual Installation (Alternative)
-For immediate testing or distribution:
-1. Build the extension: `npx vsce package`
-2. Share the `.vsix` file
-3. Users can install via Cursor's "Install from VSIX" option
+### Future Publishing
+When Cursor's marketplace publishing becomes available:
+1. Follow Cursor's official publishing guidelines
+2. Submit extension for review
+3. Publish directly to Cursor's marketplace
 
 ## Architecture
 
