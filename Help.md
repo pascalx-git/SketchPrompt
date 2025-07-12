@@ -3,6 +3,8 @@
 ## What is SketchPrompt?
 SketchPrompt is a Cursor-native extension that lets you sketch ideas, UI flows, and diagrams directly inside Cursor IDE. It uses TLDraw for a rich, visual sketching experience, and is designed for visual thinkers, designers, and developer/design hybrids.
 
+**Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
+
 ## Key Features
 - **Rich Sketching**: Draw, annotate, and design with TLDraw tools
 - **Auto-Save & File Persistence**: Your sketches are saved as `.sketchprompt` files in your workspace
@@ -17,6 +19,8 @@ SketchPrompt is a Cursor-native extension that lets you sketch ideas, UI flows, 
 3. Build: `npm run vscode:prepublish`
 4. Package: `npx vsce package`
 5. Install the `.vsix` file in Cursor IDE
+
+**Alternative**: Visit [https://sketch-prompt.com](https://sketch-prompt.com) for easy installation instructions.
 
 ## How to Use
 ### Creating a New Sketch
@@ -33,6 +37,7 @@ SketchPrompt is a Cursor-native extension that lets you sketch ideas, UI flows, 
 ### Getting Help
 - Run **"SketchPrompt: Help"** from the command palette to open this help file
 - [See the README for more details](README.md)
+- Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed tutorials and documentation
 
 ## Roadmap & Vision
 - **AI-Assisted Sketching**: Generate prompts and suggestions from your sketches
@@ -48,5 +53,10 @@ SketchPrompt is a Cursor-native extension that lets you sketch ideas, UI flows, 
 ## License
 MIT
 
+## Links
+- **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
+- **GitHub**: [https://github.com/pascalx-git/SketchPrompt](https://github.com/pascalx-git/SketchPrompt)
+- **Help**: This file or run "SketchPrompt: Help" in Cursor
+
 ---
-For the latest updates, see the [GitHub repo](https://github.com/pascalx-git/SketchPrompt)
+For the latest updates, see the [GitHub repo](https://github.com/pascalx-git/SketchPrompt) or visit [https://sketch-prompt.com](https://sketch-prompt.com)

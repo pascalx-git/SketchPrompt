@@ -1,21 +1,23 @@
-# ![SketchPrompt Logo](media/logo.svg) SketchPrompt
+# ![SketchPrompt Logo](media/logo.png) SketchPrompt
 
 [See Help & Usage Guide →](Help.md)
 
 A powerful Cursor IDE extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat. Done. Expect more crazy powerful features in the future.
 
-## ✨ Features
+**Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
 
-- **🎨 Rich Sketching**: Full TLDraw integration with shapes, text, drawing tools, and more
-- **💾 Robust Auto-Save**: Content-aware saving with debounced operations and file-watching
-- **🤖 AI-Ready**: Structured JSON format for AI analysis and collaboration
-- **📁 File Persistence**: Save and load sketches as `.sketchprompt` files with version control
-- **📋 Copy to Prompt**: Export sketches as images and seamlessly insert into your prompts
-- **🎯 Custom Editor**: Dedicated editor for `.sketchprompt` files with syntax highlighting
-- **🔄 Real-time Sync**: File-watching with external change detection and auto-reload
-- **👥 Collaboration Ready**: Foundation for multi-user and AI-assisted sketching
+## Features
 
-## 🚀 Installation
+- **Rich Sketching**: Full TLDraw integration with shapes, text, drawing tools, and more
+- **Robust Auto-Save**: Content-aware saving with debounced operations and file-watching
+- **AI-Ready**: Structured JSON format for AI analysis and collaboration
+- **File Persistence**: Save and load sketches as `.sketchprompt` files with version control
+- **Copy to Prompt**: Export sketches as images and seamlessly insert into your prompts
+- **Custom Editor**: Dedicated editor for `.sketchprompt` files with syntax highlighting
+- **Real-time Sync**: File-watching with external change detection and auto-reload
+- **Collaboration Ready**: Foundation for multi-user and AI-assisted sketching
+
+## Installation
 
 1. Clone this repository
 2. Install dependencies: `npm install`
@@ -23,7 +25,9 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 4. Package the extension: `npx vsce package`
 5. Install the `.vsix` file in Cursor IDE
 
-## 📖 Usage
+**Alternative**: Visit [https://sketch-prompt.com](https://sketch-prompt.com) for installation instructions and the latest updates.
+
+## Usage
 
 ### Creating a New Sketch
 
@@ -42,6 +46,7 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 
 - Run **"SketchPrompt: Help"** from the command palette to open the local `Help.md` file in your workspace.
 - The `Help.md` file contains usage tips and a link to the [GitHub repo](https://github.com/pascalx-git/SketchPrompt) for the latest updates.
+- Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed documentation and tutorials.
 
 ## Working with .sketchprompt Files
 
@@ -50,7 +55,7 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 - **File Watching**: Automatically reloads when files are modified externally
 - **JSON Format**: Files contain structured data that can be version controlled and analyzed by AI
 
-## 🔧 Development
+## Development
 
 ### Building
 
@@ -81,7 +86,7 @@ npm run watch
 2. Create a new sketch and test the functionality
 3. Check the developer console for any errors
 
-## 🏗️ Architecture
+## Architecture
 
 - **Extension**: TypeScript-based VS Code extension
 - **Webview**: React app with TLDraw integration
@@ -89,31 +94,31 @@ npm run watch
 - **Auto-Save**: Debounced, content-aware saving with deep equality checks
 - **File Watching**: Self-trigger suppression to prevent reload loops
 
-## 🔮 Roadmap
+## Roadmap
 
-### Phase 1: AI-Assisted Sketching (Next)
-- AI integration layer for automated suggestions
-- AI-triggered file changes with visual indicators
-- Contextual prompt generation from sketch content
+### Current Focus: Core Extension Features
+- Stabilizing the core sketching experience
+- Improving auto-save reliability
+- Enhancing the file format for better AI integration
 
-### Phase 2: Real-Time Collaboration
-- Multi-user sketching with conflict resolution
-- User presence indicators and cursor sharing
-- WebSocket-based real-time communication
+### Next Phase: AI-Assisted Sketching
+- Integrating AI capabilities to analyze sketches
+- Generate prompts and provide intelligent suggestions
+- AI-powered content analysis based on visual content
 
-### Phase 3: Cloud Sync & Sharing
-- Cloud storage integration (Firebase, Supabase)
-- Shareable links and permission-based access
-- Version control and edit history
+### Future Vision: Real-Time Collaboration
+- Multi-user sketching with real-time synchronization
+- Conflict resolution and version control
+- Cloud-based sharing capabilities
 
-## 📦 Dependencies
+## Dependencies
 
 - `tldraw`: Rich sketching library
 - `react` & `react-dom`: UI framework
 - `vite`: Build tool for the webview
 - `typescript`: Extension development
 
-## 📄 License
+## License
 
 MIT
 
@@ -124,13 +129,19 @@ SketchPrompt is licensed under the MIT License. This project bundles the TLDraw 
 - [See LICENSE file for full details](LICENSE)
 - [TLDraw SDK License](https://tldraw.dev/legal/tldraw-license)
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
 4. Test thoroughly in Cursor
 5. Submit a pull request
+
+## Links
+
+- **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
+- **GitHub**: [https://github.com/pascalx-git/SketchPrompt](https://github.com/pascalx-git/SketchPrompt)
+- **Help**: Run "SketchPrompt: Help" in Cursor or see [Help.md](Help.md)
 
 ---
 

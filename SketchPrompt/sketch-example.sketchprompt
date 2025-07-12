@@ -1772,7 +1772,7 @@
           "scale": 1
         },
         "parentId": "page:page",
-        "index": "aHfZr",
+        "index": "aH8QthNv",
         "typeName": "shape"
       },
       "binding:tA_ZB_64YAR7n__h4G9pA": {
@@ -1896,7 +1896,7 @@
           "scale": 1
         },
         "parentId": "page:page",
-        "index": "aIAuG",
+        "index": "aHE723Rf",
         "typeName": "shape"
       }
     },
@@ -1945,9 +1945,9 @@
       {
         "pageId": "page:page",
         "camera": {
-          "x": -38.60708712411065,
-          "y": -298.9148139796875,
-          "z": 1.951612527842651
+          "x": 258.05974818172075,
+          "y": 357.5031836797675,
+          "z": 0.45098297503265583
         },
         "selectedShapeIds": [],
         "focusedGroupId": null

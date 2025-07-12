@@ -63,7 +63,7 @@ Key workflows:
 
 ---
 
-## 👥 Who This Is For
+## Who This Is For
 
 * UX/product designers working inside Cursor
 * Prompt engineers using diagrams or flows

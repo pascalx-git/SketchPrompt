@@ -16,6 +16,7 @@
     "node_modules",
     ".vscode-test",
     "media",
-    "vite.config.ts"
+    "vite.config.ts",
+    "canvas-experiments"
   ]
 } 

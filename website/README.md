@@ -2,7 +2,7 @@
 
 This is the marketing website for SketchPrompt, a powerful Cursor IDE extension for visual thinking and AI collaboration.
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Local Development**
    ```bash
@@ -45,7 +45,7 @@ This is the marketing website for SketchPrompt, a powerful Cursor IDE extension 
    - In GitHub repository settings, go to Pages and add your custom domain
    - Check "Enforce HTTPS" option
 
-## 📁 File Structure
+## File Structure
 
 ```
 website/
@@ -61,7 +61,7 @@ website/
 └── README.md           # This file
 ```
 
-## 🎨 Customization
+## Customization
 
 ### Colors
 The website uses CSS custom properties for easy color customization. Edit the `:root` section in `styles.css`:
@@ -72,7 +72,6 @@ The website uses CSS custom properties for easy color customization. Edit the `:
     --primary-dark: #4f46e5;
     --secondary-color: #8b5cf6;
     --accent-color: #06b6d4;
-    /* ... other colors */
 }
 ```
 
@@ -82,7 +81,7 @@ The website uses CSS custom properties for easy color customization. Edit the `:
 - **Installation**: Update installation steps as the extension evolves
 - **Roadmap**: Keep the development timeline current
 
-## 📸 Missing Images
+## Missing Images
 
 The following images are currently placeholders and need to be created:
 - `hero-screenshot.png` - Screenshot of SketchPrompt in action
@@ -90,16 +89,16 @@ The following images are currently placeholders and need to be created:
 - `og-image.png` - Open Graph image for social sharing
 - `visual-thinking-illustration.svg` - Hero illustration
 
-## 🔧 Development Notes
+## Development Notes
 
 ### Current State
-- ✅ Responsive design with modern CSS
-- ✅ Interactive JavaScript features
-- ✅ Development status banner
-- ✅ Accurate installation instructions
-- ❌ Missing hero screenshot
-- ❌ Missing usage demo images
-- ❌ Missing social sharing images
+- Responsive design with modern CSS
+- Interactive JavaScript features
+- Development status banner
+- Accurate installation instructions
+- Missing hero screenshot
+- Missing usage demo images
+- Missing social sharing images
 
 ### Next Steps
 1. Create actual screenshots of SketchPrompt in action
@@ -109,7 +108,7 @@ The following images are currently placeholders and need to be created:
 5. Add analytics tracking
 6. Optimize for performance
 
-## 🚀 Deployment
+## Deployment
 
 ### GitHub Pages
 1. Push to GitHub repository
@@ -126,14 +125,14 @@ The following images are currently placeholders and need to be created:
 2. Configure as static site
 3. Deploy automatically on push
 
-## 📊 Analytics
+## Analytics
 
 Consider adding analytics to track website performance:
 - Google Analytics
 - Plausible Analytics
 - Simple Analytics
 
-## 🔍 SEO
+## SEO
 
 The website includes:
 - Meta tags for social sharing
@@ -142,7 +141,7 @@ The website includes:
 - Semantic HTML structure
 - Fast loading times
 
-## 📱 Mobile Optimization
+## Mobile Optimization
 
 The website is fully responsive and optimized for:
 - Mobile devices
@@ -150,7 +149,7 @@ The website is fully responsive and optimized for:
 - Desktop computers
 - Various screen sizes
 
-## 🎯 Performance
+## Performance
 
 Optimizations include:
 - Minified CSS and JavaScript

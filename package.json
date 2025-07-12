@@ -2,9 +2,9 @@
   "name": "sketchprompt",
   "publisher": "PascalX",
   "displayName": "SketchPrompt",
-  "description": "A powerful Cursor IDE extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat. Done.",
+  "description": "SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI prompting.",
   "version": "0.1.0",
-  "icon": "media/logo.svg",
+  "icon": "media/logo.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/pascalx-git/SketchPrompt.git"
@@ -44,6 +44,15 @@
         "title": "SketchPrompt: Help"
       }
     ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "sketchprompt.newSketch",
+          "group": "navigation",
+          "when": "workspaceFolderCount > 0"
+        }
+      ]
+    },
     "customEditors": [
       {
         "viewType": "sketchprompt.editor",

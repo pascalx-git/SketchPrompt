@@ -86,99 +86,87 @@ let funFactElement = null;
 let indicatorDots = null;
 let factInterval = null;
 
+function createFootnoteSup(sourceNum) {
+    const sup = document.createElement('sup');
+    sup.className = 'footnote-link';
+    sup.setAttribute('tabindex', '0');
+    sup.setAttribute('role', 'button');
+    sup.setAttribute('aria-label', sourceUrls[sourceNum]?.title || `Source ${sourceNum}`);
+    sup.textContent = sourceNum;
+    sup.addEventListener('click', handleFootnoteClick);
+    sup.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleFootnoteClick.call(this, e);
+        }
+    });
+    return sup;
+}
+
 function cycleFunFact() {
     if (!funFactElement || !indicatorDots || indicatorDots.length === 0) {
-        console.log('Elements not found, trying to initialize...');
         initializeFactCycling();
         return;
     }
-    
-    console.log('Cycling to fact index:', currentFactIndex);
-    
     funFactElement.style.opacity = '0';
-    
-    // Update indicator dots
     indicatorDots.forEach((dot, index) => {
         dot.classList.toggle('active', index === currentFactIndex);
     });
-    
     setTimeout(() => {
         currentFactIndex = (currentFactIndex + 1) % researchFacts.length;
         const fact = researchFacts[currentFactIndex];
-        
-        console.log('Showing fact:', fact.text.substring(0, 50) + '...');
-        
-        // Create the footnote links
-        const footnoteLinks = fact.sources.map(sourceNum => 
-            `<sup class="footnote-link" data-sources="${sourceNum}">${sourceNum}</sup>`
-        ).join('');
-        
-        // Update the fact text with footnotes
-        funFactElement.innerHTML = fact.text + footnoteLinks;
+        funFactElement.innerHTML = '';
+        funFactElement.appendChild(document.createTextNode(fact.text.replace(/<[^>]+>/g, '')));
+        // Add footnotes
+        fact.sources.forEach(sourceNum => {
+            funFactElement.appendChild(createFootnoteSup(sourceNum));
+        });
         funFactElement.style.opacity = '1';
-        
-        // Re-attach click handlers to new footnote links
-        attachFootnoteHandlers();
     }, 300);
 }
 
 function initializeFactCycling() {
     funFactElement = document.querySelector('.fun-fact-text');
     indicatorDots = document.querySelectorAll('.indicator-dot');
-    
-    console.log('Initializing fact cycling...');
-    console.log('Fun fact element found:', funFactElement);
-    console.log('Indicator dots found:', indicatorDots.length);
-    
     if (funFactElement && indicatorDots.length > 0) {
-        // Set initial state to match the first fact
         currentFactIndex = 0;
-        
-        // Update the initial fact to match our array
         const initialFact = researchFacts[0];
-        const footnoteLinks = initialFact.sources.map(sourceNum => 
-            `<sup class="footnote-link" data-sources="${sourceNum}">${sourceNum}</sup>`
-        ).join('');
-        funFactElement.innerHTML = initialFact.text + footnoteLinks;
-        
-        // Update indicator dots
+        funFactElement.innerHTML = '';
+        funFactElement.appendChild(document.createTextNode(initialFact.text.replace(/<[^>]+>/g, '')));
+        initialFact.sources.forEach(sourceNum => {
+            funFactElement.appendChild(createFootnoteSup(sourceNum));
+        });
         indicatorDots.forEach((dot, index) => {
             dot.classList.toggle('active', index === currentFactIndex);
         });
-        
-        // Attach handlers to existing footnotes
-        attachFootnoteHandlers();
-        
-        // Start the cycling
-        if (factInterval) {
-            clearInterval(factInterval);
-        }
-        factInterval = setInterval(cycleFunFact, 4000);
-        
-        // Initial cycle after 2 seconds
-        setTimeout(cycleFunFact, 2000);
+        if (factInterval) clearInterval(factInterval);
+        factInterval = setInterval(cycleFunFact, 5000);
     } else {
-        console.log('Elements still not found, will retry...');
         setTimeout(initializeFactCycling, 1000);
     }
 }
 
-function attachFootnoteHandlers() {
-    const footnotes = document.querySelectorAll('.footnote-link');
-    footnotes.forEach(footnote => {
-        // Remove existing handlers to avoid duplicates
-        footnote.removeEventListener('click', handleFootnoteClick);
-        // Add new handler
-        footnote.addEventListener('click', handleFootnoteClick);
-    });
-}
-
 function handleFootnoteClick(e) {
     e.preventDefault();
-    const sourceNum = this.getAttribute('data-sources');
+    const sourceNum = this.getAttribute('data-sources') || this.textContent;
     const source = sourceUrls[sourceNum];
     if (source) {
-        window.open(source.url, '_blank');
+        window.open(source.url, '_blank', 'noopener,noreferrer');
+    }
+}
+
+// Pause/resume cycling on hover/focus
+let cyclingPaused = false;
+function pauseCycling() {
+    if (!cyclingPaused) {
+        clearInterval(factInterval);
+        cyclingPaused = true;
+    }
+}
+function resumeCycling() {
+    if (cyclingPaused) {
+        factInterval = setInterval(cycleFunFact, 5000);
+        cyclingPaused = false;
     }
 }
 
@@ -191,10 +179,16 @@ document.addEventListener('click', function(e) {
 
 // Existing JS (tabs, split button, nav, smooth scroll, etc.)
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing fact cycling...');
     initializeFactCycling();
-    
-    // Split button dropdown
+    // Pause on hover/focus
+    const funFactCard = document.querySelector('.why-card.fun-fact');
+    if (funFactCard) {
+        funFactCard.addEventListener('mouseenter', pauseCycling);
+        funFactCard.addEventListener('mouseleave', resumeCycling);
+        funFactCard.addEventListener('focusin', pauseCycling);
+        funFactCard.addEventListener('focusout', resumeCycling);
+    }
+
   // Split button dropdown
   const splitBtnToggle = document.querySelector('.split-btn-toggle');
   const splitBtnDropdown = document.querySelector('.split-btn-dropdown');
@@ -229,7 +223,6 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Reinitialize fact cycling if "Why" tab is shown
       if (targetTab === 'why') {
-        console.log('Why tab shown, reinitializing fact cycling...');
         setTimeout(initializeFactCycling, 100);
       }
     });
