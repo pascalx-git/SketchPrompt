@@ -3,7 +3,7 @@
   "publisher": "PascalX",
   "displayName": "SketchPrompt",
   "description": "SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI prompting.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "icon": "media/logo.png",
   "repository": {
     "type": "git",

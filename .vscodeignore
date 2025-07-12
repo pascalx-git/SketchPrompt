@@ -1,12 +1,52 @@
+# Prototypes and experiments
+canvas-experiments/**
+
+# Webview source (if not needed at runtime)
+media/src/**
+
+# Extension source
+src/**
+
+# Node modules (let vsce include only prod deps)
+node_modules/**
+
+# Build/config files
+tsconfig.json
 .vscode/**
 .vscode-test/**
-src/**
+test/**
+tests/**
+docs/**
+*.md
+*.log
+*.bak
+*.tmp
+*.psd
+*.ai
+*.sketch
+**/*.ts
+**/*.tsx
+**/*.map
+**/*.js.map
+**/*.d.ts
+**/vite.config.ts
+**/.eslintrc.json
 .gitignore
 .yarnrc
 vsc-extension-quickstart.md
-**/tsconfig.json
-**/.eslintrc.json
-**/*.map
-**/*.ts
-node_modules/**
-*.js.map 
+
+# Exclude unneeded media (keep only built files and used assets)
+media/*.psd
+media/*.ai
+media/*.sketch
+# DO NOT exclude logo or used assets
+!media/logo.png
+!media/sketching.js
+!media/sketching.css
+
+# Keep manifest and config files
+!package.json
+!README.md
+!LICENSE
+!CHANGELOG.md
+!sketchprompt-language-configuration.json 
