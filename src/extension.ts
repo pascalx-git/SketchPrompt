@@ -3,6 +3,25 @@ import { SketchPromptCustomEditor } from './SketchPromptCustomEditor';
 import * as path from 'path';
 import * as fs from 'fs';
 
+// Security function to validate file paths and prevent path traversal
+function validateFilePath(basePath: string, userPath: string): string {
+	const resolvedBase = path.resolve(basePath);
+	const resolvedPath = path.resolve(basePath, userPath);
+	
+	// Ensure the resolved path is within the base directory
+	if (!resolvedPath.startsWith(resolvedBase + path.sep) && resolvedPath !== resolvedBase) {
+		throw new Error('Invalid file path: Path traversal detected');
+	}
+	
+	// Additional validation: ensure the filename is safe
+	const filename = path.basename(userPath);
+	if (filename.includes('..') || filename.includes('/') || filename.includes('\\')) {
+		throw new Error('Invalid filename: Contains unsafe characters');
+	}
+	
+	return resolvedPath;
+}
+
 export async function activate(context: vscode.ExtensionContext) {
 	console.log('[SketchPrompt] Extension activated');
 	console.log('SketchPrompt is now active!');
@@ -22,16 +41,22 @@ export async function activate(context: vscode.ExtensionContext) {
 			let baseName = 'sketch';
 			let defaultName = `${baseName}.sketchprompt`;
 			let i = 1;
-			while (fs.existsSync(path.join(sketchesFolder, defaultName))) {
-				defaultName = `${baseName}-${i}.sketchprompt`;
-				i++;
+			let defaultPath;
+			try {
+				while (true) {
+					defaultPath = validateFilePath(sketchesFolder, defaultName);
+					if (!fs.existsSync(defaultPath)) break;
+					defaultName = `${baseName}-${i}.sketchprompt`;
+					i++;
+				}
+				fs.writeFileSync(defaultPath, JSON.stringify({}));
+				const defaultUri = vscode.Uri.file(defaultPath);
+				setTimeout(() => {
+					vscode.commands.executeCommand('vscode.openWith', defaultUri, 'sketchprompt.editor');
+				}, 300);
+			} catch (error) {
+				console.error('Failed to create default sketch file:', error);
 			}
-			const defaultPath = path.join(sketchesFolder, defaultName);
-			fs.writeFileSync(defaultPath, JSON.stringify({}));
-			const defaultUri = vscode.Uri.file(defaultPath);
-			setTimeout(() => {
-				vscode.commands.executeCommand('vscode.openWith', defaultUri, 'sketchprompt.editor');
-			}, 300);
 		}
 	}
 
@@ -51,9 +76,15 @@ export async function activate(context: vscode.ExtensionContext) {
 		let i = 1;
 		let filePath;
 		while (true) {
-			filePath = path.join(sketchesFolder, `Untitled-${i}.sketchprompt`);
-			if (!fs.existsSync(filePath)) break;
-			i++;
+			try {
+				const filename = `Untitled-${i}.sketchprompt`;
+				filePath = validateFilePath(sketchesFolder, filename);
+				if (!fs.existsSync(filePath)) break;
+				i++;
+			} catch (error) {
+				vscode.window.showErrorMessage(`Failed to create sketch file: ${error}`);
+				return;
+			}
 		}
 		// Write empty JSON to file
 		fs.writeFileSync(filePath, JSON.stringify({}));

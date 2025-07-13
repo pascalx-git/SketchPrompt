@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
+import Ajv, { JSONSchemaType } from 'ajv';
 
 function debounce<T extends (...args: any[]) => void>(fn: T, delay: number): T {
   let timer: NodeJS.Timeout | null = null;
@@ -11,6 +12,47 @@ function debounce<T extends (...args: any[]) => void>(fn: T, delay: number): T {
 
 function deepEqual(a: any, b: any): boolean {
   return JSON.stringify(a) === JSON.stringify(b);
+}
+
+// JSON Schema for TLDraw sketch data validation
+interface SketchData {
+  document?: object;
+  session?: object;
+}
+
+const sketchDataSchema: JSONSchemaType<SketchData> = {
+  type: "object",
+  properties: {
+    document: {
+      type: "object",
+      nullable: true
+    },
+    session: {
+      type: "object", 
+      nullable: true
+    }
+  },
+  additionalProperties: false,
+  required: []
+};
+
+const ajv = new Ajv();
+const validateSketchData = ajv.compile(sketchDataSchema);
+
+function sanitizeSketchData(rawData: any): SketchData {
+  if (!rawData || typeof rawData !== 'object') {
+    return { document: {}, session: {} };
+  }
+  
+  if (!validateSketchData(rawData)) {
+    console.warn('Invalid sketch data structure, using safe defaults:', validateSketchData.errors);
+    return { document: {}, session: {} };
+  }
+  
+  return {
+    document: rawData.document || {},
+    session: rawData.session || {}
+  };
 }
 
 export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider {
@@ -48,7 +90,8 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
     function sendSketchData() {
       try {
         const text = document.getText();
-        const data = text ? JSON.parse(text) : {};
+        const rawData = text ? JSON.parse(text) : {};
+        const data = sanitizeSketchData(rawData);
         // Always send the full snapshot (document + session)
         lastSavedDocument = data.document || {};
         webviewPanel.webview.postMessage({
@@ -57,6 +100,8 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
         });
       } catch (error) {
         console.error('Failed to parse sketch data:', error);
+        // Don't expose internal error details to user
+        vscode.window.showWarningMessage('Unable to load sketch file. Using empty sketch.');
         webviewPanel.webview.postMessage({
           type: 'loadSketch',
           data: { document: {}, session: {} }
@@ -83,8 +128,8 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
       } catch (error) {
         console.error('Failed to save sketch:', error);
         if (document.uri.scheme === 'file') {
-          const errorMessage = error instanceof Error ? error.message : String(error);
-          vscode.window.showErrorMessage(`Failed to save sketch: ${errorMessage}`);
+          // Don't expose internal error details - use sanitized message
+          vscode.window.showErrorMessage('Failed to save sketch. Please check file permissions and try again.');
         }
       }
     }, 300);
@@ -204,7 +249,7 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tldraw.com; style-src ${webview.cspSource} 'unsafe-inline' https://cdn.tldraw.com; script-src 'nonce-${nonce}' 'unsafe-eval' https://cdn.tldraw.com; img-src data: blob: https://cdn.tldraw.com; font-src https://cdn.tldraw.com; connect-src https://cdn.tldraw.com;">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self';">
         <title>SketchPrompt Editor</title>
         <link rel="stylesheet" href="${styleUri}">
         <style>
