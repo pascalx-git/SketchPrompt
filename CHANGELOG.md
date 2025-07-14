@@ -5,9 +5,9 @@ SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI promp
 
 ---
 
-## v0.2.0 – Analytics, Security & Reliability Improvements
+## v0.2.0 – Security & Reliability Improvements
 
-This release makes SketchPrompt more reliable with critical bug fixes and introduces anonymous analytics to improve the extension. Your sketches stay private while helping us build better features.
+This release makes SketchPrompt more reliable with critical bug fixes and enhanced security features. Your sketches are now more secure and the extension is more stable.
 
 ### What's New in 0.2.0
 
@@ -35,12 +35,7 @@ This release makes SketchPrompt more reliable with critical bug fixes and introd
 - **Updated Help System**: Enhanced the built-in help documentation with more detailed instructions and troubleshooting tips.
 - **Better Examples**: Added more comprehensive examples to help you get started quickly.
 
-####  **Analytics & Privacy**
-- **Privacy-Focused Analytics**: Implemented anonymous usage tracking via Umami Cloud to help improve the extension
-- **Feature Usage Tracking**: Monitor which features are used most to prioritize development
-- **Error Monitoring**: Track error patterns to identify and fix issues quickly
-- **Privacy Protection**: No personal data, sketch content, or file names are ever tracked
-- **Optional Tracking**: Analytics can be disabled by developers building from source
+
 
 ---
 

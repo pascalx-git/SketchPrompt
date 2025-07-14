@@ -44,13 +44,8 @@ SketchPrompt is a Cursor-native extension that lets you sketch ideas, UI flows, 
 - **Real-Time Collaboration**: Multi-user sketching and feedback
 - **Cloud Sync & Sharing**: Share sketches and sync across devices
 
-## Analytics & Privacy
-SketchPrompt includes anonymous usage analytics to help improve the extension. We track feature usage and error patterns to make the extension better, but we never collect:
-- Your sketch content or drawings
-- Personal information or file names
-- Workspace data or AI conversations
-
-All analytics are anonymous and privacy-focused. If you're a developer building from source, you can disable analytics by editing `src/umamiConfig.ts`. For detailed privacy information, see the [README.md](README.md).
+## Privacy
+SketchPrompt is designed with privacy in mind. All sketch data stays on your local machine and is never sent to external services.
 
 ## Who is this for?
 - UX/product designers

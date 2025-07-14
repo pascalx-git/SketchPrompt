@@ -93,7 +93,7 @@ npm run watch
 - **Build**: Vite for webview bundling, TypeScript for extension compilation
 - **Auto-Save**: Debounced, content-aware saving with deep equality checks
 - **File Watching**: Self-trigger suppression to prevent reload loops
-- **Analytics**: Privacy-focused usage tracking via Umami Cloud
+
 
 ## Security & Privacy
 
@@ -108,42 +108,22 @@ SketchPrompt follows a security-first development approach with iterative securi
 - **Error Sanitization**: No information leakage in error messages
 - **Local Bundling**: Minimal external dependencies
 
-### **Privacy & Analytics**
+### **Privacy**
 
-SketchPrompt includes anonymous usage analytics to help improve the extension. Here's what you should know:
+SketchPrompt is designed with privacy in mind. All sketch data stays on your local machine and is never sent to external services.
 
-### **What We Track**
-- **Feature usage**: Which commands and features are used most
-- **Error patterns**: What types of errors occur (without personal details)
-- **Extension performance**: Basic usage statistics to identify issues
-- **Version adoption**: Which extension versions are being used
-
-### **What We Don't Track**
+**What We Don't Track:**
 - ❌ **Personal data**: No user names, emails, or identities
-- ❌ **Sketch content**: Your drawings and sketches are never sent
+- ❌ **Sketch content**: Your drawings and sketches are never sent anywhere
 - ❌ **File names**: Individual file names or paths are not tracked
 - ❌ **Workspace data**: Your project structure or workspace information
 - ❌ **AI conversations**: Chat content or prompts are not tracked
 
-### **Privacy Features**
-- **Anonymous tracking**: No personal identifiers are collected
-- **Local processing**: All sketch data stays on your machine
-- **Optional**: Analytics can be disabled by developers building from source
-- **Transparent**: All tracking code is open source and visible
-
-### **Data Storage**
-- Analytics data is stored securely on Umami Cloud servers
-- Data is used only to improve the extension's functionality
-- No data is sold or shared with third parties
-- You can request data deletion by contacting the maintainers
-
-For more details, see [ANALYTICS_SETUP.md](ANALYTICS_SETUP.md).
-
-### **For Extension Users**
-If you install SketchPrompt from the Cursor IDE marketplace, analytics are enabled by default to help improve the extension. The tracking is anonymous and privacy-focused.
-
-### **For Developers Building from Source**
-If you build SketchPrompt from the GitHub repository, you can disable analytics by editing `src/umamiConfig.ts` and setting `ENABLED: false`.
+**What's Coming:**
+- 🔒 **Local-first approach**: All features will prioritize local processing
+- 🤝 **Optional collaboration**: Future sharing features will be opt-in only
+- 🔐 **End-to-end encryption**: For any future cloud features
+- 📊 **Privacy-focused analytics**: If implemented, will be anonymous and optional
 
 ## Roadmap
 
