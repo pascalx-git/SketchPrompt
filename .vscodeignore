@@ -1,52 +1,53 @@
-# Prototypes and experiments
-canvas-experiments/**
-
-# Webview source (if not needed at runtime)
-media/src/**
-
-# Extension source
+# Source files
 src/**
-
-# Node modules (let vsce include only prod deps)
-node_modules/**
-
-# Build/config files
 tsconfig.json
-.vscode/**
-.vscode-test/**
+vite.config.ts
+
+# Build artifacts (keep bundled version, exclude source)
+out/**
+
+# Development files
+*.vsix
+*.log
+.DS_Store
+node_modules/.cache/**
+
+# Exclude all node_modules
+node_modules/**
+canvas-experiments/node_modules/**
+*(No exceptions!)*
+
+# Test files
 test/**
 tests/**
-docs/**
+.vscode-test/**
+
+# Documentation
+.steer/**
 *.md
-*.log
-*.bak
-*.tmp
-*.psd
-*.ai
-*.sketch
-**/*.ts
-**/*.tsx
-**/*.map
-**/*.js.map
-**/*.d.ts
-**/vite.config.ts
-**/.eslintrc.json
+!README.md
+!HELP.md
+!LICENSE
+!CHANGELOG.md
+
+# Config files
+.vscode/**
 .gitignore
 .yarnrc
 vsc-extension-quickstart.md
 
-# Exclude unneeded media (keep only built files and used assets)
+# Media source files (keep only built assets)
+media/src/**
 media/*.psd
 media/*.ai
 media/*.sketch
-# DO NOT exclude logo or used assets
+
+# Keep essential files
+!package.json
+!sketchprompt-language-configuration.json
 !media/logo.png
 !media/sketching.js
 !media/sketching.css
 
-# Keep manifest and config files
-!package.json
-!README.md
-!LICENSE
-!CHANGELOG.md
-!sketchprompt-language-configuration.json 
+# Package files
+package-lock.json

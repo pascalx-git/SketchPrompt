@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as https from 'https';
 import { UMAMI_CONFIG } from './umamiConfig';
 
 // Umami Analytics Configuration
@@ -67,36 +68,61 @@ export class UmamiAnalytics {
         }
       };
 
-      // Send to Umami using the correct API format
-      const response = await fetch(`https://cloud.umami.is/api/send`, {
+      // Send to Umami using Node.js https module
+      const postData = JSON.stringify({
+        payload: {
+          hostname: 'extension.vscode',
+          language: 'en-US',
+          referrer: '',
+          screen: '1920x1080',
+          title: 'SketchPrompt Extension',
+          url: '/extension-event',
+          website: this.config.websiteId,
+          name: eventName,
+          data: event.data
+        },
+        type: 'event'
+      });
+
+      const options = {
+        hostname: 'cloud.umami.is',
+        port: 443,
+        path: '/api/send',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'User-Agent': `SketchPrompt-Extension/${this.extensionVersion}`,
-        },
-        body: JSON.stringify({
-          payload: {
-            hostname: 'extension.vscode',
-            language: 'en-US',
-            referrer: '',
-            screen: '1920x1080',
-            title: 'SketchPrompt Extension',
-            url: '/extension-event',
-            website: this.config.websiteId,
-            name: eventName,
-            data: event.data
-          },
-          type: 'event'
-        }),
-      });
-
-      if (!response.ok) {
-        console.warn(`[SketchPrompt] Umami tracking failed: ${response.status} ${response.statusText}`);
-      } else {
-        if (this.config.debugMode) {
-          console.log(`[SketchPrompt] Successfully tracked event: ${eventName}`, properties);
+          'Content-Length': Buffer.byteLength(postData)
         }
-      }
+      };
+
+      return new Promise<void>((resolve, reject) => {
+        const req = https.request(options, (res) => {
+          let data = '';
+          res.on('data', (chunk) => {
+            data += chunk;
+          });
+          res.on('end', () => {
+            if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
+              if (this.config.debugMode) {
+                console.log(`[SketchPrompt] Successfully tracked event: ${eventName}`, properties);
+              }
+              resolve();
+            } else {
+              console.warn(`[SketchPrompt] Umami tracking failed: ${res.statusCode} ${res.statusMessage}`);
+              resolve(); // Don't reject to avoid disrupting user experience
+            }
+          });
+        });
+
+        req.on('error', (error) => {
+          console.warn('[SketchPrompt] Umami tracking error:', error);
+          resolve(); // Don't reject to avoid disrupting user experience
+        });
+
+        req.write(postData);
+        req.end();
+      });
     } catch (error) {
       // Silently fail to avoid disrupting user experience
       console.warn('[SketchPrompt] Umami tracking error:', error);

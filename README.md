@@ -95,7 +95,20 @@ npm run watch
 - **File Watching**: Self-trigger suppression to prevent reload loops
 - **Analytics**: Privacy-focused usage tracking via Umami Cloud
 
-## Analytics & Privacy
+## Security & Privacy
+
+SketchPrompt follows a security-first development approach with iterative security reviews. We ensure no release ships with major security issues by conducting regular security assessments and addressing vulnerabilities promptly.
+
+**📋 [See detailed security information →](SECURITY.md)**
+
+### **Security Features**
+- **Content Security Policy (CSP)**: Hardened against XSS attacks
+- **Input Validation**: All sketch data validated with JSON schema
+- **Path Traversal Protection**: Secure file operations
+- **Error Sanitization**: No information leakage in error messages
+- **Local Bundling**: Minimal external dependencies
+
+### **Privacy & Analytics**
 
 SketchPrompt includes anonymous usage analytics to help improve the extension. Here's what you should know:
 
