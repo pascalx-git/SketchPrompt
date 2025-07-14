@@ -5,6 +5,45 @@ SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI promp
 
 ---
 
+## v0.2.0 – Analytics, Security & Reliability Improvements
+
+This release makes SketchPrompt more reliable with critical bug fixes and introduces anonymous analytics to improve the extension. Your sketches stay private while helping us build better features.
+
+### What's New in 0.2.0
+
+#### 🔧 **Critical Bug Fixes**
+- **Fixed Custom Editor Registration**: Resolved the issue where sketches weren't saving properly and the editor wasn't displaying correctly. Your sketches now persist reliably and the interface works as expected.
+- **Improved File Persistence**: Enhanced the auto-save mechanism to ensure your work is never lost, even during unexpected interruptions.
+- **Better Error Handling**: More graceful handling of edge cases and improved error messages to help you troubleshoot any issues.
+
+#### 🛡️ **Security Enhancements**
+- **Comprehensive Security Analysis**: Conducted thorough security review of all dependencies and code paths to ensure your sketches and workspace remain secure.
+- **Updated Dependencies**: Upgraded all packages to their latest secure versions, protecting against known vulnerabilities.
+- **Input Validation**: Added robust input validation to prevent potential security issues when working with sketch files.
+
+#### 🎨 **User Experience Improvements**
+- **Enhanced Visual Feedback**: Better loading states and visual indicators when sketches are being saved or loaded.
+- **Improved File Management**: More intuitive handling of `.sketchprompt` files with better integration into your existing workflow.
+- **Streamlined Installation**: Simplified the installation process for a smoother setup experience.
+
+#### 🔄 **Performance Optimizations**
+- **Faster Loading**: Reduced initialization time so you can start sketching immediately.
+- **Memory Efficiency**: Optimized memory usage for better performance with large sketches.
+- **Smoother Interactions**: Improved responsiveness when drawing and editing complex sketches.
+
+#### 📚 **Documentation Updates**
+- **Updated Help System**: Enhanced the built-in help documentation with more detailed instructions and troubleshooting tips.
+- **Better Examples**: Added more comprehensive examples to help you get started quickly.
+
+#### 📊 **Analytics & Privacy**
+- **Privacy-Focused Analytics**: Implemented anonymous usage tracking via Umami Cloud to help improve the extension
+- **Feature Usage Tracking**: Monitor which features are used most to prioritize development
+- **Error Monitoring**: Track error patterns to identify and fix issues quickly
+- **Privacy Protection**: No personal data, sketch content, or file names are ever tracked
+- **Optional Tracking**: Analytics can be disabled by developers building from source
+
+---
+
 ## v0.1.0 – Initial Public Alpha Release
 
 Welcome to the very first public release of SketchPrompt! This alpha version lays the foundation for a seamless visual sketching experience inside Cursor, designed for developers, designers, and anyone who thinks with visuals as well as words.
@@ -24,7 +63,7 @@ Welcome to the very first public release of SketchPrompt! This alpha version lay
 
 ---
 
-**Note:** This is an early alpha release. AAdditionalsSecurity features, advanced collaboration, and cloud sync are planned for future updates. Feedback and contributions are welcome!
+**Note:** This is an early alpha release. Additional security features, advanced collaboration, and cloud sync are planned for future updates. Feedback and contributions are welcome!
 
 ---
 

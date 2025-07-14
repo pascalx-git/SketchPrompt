@@ -249,6 +249,29 @@ body {
     font-weight: 700;
 }
 
+/* Cycling Value Proposition Animation */
+.cycling-value-prop {
+    display: inline-block;
+    min-width: 280px;
+    transition: opacity 0.4s ease-in-out;
+    position: relative;
+    opacity: 1;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+}
+
+.cycling-value-prop.fade-out {
+    opacity: 0;
+}
+
+.cycling-value-prop.fade-in {
+    opacity: 1;
+}
+
 .gradient-text {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
@@ -1169,15 +1192,6 @@ html {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-}
-
-@keyframes cyclingText {
-    0%, 16% { content: 'brainstorming with AI'; }
-    17%, 33% { content: 'explaining your code'; }
-    34%, 50% { content: 'debugging visually'; }
-    51%, 66% { content: 'teaching or learning'; }
-    67%, 83% { content: 'collaborating with teammates'; }
-    84%, 100% { content: 'communicating with AI'; }
 }
 
 .cycling-fact {

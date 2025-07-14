@@ -1,22 +1,18 @@
-// Cycling hero value prop/fact
-const cyclingTexts = [
-  'brainstorming with AI',
-  'explaining your code',
-  'debugging visually',
-  'teaching or learning',
-  'collaborating with teammates',
-  'communicating with AI'
-];
-const cyclingFacts = [
-  'Did you know 60% of people are visual thinkers?',
-  'Visuals are processed 60,000x faster than text.',
-  'Sketching boosts memory and understanding.',
-  'AI understands better with visual context.',
-  'Sketching saves time over typing long prompts.'
-];
 
-// Remove typewriter effect for hero
-// (No code needed here anymore)
+
+// Hero value propositions for cycling animation
+const heroValueProps = [
+  'Sketch your ideas',
+  'Diagram your thinking',
+  'Visualize the next step',
+  'Design your prompt visually',
+  'Externalize your thinking',
+  'Think in spatial patterns',
+  'Combine visuals and language',
+  'Bring clarity to complexity',
+  'Structure your thought process',
+  'Bring shape to your solution'
+];
 
 // Research-backed facts with footnotes
 const researchFacts = [
@@ -85,6 +81,11 @@ let currentFactIndex = 0;
 let funFactElement = null;
 let indicatorDots = null;
 let factInterval = null;
+
+// Hero cycling animation variables
+let currentHeroIndex = 0;
+let heroElement = null;
+let heroInterval = null;
 
 function createFootnoteSup(sourceNum) {
     const sup = document.createElement('sup');
@@ -155,6 +156,48 @@ function handleFootnoteClick(e) {
     }
 }
 
+function cycleHeroValueProp() {
+    if (!heroElement) {
+        initializeHeroCycling();
+        return;
+    }
+    
+    console.log('Cycling hero value prop, current index:', currentHeroIndex);
+    
+    // Fade out
+    heroElement.classList.add('fade-out');
+    
+    setTimeout(() => {
+        // Update text
+        currentHeroIndex = (currentHeroIndex + 1) % heroValueProps.length;
+        heroElement.textContent = heroValueProps[currentHeroIndex];
+        
+        // Fade in
+        heroElement.classList.remove('fade-out');
+        console.log('Updated to:', heroValueProps[currentHeroIndex]);
+    }, 400);
+}
+
+function initializeHeroCycling() {
+    heroElement = document.querySelector('.cycling-value-prop');
+    console.log('Initializing hero cycling, found element:', heroElement);
+    if (heroElement) {
+        currentHeroIndex = 0;
+        heroElement.textContent = heroValueProps[0];
+        console.log('Set initial text to:', heroValueProps[0]);
+        
+        if (heroInterval) clearInterval(heroInterval);
+        // Start cycling after a short delay to make it more obvious
+        setTimeout(() => {
+            heroInterval = setInterval(cycleHeroValueProp,4000); // Change every 2 seconds for testing
+            console.log('Started hero cycling interval');
+        }, 1000); // Start after 1 second
+    } else {
+        console.log('Hero element not found, retrying in 1 second');
+        setTimeout(initializeHeroCycling, 1000);
+    }
+}
+
 // Pause/resume cycling on hover/focus
 let cyclingPaused = false;
 function pauseCycling() {
@@ -170,6 +213,21 @@ function resumeCycling() {
     }
 }
 
+// Pause/resume hero cycling on hover/focus
+let heroCyclingPaused = false;
+function pauseHeroCycling() {
+    if (!heroCyclingPaused) {
+        clearInterval(heroInterval);
+        heroCyclingPaused = true;
+    }
+}
+function resumeHeroCycling() {
+    if (heroCyclingPaused) {
+        heroInterval = setInterval(cycleHeroValueProp, 4500);
+        heroCyclingPaused = false;
+    }
+}
+
 // Global click handler for footnotes (fallback)
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('footnote-link')) {
@@ -180,13 +238,24 @@ document.addEventListener('click', function(e) {
 // Existing JS (tabs, split button, nav, smooth scroll, etc.)
 document.addEventListener('DOMContentLoaded', function() {
     initializeFactCycling();
-    // Pause on hover/focus
+    initializeHeroCycling();
+    
+    // Pause on hover/focus for fun facts
     const funFactCard = document.querySelector('.why-card.fun-fact');
     if (funFactCard) {
         funFactCard.addEventListener('mouseenter', pauseCycling);
         funFactCard.addEventListener('mouseleave', resumeCycling);
         funFactCard.addEventListener('focusin', pauseCycling);
         funFactCard.addEventListener('focusout', resumeCycling);
+    }
+    
+    // Pause on hover/focus for hero cycling
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+        heroTitle.addEventListener('mouseenter', pauseHeroCycling);
+        heroTitle.addEventListener('mouseleave', resumeHeroCycling);
+        heroTitle.addEventListener('focusin', pauseHeroCycling);
+        heroTitle.addEventListener('focusout', resumeHeroCycling);
     }
 
   // Split button dropdown

@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import Ajv, { JSONSchemaType } from 'ajv';
+import Ajv from 'ajv';
+import { UmamiAnalytics } from './umamiAnalytics';
 
 function debounce<T extends (...args: any[]) => void>(fn: T, delay: number): T {
   let timer: NodeJS.Timeout | null = null;
@@ -20,7 +21,7 @@ interface SketchData {
   session?: object;
 }
 
-const sketchDataSchema: JSONSchemaType<SketchData> = {
+const sketchDataSchema = {
   type: "object",
   properties: {
     document: {
@@ -57,8 +58,11 @@ function sanitizeSketchData(rawData: any): SketchData {
 
 export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider {
   public static readonly viewType = 'sketchprompt.editor';
+  private analytics: UmamiAnalytics;
 
-  constructor(private readonly context: vscode.ExtensionContext) {}
+  constructor(private readonly context: vscode.ExtensionContext) {
+    this.analytics = UmamiAnalytics.getInstance();
+  }
 
   public async resolveCustomTextEditor(
     document: vscode.TextDocument,
@@ -66,6 +70,9 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
     _token: vscode.CancellationToken
   ): Promise<void> {
     console.log('[SketchPrompt] resolveCustomTextEditor called for', document.uri.fsPath);
+    
+    // Track sketch opened
+    await this.analytics.trackSketchOpened();
     webviewPanel.webview.options = {
       enableScripts: true,
       localResourceRoots: [this.context.extensionUri]
@@ -139,6 +146,8 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
       switch (message.type) {
         case 'saveSketch': {
           debouncedSave(message.data);
+          // Track sketch saved
+          await this.analytics.trackSketchSaved();
           break;
         }
         case 'requestSketch': {
@@ -148,6 +157,8 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
         case 'copyToClipboard': {
           try {
             vscode.window.showInformationMessage('Image copied to clipboard! You can now paste it in chat.');
+            // Track copy to clipboard
+            await this.analytics.trackCopyToClipboard();
           } catch (error) {
             console.error('Failed to copy to clipboard:', error);
             vscode.window.showErrorMessage('Failed to copy image to clipboard');
@@ -160,6 +171,8 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
         }
         case 'showError': {
           vscode.window.showErrorMessage(message.message);
+          // Track sketch error
+          await this.analytics.trackSketchError(message.message);
           break;
         }
       }

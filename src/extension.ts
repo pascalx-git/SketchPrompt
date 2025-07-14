@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { SketchPromptCustomEditor } from './SketchPromptCustomEditor';
+import { UmamiAnalytics } from './umamiAnalytics';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -25,6 +26,12 @@ function validateFilePath(basePath: string, userPath: string): string {
 export async function activate(context: vscode.ExtensionContext) {
 	console.log('[SketchPrompt] Extension activated');
 	console.log('SketchPrompt is now active!');
+
+	// Initialize Umami analytics
+	const analytics = UmamiAnalytics.getInstance();
+	
+	// Track extension activation
+	await analytics.trackActivation();
 
 	// On activation, ensure SketchPrompt folder and default file exist
 	const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -90,6 +97,9 @@ export async function activate(context: vscode.ExtensionContext) {
 		fs.writeFileSync(filePath, JSON.stringify({}));
 		const fileUri = vscode.Uri.file(filePath);
 		await vscode.commands.executeCommand('vscode.openWith', fileUri, 'sketchprompt.editor');
+		
+		// Track new sketch creation
+		await analytics.trackNewSketch();
 	});
 	context.subscriptions.push(newSketchDisposable);
 
@@ -107,6 +117,9 @@ export async function activate(context: vscode.ExtensionContext) {
 		}
 		const helpUri = vscode.Uri.file(helpPath);
 		await vscode.commands.executeCommand('vscode.open', helpUri);
+		
+		// Track help viewed
+		await analytics.trackHelpViewed();
 	});
 	context.subscriptions.push(helpDisposable);
 
@@ -118,4 +131,8 @@ export async function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(customEditorProvider);
 }
 
-export function deactivate() {} 
+export async function deactivate() {
+	// Track extension deactivation
+	const analytics = UmamiAnalytics.getInstance();
+	await analytics.trackDeactivation();
+} 
