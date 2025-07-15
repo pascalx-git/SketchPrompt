@@ -19,7 +19,8 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 
 ## Installation
 
-### Option 1: Install SketchPrompt
+### Option 1: For Cursor IDE Users
+**Install SketchPrompt to start sketching:**
 
 #### Option 1a: Install from Cursor IDE Extensions
 1. Open Cursor IDE
