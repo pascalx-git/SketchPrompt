@@ -1,6 +1,6 @@
 # ![SketchPrompt Logo](media/logo.png) SketchPrompt
 
-[See Help & Usage Guide →](Help.md)
+[See Help & Usage Guide →](HELP.md)
 
 A powerful Cursor IDE extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat. Done. Expect more crazy powerful features in the future.
 
@@ -19,13 +19,31 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 
 ## Installation
 
-1. Clone this repository
+### Option 1: Install SketchPrompt
+
+#### Option 1a: Install from Cursor IDE Extensions
+1. Open Cursor IDE
+2. Go to Extensions (Cmd/Ctrl + Shift + X)
+3. Search for "SketchPrompt"
+4. Click Install
+
+#### Option 1b: Install from GitHub Releases
+1. Download the latest `.vsix` file from [GitHub Releases](https://github.com/pascalx-git/SketchPrompt/releases)
+2. Open Cursor IDE
+3. Go to Extensions (Cmd/Ctrl + Shift + X)
+4. Click the "..." menu and select "Install from VSIX..."
+5. Select the downloaded `.vsix` file
+6. Restart Cursor IDE when prompted
+
+### Option 2: For Developers & Contributors
+**Build from source to contribute or customize:**
+1. Clone this repository: `git clone https://github.com/pascalx-git/SketchPrompt.git`
 2. Install dependencies: `npm install`
 3. Build the extension: `npm run vscode:prepublish`
 4. Package the extension: `npx vsce package`
 5. Install the `.vsix` file in Cursor IDE
 
-**Alternative**: Visit [https://sketch-prompt.com](https://sketch-prompt.com) for installation instructions and the latest updates.
+**Alternative**: Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed tutorials and documentation.
 
 ## Usage
 
@@ -176,4 +194,4 @@ SketchPrompt is licensed under the MIT License. This project bundles the TLDraw 
 
 ---
 
-**Version**: 0.0.2 | **Last Updated**: July 2024 | **Compatibility**: Cursor IDE
+**Version**: 0.2.0 | **Last Updated**: July 2024 | **Compatibility**: Cursor IDE
