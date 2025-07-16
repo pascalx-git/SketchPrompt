@@ -11,6 +11,8 @@
 
 SketchPrompt follows a security-first development approach with iterative security reviews. We ensure no release ships with major security issues by conducting regular security assessments and addressing vulnerabilities promptly.
 
+Our current architecture prioritizes local processing and user privacy while maintaining the flexibility to add secure cloud features in the future.
+
 ### **Security Features**
 - **Content Security Policy (CSP)**: Hardened against XSS attacks
 - **Input Validation**: All sketch data validated with JSON schema
@@ -96,26 +98,27 @@ Through iterative security reviews and prompt vulnerability remediation, all cri
 
 ---
 
-## Privacy & Analytics
+## Privacy & Data Handling
 
-SketchPrompt includes anonymous usage analytics to help improve the extension. Here's what you should know:
+SketchPrompt is designed with privacy as a fundamental principle. Here's how we handle data:
 
-### **What We Track**
-- **Feature usage**: Which commands and features are used most
-- **Error patterns**: What types of errors occur (without personal details)
-- **Extension performance**: Basic usage statistics to identify issues
+### **Current Privacy Features**
+- **Local processing**: All sketches and data stay on your machine
+- **No data collection**: We don't track usage, errors, or performance metrics
+- **No cloud dependencies**: No external services required for core functionality
+- **No analytics**: No anonymous usage tracking or statistics collection
 
-### **What We Don't Track**
-- Personal information or file contents
-- User sketches or drawing data
-- Individual user behavior patterns
-- Any sensitive or private information
+### **Future Privacy Considerations**
+As we add AI and collaboration features, we will:
+- **Maintain transparency**: Clear documentation of any data handling
+- **Provide opt-out options**: Users can choose not to use cloud features
+- **Use secure protocols**: Any future cloud features will use encryption and secure APIs
+- **Minimize data collection**: Only collect what's absolutely necessary for functionality
 
-### **Analytics Privacy**
-- **Anonymous**: No personal identification
-- **Aggregated**: Only summary statistics
-- **Optional**: Can be disabled if desired
-- **Secure**: Data transmitted over HTTPS
+### **Privacy Commitment**
+- **User control**: You decide what data to share
+- **Transparent practices**: Clear documentation of all data handling
+- **Security-first**: Privacy and security are core design principles
 
 ---
 

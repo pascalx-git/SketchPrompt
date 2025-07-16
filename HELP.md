@@ -44,8 +44,22 @@ SketchPrompt is a Cursor-native extension that lets you sketch ideas, UI flows, 
 - **Real-Time Collaboration**: Multi-user sketching and feedback
 - **Cloud Sync & Sharing**: Share sketches and sync across devices
 
-## Privacy
-SketchPrompt is designed with privacy in mind. All sketch data stays on your local machine and is never sent to external services.
+## Security & Privacy
+SketchPrompt is designed with security and privacy in mind. All sketch data stays on your local machine and is never sent to external services.
+
+### **Security Features**
+- **Local-First Architecture**: All processing happens on your machine
+- **Open Source**: Full code transparency for security review
+- **No Cloud Dependencies**: No external services required for core functionality
+- **Regular Security Reviews**: Iterative assessments before each release
+
+### **Privacy Commitment**
+- **No Data Collection**: We don't track usage, errors, or personal information
+- **No Sketch Transmission**: Your drawings never leave your machine
+- **No File Monitoring**: Individual file names or workspace data are not tracked
+- **Local Processing**: All functionality runs locally on your device
+
+For detailed security information, see [SECURITY.md](https://github.com/pascalx-git/SketchPrompt/blob/main/SECURITY.md).
 
 ## Who is this for?
 - UX/product designers

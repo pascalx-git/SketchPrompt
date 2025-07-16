@@ -1520,3 +1520,78 @@ section.hero {
     }
 } 
 
+/* Security Section */
+.security {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+}
+
+.security .section-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.security-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.security-card {
+    text-align: center;
+    padding: 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.security-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.security-card h3 {
+    margin: 1rem 0 0.5rem;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.security-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.security-cta {
+    text-align: center;
+}
+
+.security-cta .btn {
+    margin-top: 1rem;
+}
+
+/* Feature icon styles for security cards */
+.security-card .feature-icon {
+    margin-bottom: 1rem;
+}
+
+.security-card .icon-info svg { color: var(--icon-info); }
+.security-card .icon-success svg { color: var(--icon-success); }
+.security-card .icon-warning svg { color: var(--icon-warning); }
+
+@media (max-width: 768px) {
+    .security-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .security-card {
+        padding: 1.5rem;
+    }
+} 
+

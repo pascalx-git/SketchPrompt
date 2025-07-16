@@ -116,7 +116,19 @@ npm run watch
 
 ## Security & Privacy
 
-SketchPrompt follows a security-first development approach with iterative security reviews. We ensure no release ships with major security issues by conducting regular security assessments and addressing vulnerabilities promptly.
+SketchPrompt is built with security-first principles to ensure your sketches and workflow remain safe and private.
+
+### **Security Features**
+- **Local-First Architecture**: All sketches stay on your machine with no cloud dependencies
+- **Open Source & Auditable**: Full source code available for security review
+- **Privacy-Focused**: No data collection or transmission to external services
+- **Regular Security Reviews**: Iterative assessments before each release
+
+### **Privacy Commitment**
+- **No personal data tracking**: We don't collect user names, emails, or identities
+- **No sketch content transmission**: Your drawings never leave your machine
+- **No file monitoring**: Individual file names or workspace data are not tracked
+- **Local processing**: All functionality runs locally on your device
 
 **📋 [See detailed security information →](SECURITY.md)**
 
