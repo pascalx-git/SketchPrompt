@@ -2,7 +2,7 @@
   "name": "sketchprompt",
   "publisher": "PascalX",
   "displayName": "SketchPrompt",
-  "description": "SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI prompting.",
+  "description": "SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat. Done.",
   "version": "0.2.0",
   "icon": "media/logo.png",
   "repository": {
@@ -10,6 +10,10 @@
     "url": "https://github.com/pascalx-git/SketchPrompt.git"
   },
   "license": "MIT",
+  "homepage": "https://sketch-prompt.com",
+  "bugs": {
+    "url": "https://github.com/pascalx-git/SketchPrompt/issues"
+  },
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -22,13 +26,38 @@
     "sketching",
     "drawing",
     "visual",
-    "tldraw",
+    "design",
     "diagrams",
     "prompts",
     "ai",
     "collaboration",
-    "cursor"
+    "cursor",
+    "ux",
+    "visual-thinking",
+    "sketch",
+    "tldraw",
+    "brainstorming",
+    "wireframes",
+    "prototyping"
   ],
+  "markdown": "github",
+  "galleryBanner": {
+    "color": "#6366f1",
+    "theme": "dark"
+  },
+  "badges": [
+    {
+      "url": "https://img.shields.io/badge/version-0.2.0-blue.svg",
+      "href": "https://github.com/pascalx-git/SketchPrompt/releases",
+      "description": "Version"
+    },
+    {
+      "url": "https://img.shields.io/badge/license-MIT-green.svg",
+      "href": "https://github.com/pascalx-git/SketchPrompt/blob/main/LICENSE",
+      "description": "License"
+    }
+  ],
+  "publisherDisplayName": "PascalX",
   "activationEvents": [
     "onCommand:sketchprompt.newSketch",
     "onCommand:sketchprompt.help",
