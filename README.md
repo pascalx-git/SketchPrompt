@@ -207,4 +207,4 @@ SketchPrompt is licensed under the MIT License. This project bundles the TLDraw 
 
 ---
 
-**Version**: 0.2.0 | **Last Updated**: July 2024 | **Compatibility**: Cursor IDE
+**Version**: 0.2.1 | **Last Updated**: July 2024 | **Compatibility**: Cursor IDE

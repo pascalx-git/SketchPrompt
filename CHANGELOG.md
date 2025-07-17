@@ -39,6 +39,13 @@ This release makes SketchPrompt more reliable with critical bug fixes and enhanc
 
 ---
 
+## v0.2.1 – Marketplace & Documentation Updates
+
+- Updated extension description and marketplace metadata for better discoverability
+- Added comprehensive security messaging to website and documentation
+
+---
+
 ## v0.1.0 – Initial Public Alpha Release
 
 Welcome to the very first public release of SketchPrompt! This alpha version lays the foundation for a seamless visual sketching experience inside Cursor, designed for developers, designers, and anyone who thinks with visuals as well as words.
