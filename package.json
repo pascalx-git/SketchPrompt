@@ -3,7 +3,7 @@
   "publisher": "PascalX",
   "displayName": "SketchPrompt",
   "description": "SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat. Done.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "icon": "media/logo.png",
   "repository": {
     "type": "git",
@@ -47,7 +47,7 @@
   },
   "badges": [
     {
-      "url": "https://img.shields.io/badge/version-0.2.1-blue.svg",
+      "url": "https://img.shields.io/badge/version-0.2.2-blue.svg",
       "href": "https://github.com/pascalx-git/SketchPrompt/releases",
       "description": "Version"
     },
@@ -55,6 +55,11 @@
       "url": "https://img.shields.io/badge/license-MIT-green.svg",
       "href": "https://github.com/pascalx-git/SketchPrompt/blob/main/LICENSE",
       "description": "License"
+    },
+    {
+      "url": "https://img.shields.io/badge/Cursor%20IDE-Extension-purple.svg",
+      "href": "https://cursor.sh",
+      "description": "Cursor IDE Extension"
     }
   ],
   "publisherDisplayName": "PascalX",
@@ -108,7 +113,19 @@
         ],
         "configuration": "./sketchprompt-language-configuration.json"
       }
-    ]
+    ],
+    "fileExtensions": {
+      "sketchprompt": {
+        "icon": "./media/logo-file-icon-light-theme.svg",
+        "format": "svg",
+        "light": {
+          "icon": "./media/logo-file-icon-light-theme.svg"
+        },
+        "dark": {
+          "icon": "./media/logo-file-icon-dark-theme.svg"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile && npm run build-webview && npm run bundle",

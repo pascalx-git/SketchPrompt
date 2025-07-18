@@ -1,4 +1,9 @@
-# ![SketchPrompt Logo](media/logo.png) SketchPrompt
+# ![SketchPrompt Logo](media/logo-icon.png) SketchPrompt
+
+[![Version](https://img.shields.io/badge/version-0.2.2-blue.svg)](https://github.com/pascalx-git/SketchPrompt/releases)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/pascalx-git/SketchPrompt/blob/main/LICENSE)
+[![Cursor IDE](https://img.shields.io/badge/Cursor%20IDE-Extension-purple.svg)](https://cursor.sh)
+[![TLDraw](https://img.shields.io/badge/TLDraw-Powered-orange.svg)](https://tldraw.dev)
 
 [See Help & Usage Guide →](HELP.md)
 
@@ -9,12 +14,11 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 ## Features
 
 - **Rich Sketching**: Full TLDraw integration with shapes, text, drawing tools, and more
-- **Robust Auto-Save**: Content-aware saving with debounced operations and file-watching
-- **AI-Ready**: Structured JSON format for AI analysis and collaboration
+- **AI-Ready**: Structured format for AI analysis and collaboration
 - **File Persistence**: Save and load sketches as `.sketchprompt` files with version control
 - **Copy to Prompt**: Export sketches as images and seamlessly insert into your prompts
-- **Custom Editor**: Dedicated editor for `.sketchprompt` files with syntax highlighting
-- **Real-time Sync**: File-watching with external change detection and auto-reload
+- **Custom Editor**: Dedicated editor for `.sketchprompt` files
+- **Auto-Save**: Your work is automatically saved as you sketch
 - **Collaboration Ready**: Foundation for multi-user and AI-assisted sketching
 
 ## Installation
@@ -73,6 +77,8 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 - **Smart Auto-Save**: Only saves when content actually changes (not on mouse movement)
 - **File Watching**: Automatically reloads when files are modified externally
 - **JSON Format**: Files contain structured data that can be version controlled and analyzed by AI
+- **Visual Feedback**: Real-time status updates and notifications keep you informed
+- **Smart Recovery**: Automatic backup and recovery from file corruption
 
 ## Development
 

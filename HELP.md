@@ -11,6 +11,9 @@ SketchPrompt is a Cursor-native extension that lets you sketch ideas, UI flows, 
 - **AI-Ready**: Sketches are stored in a structured JSON format for easy AI analysis
 - **Custom Editor**: Dedicated editor for `.sketchprompt` files
 - **Real-time Sync**: Auto-reload when files change externally
+- **Status Bar Integration**: Real-time status updates showing save state and file information
+- **Error Recovery**: Automatic backup creation and recovery from corrupted files
+- **Multi-Channel Feedback**: Toast notifications, status bar, and output channel for comprehensive user feedback
 - **Collaboration Ready**: Foundation for future multi-user and AI-assisted sketching
 
 ## Installation
@@ -33,6 +36,9 @@ SketchPrompt is a Cursor-native extension that lets you sketch ideas, UI flows, 
 ### Editing Sketches
 - Open any `.sketchprompt` file to edit it visually
 - All changes are auto-saved
+- **Status Bar**: Shows current save state and file information
+- **Error Recovery**: If a file becomes corrupted, it's automatically backed up and recovery is attempted
+- **Backup Files**: Backup files are created with timestamps (e.g., `sketch.sketchprompt.backup-2024-01-15T10-30-45`) and preserved for user control
 
 ### Getting Help
 - Run **"SketchPrompt: Help"** from the command palette to open this help file

@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
+import * as fs from 'fs';
 import Ajv from 'ajv';
 
 function debounce<T extends (...args: any[]) => void>(fn: T, delay: number): T {
@@ -55,10 +56,70 @@ function sanitizeSketchData(rawData: any): SketchData {
   };
 }
 
+function tryRecoverFromCorruptedJSON(text: string): { recovered: boolean; data: any; error?: string } {
+  try {
+    // Try to parse as-is first
+    const parsed = JSON.parse(text);
+    return { recovered: true, data: parsed };
+  } catch (error) {
+    // Try to recover by finding valid JSON parts
+    const jsonMatch = text.match(/\{[^{}]*\}/);
+    if (jsonMatch) {
+      try {
+        const partialData = JSON.parse(jsonMatch[0]);
+        return { recovered: true, data: partialData, error: 'Partial recovery - some data may be lost' };
+      } catch (partialError) {
+        return { recovered: false, data: null, error: 'Unable to recover from corrupted file' };
+      }
+    }
+    return { recovered: false, data: null, error: 'No valid JSON found' };
+  }
+}
+
+function createBackup(filePath: string, content: string): string {
+  try {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const backupPath = `${filePath}.backup-${timestamp}`;
+    fs.writeFileSync(backupPath, content);
+    
+    // Note: Backup cleanup disabled for now - keeping all backups for user control
+    // TODO: Add configurable backup retention in settings
+    
+    return backupPath;
+  } catch (error) {
+    console.error('Failed to create backup:', error);
+    return '';
+  }
+}
+
 export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider {
   public static readonly viewType = 'sketchprompt.editor';
+  private statusBarItem: vscode.StatusBarItem | undefined;
+  private statusBarTimeouts: NodeJS.Timeout[] = [];
 
-  constructor(private readonly context: vscode.ExtensionContext) {}
+  constructor(private readonly context: vscode.ExtensionContext) {
+    // Status bar item will be created when editor is resolved
+  }
+
+  private updateStatusBar(text: string, tooltip: string) {
+    if (this.statusBarItem) {
+      this.statusBarItem.text = text;
+      this.statusBarItem.tooltip = tooltip;
+      console.log('[SketchPrompt] Status bar updated:', text);
+    } else {
+      // Recreate status bar if it was disposed
+      this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 99);
+      this.statusBarItem.text = text;
+      this.statusBarItem.tooltip = tooltip;
+      this.statusBarItem.show();
+      console.log('[SketchPrompt] Status bar recreated and updated:', text);
+    }
+  }
+
+  private scheduleStatusBarUpdate(callback: () => void, delay: number): void {
+    const timeout = setTimeout(callback, delay);
+    this.statusBarTimeouts.push(timeout);
+  }
 
   public async resolveCustomTextEditor(
     document: vscode.TextDocument,
@@ -67,6 +128,14 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
   ): Promise<void> {
     console.log('[SketchPrompt] resolveCustomTextEditor called for', document.uri.fsPath);
     
+    // Create status bar item for this editor instance
+    if (!this.statusBarItem) {
+      this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 99);
+      this.statusBarItem.text = '$(pencil) SketchPrompt: Ready';
+      this.statusBarItem.tooltip = 'SketchPrompt is ready to use';
+      this.statusBarItem.show();
+      console.log('[SketchPrompt] Status bar item created and shown');
+    }
 
     webviewPanel.webview.options = {
       enableScripts: true,
@@ -89,7 +158,7 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
     let ignoreNextWatcher = false;
 
     // Send the initial sketch data to the webview
-    function sendSketchData() {
+    const sendSketchData = () => {
       try {
         const text = document.getText();
         const rawData = text ? JSON.parse(text) : {};
@@ -100,16 +169,94 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
           type: 'loadSketch',
           data: data // { document, session }
         });
+        // Update status bar to show loaded
+        this.updateStatusBar('$(pencil) SketchPrompt: Ready', `Editing ${path.basename(document.uri.fsPath)}`);
       } catch (error) {
         console.error('Failed to parse sketch data:', error);
-        // Don't expose internal error details to user
-        vscode.window.showWarningMessage('Unable to load sketch file. Using empty sketch.');
-        webviewPanel.webview.postMessage({
-          type: 'loadSketch',
-          data: { document: {}, session: {} }
-        });
+        
+        // Create backup before attempting recovery
+        const text = document.getText();
+        const backupPath = createBackup(document.uri.fsPath, text);
+        
+        // Try to recover from corrupted JSON
+        const recovery = tryRecoverFromCorruptedJSON(text);
+        
+        if (recovery.recovered) {
+          // Successfully recovered some data
+          const data = sanitizeSketchData(recovery.data);
+          lastSavedDocument = data.document || {};
+          webviewPanel.webview.postMessage({
+            type: 'loadSketch',
+            data: data
+          });
+          
+          // Show recovery message with multiple feedback channels
+          const message = backupPath 
+            ? `Recovered sketch data. Backup saved as ${path.basename(backupPath)}`
+            : 'Recovered sketch data from corrupted file';
+          
+          // 1. Toast notification
+          vscode.window.showInformationMessage(message);
+          
+          // 2. Status bar with recovery indicator
+          this.updateStatusBar('$(pencil) SketchPrompt: Ready (Recovered)', `Editing ${path.basename(document.uri.fsPath)} - ${message}`);
+          
+          // 3. Show in output channel for persistent visibility
+          const outputChannel = vscode.window.createOutputChannel('SketchPrompt');
+          outputChannel.appendLine(`[${new Date().toLocaleTimeString()}] ${message}`);
+          outputChannel.show();
+          
+          // 4. Show notification in webview for maximum visibility
+          webviewPanel.webview.postMessage({
+            type: 'showNotification',
+            data: {
+              type: 'info',
+              message: `🔄 ${message}`,
+              duration: 5000
+            }
+          });
+        } else {
+          // Complete failure - use empty sketch but preserve backup
+          webviewPanel.webview.postMessage({
+            type: 'loadSketch',
+            data: { document: {}, session: {} }
+          });
+          
+          const message = backupPath 
+            ? `Unable to recover sketch. Backup saved as ${path.basename(backupPath)}`
+            : 'Unable to recover sketch data';
+          
+          // 1. Toast notification
+          vscode.window.showWarningMessage(message);
+          
+          // 2. Status bar with error indicator
+          this.updateStatusBar('$(error) SketchPrompt: Load Failed', `Failed to load sketch file - ${message}`);
+          
+          // 3. Show in output channel for persistent visibility
+          const outputChannel = vscode.window.createOutputChannel('SketchPrompt');
+          outputChannel.appendLine(`[${new Date().toLocaleTimeString()}] WARNING: ${message}`);
+          outputChannel.show();
+          
+          // 4. Show notification in webview for maximum visibility
+          webviewPanel.webview.postMessage({
+            type: 'showNotification',
+            data: {
+              type: 'warning',
+              message: `⚠️ ${message}`,
+              duration: 8000
+            }
+          });
+          this.scheduleStatusBarUpdate(() => {
+            this.updateStatusBar('$(pencil) SketchPrompt: Ready', `Editing ${path.basename(document.uri.fsPath)}`);
+          }, 3000);
+        }
+        
+        // Ensure status bar is visible after error recovery
+        if (this.statusBarItem) {
+          this.statusBarItem.show();
+        }
       }
-    }
+    };
     sendSketchData();
 
     // Debounced save logic
@@ -118,6 +265,9 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
         if (document.uri.scheme === 'file') {
           // Only save if document actually changed
           if (!deepEqual(data.document, lastSavedDocument)) {
+            // Update status bar to show saving
+            this.updateStatusBar('$(sync~spin) SketchPrompt: Saving...', 'Saving sketch...');
+            
             const edit = new vscode.WorkspaceEdit();
             // Always save the full snapshot (document + session)
             edit.replace(document.uri, new vscode.Range(0, 0, document.lineCount, 0), JSON.stringify({ document: data.document, session: data.session }, null, 2));
@@ -125,6 +275,12 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
             await vscode.workspace.applyEdit(edit);
             await document.save();
             lastSavedDocument = data.document;
+            
+            // Update status bar to show saved briefly, then return to ready
+            this.updateStatusBar('$(pass-filled) SketchPrompt: Saved', 'Sketch saved successfully');
+            this.scheduleStatusBarUpdate(() => {
+              this.updateStatusBar('$(pencil) SketchPrompt: Ready', `Editing ${path.basename(document.uri.fsPath)}`);
+            }, 2000);
           }
         }
       } catch (error) {
@@ -132,6 +288,11 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
         if (document.uri.scheme === 'file') {
           // Don't expose internal error details - use sanitized message
           vscode.window.showErrorMessage('Failed to save sketch. Please check file permissions and try again.');
+          // Update status bar to show error briefly, then return to ready
+          this.updateStatusBar('$(error) SketchPrompt: Save Failed', 'Failed to save sketch');
+          this.scheduleStatusBarUpdate(() => {
+            this.updateStatusBar('$(pencil) SketchPrompt: Ready', `Editing ${path.basename(document.uri.fsPath)}`);
+          }, 3000);
         }
       }
     }, 300);
@@ -162,6 +323,16 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
         }
         case 'showError': {
           vscode.window.showErrorMessage(message.message);
+          break;
+        }
+        case 'showNotification': {
+          // Handle webview notifications (for recovery messages)
+          const { type, message: msg, duration } = message.data;
+          if (type === 'info') {
+            vscode.window.showInformationMessage(msg);
+          } else if (type === 'warning') {
+            vscode.window.showWarningMessage(msg);
+          }
           break;
         }
       }
@@ -199,6 +370,14 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
     webviewPanel.onDidDispose(() => {
       changeDocDisposable.dispose();
       fileWatcher.dispose();
+      // Clear all pending status bar timeouts
+      this.statusBarTimeouts.forEach(timeout => clearTimeout(timeout));
+      this.statusBarTimeouts = [];
+      // Dispose status bar item
+      if (this.statusBarItem) {
+        this.statusBarItem.dispose();
+        console.log('[SketchPrompt] Status bar item disposed');
+      }
     });
 
     // Debounced reload to avoid excessive reloads

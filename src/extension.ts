@@ -28,6 +28,8 @@ export async function activate(context: vscode.ExtensionContext) {
 
 
 
+
+
 	// On activation, ensure SketchPrompt folder and default file exist
 	const workspaceFolders = vscode.workspace.workspaceFolders;
 	if (workspaceFolders) {
