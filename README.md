@@ -3,7 +3,6 @@
 [![Version](https://img.shields.io/badge/version-0.2.2-blue.svg)](https://github.com/pascalx-git/SketchPrompt/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/pascalx-git/SketchPrompt/blob/main/LICENSE)
 [![Cursor IDE](https://img.shields.io/badge/Cursor%20IDE-Extension-purple.svg)](https://cursor.sh)
-[![TLDraw](https://img.shields.io/badge/TLDraw-Powered-orange.svg)](https://tldraw.dev)
 
 [See Help & Usage Guide →](HELP.md)
 
