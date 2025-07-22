@@ -33,7 +33,6 @@ This release improves the user experience with comprehensive feedback systems an
 - **Memory Management**: Proper cleanup of timeouts and resources to prevent memory leaks
 
 #### **Visual & UX Enhancements**
-- **Custom File Icons**: Added light and dark theme file icons for `.sketchprompt` files
 - **Marketplace Badges**: Updated badges for version, license, Cursor IDE, and TLDraw integration
 
 ---

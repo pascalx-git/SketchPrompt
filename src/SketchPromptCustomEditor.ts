@@ -217,10 +217,10 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
           });
         } else {
           // Complete failure - use empty sketch but preserve backup
-          webviewPanel.webview.postMessage({
-            type: 'loadSketch',
-            data: { document: {}, session: {} }
-          });
+        webviewPanel.webview.postMessage({
+          type: 'loadSketch',
+          data: { document: {}, session: {} }
+        });
           
           const message = backupPath 
             ? `Unable to recover sketch. Backup saved as ${path.basename(backupPath)}`

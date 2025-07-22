@@ -12,10 +12,10 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 
 ## Features
 
-- **Rich Sketching**: Full TLDraw integration with shapes, text, drawing tools, and more
-- **AI-Ready**: Structured format for AI analysis and collaboration
+- **Rich Sketching**: Full sketching canvas integration with shapes, text, drawing tools, and more
+- **AI-Ready**: Structured format for future AI analysis and collaboration
 - **File Persistence**: Save and load sketches as `.sketchprompt` files with version control
-- **Copy to Prompt**: Export sketches as images and seamlessly insert into your prompts
+- **Copy to Prompt**: Copy or export sketches as images and seamlessly insert into your prompts
 - **Custom Editor**: Dedicated editor for `.sketchprompt` files
 - **Auto-Save**: Your work is automatically saved as you sketch
 - **Collaboration Ready**: Foundation for multi-user and AI-assisted sketching
