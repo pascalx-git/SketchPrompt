@@ -1,6 +1,6 @@
 # ![SketchPrompt Logo](media/logo-icon.png) SketchPrompt
 
-[![Version](https://img.shields.io/badge/version-0.2.2-blue.svg)](https://github.com/pascalx-git/SketchPrompt/releases)
+[![Version](https://img.shields.io/badge/version-0.2.3-blue.svg)](https://github.com/pascalx-git/SketchPrompt)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/pascalx-git/SketchPrompt/blob/main/LICENSE)
 [![Cursor IDE](https://img.shields.io/badge/Cursor%20IDE-Extension-purple.svg)](https://cursor.sh)
 
@@ -25,19 +25,11 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 ### Option 1: For Cursor IDE Users
 **Install SketchPrompt to start sketching:**
 
-#### Option 1a: Install from Cursor IDE Extensions
+#### Option 1: Install from Cursor IDE Extensions
 1. Open Cursor IDE
 2. Go to Extensions (Cmd/Ctrl + Shift + X)
 3. Search for "SketchPrompt"
 4. Click Install
-
-#### Option 1b: Install from GitHub Releases
-1. Download the latest `.vsix` file from [GitHub Releases](https://github.com/pascalx-git/SketchPrompt/releases)
-2. Open Cursor IDE
-3. Go to Extensions (Cmd/Ctrl + Shift + X)
-4. Click the "..." menu and select "Install from VSIX..."
-5. Select the downloaded `.vsix` file
-6. Restart Cursor IDE when prompted
 
 ### Option 2: For Developers & Contributors
 **Build from source to contribute or customize:**
