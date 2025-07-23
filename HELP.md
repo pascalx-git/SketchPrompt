@@ -22,9 +22,7 @@ SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI promp
 ## Installation
 
 ### Option 1: For Cursor IDE Users
-**Install SketchPrompt to start sketching:**
-
-#### Option 1: Install from Cursor IDE Extensions
+**Install SketchPrompt from Cursor IDE Extensions:**
 1. Open Cursor IDE
 2. Go to Extensions (Cmd/Ctrl + Shift + X)
 3. Search for "SketchPrompt"
