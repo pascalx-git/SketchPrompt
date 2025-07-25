@@ -2,7 +2,7 @@
 
 ## Pre-Release Testing
 - [ ] **Test the extension locally**
-  - [ ] Install the built `.vsix` file in VS Code/Cursor
+  - [ ] Install the built `.vsix` file in Cursor IDE/Windsurf
   - [ ] Test all core functionality (sketching, saving, loading)
   - [ ] Test error handling and edge cases
   - [ ] Verify analytics integration works correctly
@@ -31,7 +31,7 @@
   - [ ] Write comprehensive release notes
   - [ ] Include installation instructions
   - [ ] Mark as latest release if stable
-- [ ] **Update VS Code Marketplace** (when ready)
+- [ ] **Update OpenVSX and extension marketplaces** (when ready)
   - [ ] Publish new version to marketplace
   - [ ] Update marketplace description if needed
 

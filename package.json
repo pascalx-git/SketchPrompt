@@ -2,7 +2,7 @@
   "name": "sketchprompt",
   "publisher": "PascalX",
   "displayName": "SketchPrompt",
-  "description": "SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat. Done.",
+  "description": "SketchPrompt is a powerful Cursor IDE and Windsurf extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat or Windsurf. Done.",
   "version": "0.2.3",
   "icon": "media/logo.png",
   "repository": {
@@ -60,6 +60,11 @@
       "url": "https://img.shields.io/badge/Cursor%20IDE-Extension-purple.svg",
       "href": "https://cursor.sh",
       "description": "Cursor IDE Extension"
+    },
+    {
+      "url": "https://img.shields.io/badge/Windsurf-Extension-blue.svg",
+      "href": "https://windsurf.com",
+      "description": "Windsurf Extension"
     }
   ],
   "publisherDisplayName": "PascalX",

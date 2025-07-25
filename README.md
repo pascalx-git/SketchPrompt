@@ -3,10 +3,11 @@
 [![Version](https://img.shields.io/badge/version-0.2.3-blue.svg)](https://github.com/pascalx-git/SketchPrompt)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/pascalx-git/SketchPrompt/blob/main/LICENSE)
 [![Cursor IDE](https://img.shields.io/badge/Cursor%20IDE-Extension-purple.svg)](https://cursor.sh)
+[![Windsurf](https://img.shields.io/badge/Windsurf-Extension-blue.svg)](https://windsurf.com)
 
 [See Help & Usage Guide →](HELP.md)
 
-A powerful Cursor IDE extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat. Done. Expect more crazy powerful features in the future.
+A powerful Cursor IDE and Windsurf extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat or Windsurf. Done. 
 
 **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
 
@@ -29,13 +30,20 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 3. Search for "SketchPrompt"
 4. Click Install
 
-### Option 2: For Developers & Contributors
+### Option 2: For Windsurf Users
+**Install SketchPrompt from Windsurf Extensions:**
+1. Open Windsurf
+2. Go to Extensions (Cmd/Ctrl + Shift + X)
+3. Search for "SketchPrompt"
+4. Click Install
+
+### Option 3: For Developers & Contributors
 **Build from source to contribute or customize:**
 1. Clone this repository: `git clone https://github.com/pascalx-git/SketchPrompt.git`
 2. Install dependencies: `npm install`
 3. Build the extension: `npm run vscode:prepublish`
 4. Package the extension: `npx vsce package`
-5. Install the `.vsix` file in Cursor IDE
+5. Install the `.vsix` file in Cursor IDE or Windsurf
 
 **Alternative**: Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed tutorials and documentation.
 
@@ -49,6 +57,8 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 - A new `.sketchprompt` file will be created in the `SketchPrompt` folder
 - The file will open in the SketchPrompt editor
 
+*Works the same way in both Cursor IDE and Windsurf*
+
 ### Editing Sketches
 
 - Open any `.sketchprompt` file to edit it visually
@@ -59,6 +69,8 @@ A powerful Cursor IDE extension for visual thinking and AI prompting—best used
 - Run **"SketchPrompt: Help"** from the command palette to open the local `Help.md` file in your workspace.
 - The `Help.md` file contains usage tips and a link to the [GitHub repo](https://github.com/pascalx-git/SketchPrompt) for the latest updates.
 - Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed documentation and tutorials.
+
+*Available in both Cursor IDE and Windsurf*
 
 ## Working with .sketchprompt Files
 
@@ -96,13 +108,13 @@ npm run watch
 
 ### Testing
 
-1. Press `F5` in Cursor to launch the extension in debug mode
+1. Press `F5` in Cursor IDE or Windsurf to launch the extension in debug mode
 2. Create a new sketch and test the functionality
 3. Check the developer console for any errors
 
 ## Architecture
 
-- **Extension**: TypeScript-based VS Code extension
+- **Extension**: TypeScript-based VS Code extension (compatible with Cursor IDE and Windsurf)
 - **Webview**: React app with TLDraw integration
 - **Build**: Vite for webview bundling, TypeScript for extension compilation
 - **Auto-Save**: Debounced, content-aware saving with deep equality checks
@@ -191,15 +203,15 @@ SketchPrompt is licensed under the MIT License. This project bundles the TLDraw 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test thoroughly in Cursor
+4. Test thoroughly in Cursor IDE and Windsurf
 5. Submit a pull request
 
 ## Links
 
 - **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
 - **GitHub**: [https://github.com/pascalx-git/SketchPrompt](https://github.com/pascalx-git/SketchPrompt)
-- **Help**: Run "SketchPrompt: Help" in Cursor or see [Help.md](Help.md)
+- **Help**: Run "SketchPrompt: Help" in Cursor IDE or Windsurf or see [Help.md](Help.md)
 
 ---
 
-**Version**: 0.2.1 | **Last Updated**: July 2024 | **Compatibility**: Cursor IDE
+**Version**: 0.2.3 | **Last Updated**: July 23 2024 | **Compatibility**: Cursor IDE, Windsurf

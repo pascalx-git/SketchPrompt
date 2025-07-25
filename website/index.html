@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SketchPrompt - Visual thinking for coding with AI</title>
-    <meta name="description" content="A powerful Cursor IDE extension for visual thinking and AI prompting. Sketch your thoughts and ideas and seamlessly collaborate with AI.">
-    <meta name="keywords" content="SketchPrompt, Cursor IDE, AI collaboration, visual thinking, sketching, TLDraw">
+    <meta name="description" content="A powerful Cursor IDE and Windsurf extension for visual thinking and AI prompting. Sketch your thoughts and ideas and seamlessly collaborate with AI.">
+    <meta name="keywords" content="SketchPrompt, Cursor IDE, Windsurf, AI collaboration, visual thinking, sketching">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sketch-prompt.com/">
     <meta property="og:title" content="SketchPrompt - Visual Thinking for AI Collaboration">
-    <meta property="og:description" content="A powerful Cursor IDE extension for visual thinking and AI prompting. Sketch ideas and seamlessly collaborate with AI.">
+    <meta property="og:description" content="A powerful Cursor IDE and Windsurf extension for visual thinking and AI prompting. Sketch ideas and seamlessly collaborate with AI.">
     <meta property="og:image" content="https://sketch-prompt.com/images/og-image.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://sketch-prompt.com/">
     <meta property="twitter:title" content="SketchPrompt - Visual Thinking for AI Collaboration">
-    <meta property="twitter:description" content="A powerful Cursor IDE extension for visual thinking and AI prompting. Sketch ideas and seamlessly collaborate with AI.">
+    <meta property="twitter:description" content="A powerful Cursor IDE and Windsurf extension for visual thinking and AI prompting. Sketch ideas and seamlessly collaborate with AI.">
     <meta property="twitter:image" content="https://sketch-prompt.com/images/og-image.png">
 
     <link rel="stylesheet" href="styles.css">
@@ -60,7 +60,7 @@
                 <h1 class="hero-title">
                     <span class="cycling-value-prop">Sketch your ideas</span> when collaborating with AI
                 </h1>
-                <p class="hero-description">SketchPrompt is a Cursor IDE extension that brings visual thinking into your coding workflow. Sketch ideas, user flows, or systems — then use them as part of your AI prompts, right where you code.</p>
+                <p class="hero-description">SketchPrompt is a Cursor IDE and Windsurf extension that brings visual thinking into your coding workflow. Sketch ideas, user flows, or systems — then use them as part of your AI prompts, right where you code.</p>
                 <div class="hero-buttons">
                     <a href="#installation" class="btn btn-primary" data-umami-event="hero-cta-get-sketchprompt">Get SketchPrompt</a>
                     <a href="#features" class="btn btn-secondary" data-umami-event="hero-cta-learn-more">Learn more</a>
@@ -152,7 +152,7 @@
                             </div>
                             <div class="why-card card">
                                 <h3>Seamless integration</h3>
-                                <p>Built for Cursor IDE, SketchPrompt fits right into your coding workflow.</p>
+                                <p>Built for Cursor IDE and Windsurf, SketchPrompt fits right into your coding workflow.</p>
                             </div>
                             <div class="why-card card fun-fact">
                                 <h3>Some fun facts</h3>
@@ -185,6 +185,7 @@
             <div class="installation-tabs">
                 <div class="tab-buttons">
                     <button class="tab-button active" data-tab="cursor">Cursor IDE</button>
+                    <button class="tab-button" data-tab="windsurf">Windsurf</button>
                     <button class="tab-button" data-tab="github">GitHub</button>
                 </div>
                 
@@ -233,7 +234,49 @@
                         </div>
                     </div>
                     
-
+                    <div id="windsurf-tab" class="tab-pane">
+                        <div class="installation-method">
+                            <h3>Install via Windsurf Extensions</h3>
+                            <p>For Windsurf users, install directly from the Windsurf extensions marketplace</p>
+                            <div class="installation-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h3>Open Windsurf</h3>
+                                        <p>Launch Windsurf on your computer</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h3>Open Extensions</h3>
+                                        <p>Press <code>Cmd/Ctrl + Shift + X</code> or click the Extensions icon in the sidebar</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h3>Search for SketchPrompt</h3>
+                                        <p>Type "SketchPrompt" in the search box</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h3>Install Extension</h3>
+                                        <p>Click "Install" and restart Windsurf (if prompted)</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">
+                                        <h3>Start Sketching</h3>
+                                        <p>Use <code>Cmd/Ctrl + Shift + P</code> and run "SketchPrompt: New Sketch"</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div id="github-tab" class="tab-pane">
                         <div class="installation-method">
@@ -271,8 +314,8 @@
                                 <div class="step">
                                     <div class="step-number">5</div>
                                     <div class="step-content">
-                                        <h3>Install in Cursor</h3>
-                                        <p>Install the generated <code>.vsix</code> file in Cursor IDE</p>
+                                        <h3>Install in Cursor IDE or Windsurf</h3>
+                                        <p>Install the generated <code>.vsix</code> file in Cursor IDE or Windsurf</p>
                                     </div>
                                 </div>
                             </div>
@@ -288,13 +331,13 @@
         <div class="container usage-steps">
             <h2 class="section-title">How to Use</h2>
             <div class="installation-method">
-                <p>Follow these steps to create your first sketch in Cursor IDE</p>
+                <p>Follow these steps to create your first sketch in Cursor IDE or Windsurf</p>
                 <div class="installation-steps">
                     <div class="step">
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h3>Open the Command Palette</h3>
-                            <p>Press <code>Cmd/Ctrl + Shift + P</code> in Cursor IDE.</p>
+                            <p>Press <code>Cmd/Ctrl + Shift + P</code> in Cursor IDE or Windsurf.</p>
                         </div>
                     </div>
                     <div class="step">
@@ -322,7 +365,7 @@
                                 <strong>Option 1:</strong> Take a screenshot of your sketch using your system’s screenshot shortcut
                                 (e.g., <code>Cmd + Shift + 4</code> on Mac, <code>Win + Shift + S</code> on Windows).<br>
                                 <strong>Option 2:</strong> Select the part of your sketch, <strong>right-click</strong>, choose <strong>Copy as PNG</strong>,
-                                then paste it directly into Cursor chat.
+                                then paste it directly into Cursor chat or Windsurf.
                             </p>
                         </div>
                     </div>
@@ -402,7 +445,7 @@
             <h2>Ready to transform your AI coding workflow?</h2>
             <p>Join us in building the future of visual thinking for human-AI collaboration.</p>
             <div class="cta-buttons">
-                <a href="#installation" class="btn btn-primary" data-umami-event="cta-use-sketchprompt">Use SketchPrompt in Cursor</a>
+                <a href="#installation" class="btn btn-primary" data-umami-event="cta-use-sketchprompt">Get SketchPrompt </a>
                 <a href="https://github.com/pascalx-git/SketchPrompt" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" data-umami-event="cta-view-github">View on GitHub</a>
             </div>
         </div>
@@ -428,11 +471,12 @@
                 <div class="footer-section">
                     <h4>Resources</h4>
                     <a href="https://cursor.sh" target="_blank" rel="noopener noreferrer" data-umami-event="footer-cursor-ide">Cursor IDE</a>
+                    <a href="https://windsurf.com" target="_blank" rel="noopener noreferrer" data-umami-event="footer-windsurf">Windsurf</a>
                     <a href="https://github.com/pascalx-git/SketchPrompt/blob/main/Help.md" target="_blank" rel="noopener noreferrer" data-umami-event="footer-help">Help</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 SketchPrompt. MIT License. Built with ❤️ for the community.</p>
+                <p>&copy; 2024 SketchPrompt. MIT License. </p>
             </div>
         </div>
     </footer>

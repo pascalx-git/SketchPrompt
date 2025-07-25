@@ -1,6 +1,6 @@
 # SketchPrompt Website
 
-This is the marketing website for SketchPrompt, a powerful Cursor IDE extension for visual thinking and AI collaboration.
+This is the marketing website for SketchPrompt, a powerful Cursor IDE and Windsurf extension for visual thinking and AI collaboration.
 
 ## Quick Start
 

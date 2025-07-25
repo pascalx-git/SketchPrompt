@@ -1,9 +1,9 @@
 # SketchPrompt Help & Usage Guide
 
-**Version**: 0.2.2 | **Last Updated**: July 2024 | **Compatibility**: Cursor IDE
+**Version**: 0.2.3 | **Last Updated**: July 2024 | **Compatibility**: Cursor IDE, Windsurf
 
 ## What is SketchPrompt?
-SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat. Done.
+SketchPrompt is a powerful Cursor IDE and Windsurf extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat or Windsurf. Done.
 
 **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
 
@@ -28,13 +28,20 @@ SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI promp
 3. Search for "SketchPrompt"
 4. Click Install
 
-### Option 2: For Developers & Contributors
+### Option 2: For Windsurf Users
+**Install SketchPrompt from Windsurf Extensions:**
+1. Open Windsurf
+2. Go to Extensions (Cmd/Ctrl + Shift + X)
+3. Search for "SketchPrompt"
+4. Click Install
+
+### Option 3: For Developers & Contributors
 **Build from source to contribute or customize:**
 1. Clone this repository: `git clone https://github.com/pascalx-git/SketchPrompt.git`
 2. Install dependencies: `npm install`
 3. Build the extension: `npm run vscode:prepublish`
 4. Package the extension: `npx vsce package`
-5. Install the `.vsix` file in Cursor IDE
+5. Install the `.vsix` file in Cursor IDE or Windsurf
 
 **Alternative**: Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed tutorials and documentation.
 
@@ -47,6 +54,8 @@ SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI promp
 - A new `.sketchprompt` file will be created in the `SketchPrompt` folder
 - The file opens in the SketchPrompt editor
 
+*Works the same way in both Cursor IDE and Windsurf*
+
 ### Editing Sketches
 - Open any `.sketchprompt` file to edit it visually
 - All changes are auto-saved
@@ -56,7 +65,7 @@ SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI promp
 
 ### Copy to Prompt Feature
 - **Export as Image**: Use the export function to save your sketch as an image
-- **Copy to Clipboard**: Copy your sketch directly to paste into Cursor Chat or other applications
+- **Copy to Clipboard**: Copy your sketch directly to paste into Cursor Chat, Windsurf, or other applications
 - **Seamless Integration**: Paste sketches directly into your AI prompts for visual context
 - **Multiple Formats**: Export in various formats for different use cases
 
@@ -64,6 +73,8 @@ SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI promp
 - Run **"SketchPrompt: Help"** from the command palette to open this help file
 - [See the README for more details](README.md)
 - Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed tutorials and documentation
+
+*Available in both Cursor IDE and Windsurf*
 
 ## Troubleshooting
 
@@ -75,7 +86,7 @@ SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI promp
 - Try creating a new sketch file to test
 
 #### **Editor Not Opening**
-- Restart Cursor IDE
+- Restart Cursor IDE or Windsurf
 - Check if the extension is properly installed
 - Run "SketchPrompt: Help" to verify installation
 
@@ -86,7 +97,7 @@ SketchPrompt is a powerful Cursor IDE extension for visual thinking and AI promp
 
 #### **Performance Issues**
 - Close other large files or applications
-- Restart Cursor IDE if sketches become unresponsive
+- Restart Cursor IDE or Windsurf if sketches become unresponsive
 - Check available system memory
 
 ### Getting More Help
@@ -131,7 +142,7 @@ MIT
 ## Links
 - **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
 - **GitHub**: [https://github.com/pascalx-git/SketchPrompt](https://github.com/pascalx-git/SketchPrompt)
-- **Help**: This file or run "SketchPrompt: Help" in Cursor
+- **Help**: This file or run "SketchPrompt: Help" in Cursor IDE or Windsurf
 - **Release Notes**: [CHANGELOG.md](CHANGELOG.md)
 
 ---

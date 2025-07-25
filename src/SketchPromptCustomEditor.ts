@@ -148,7 +148,7 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
       await vscode.workspace.fs.stat(document.uri);
     } catch (err) {
       vscode.window.showWarningMessage(
-        'File not found. If you renamed or deleted this file outside VS Code, please refresh the file explorer.'
+        'File not found. If you renamed or deleted this file outside the editor, please refresh the file explorer.'
       );
     }
 
@@ -403,7 +403,7 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
         } else {
           // If dirty, show notification with reload button
           vscode.window.showWarningMessage(
-            'This sketch file was changed outside of Cursor. You have unsaved changes. Click to reload from disk and discard your edits.',
+            'This sketch file was changed outside of the editor. You have unsaved changes. Click to reload from disk and discard your edits.',
             'Reload from Disk'
           ).then(selection => {
             if (selection === 'Reload from Disk') {
@@ -411,7 +411,7 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
               vscode.commands.executeCommand('workbench.action.files.revert');
               setTimeout(() => {
                 sendSketchData();
-              }, 500); // Give VS Code time to revert
+              }, 500); // Give the editor time to revert
             }
           });
         }
@@ -441,6 +441,24 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
             padding: 0;
             overflow: hidden;
             background: var(--vscode-editor-background, #222);
+            color: var(--vscode-editor-foreground, #fff);
+          }
+          
+          /* Theme-aware styling for better integration */
+          body {
+            background-color: var(--vscode-editor-background, #222);
+            color: var(--vscode-editor-foreground, #fff);
+          }
+          
+          /* Ensure proper theme inheritance */
+          body.vscode-light {
+            background-color: var(--vscode-editor-background, #ffffff);
+            color: var(--vscode-editor-foreground, #000000);
+          }
+          
+          body.vscode-dark {
+            background-color: var(--vscode-editor-background, #1e1e1e);
+            color: var(--vscode-editor-foreground, #ffffff);
           }
           
           /* Make TLDraw menus wider and show more items */
