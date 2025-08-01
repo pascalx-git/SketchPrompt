@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SketchPrompt - Visual thinking for coding with AI</title>
-    <meta name="description" content="A powerful Cursor IDE and Windsurf extension for visual thinking and AI prompting. Sketch your thoughts and ideas and seamlessly collaborate with AI.">
-    <meta name="keywords" content="SketchPrompt, Cursor IDE, Windsurf, AI collaboration, visual thinking, sketching">
+    <meta name="description" content="A powerful VS Code extension for visual thinking and AI prompting. Works in OpenVSX-compatible editors like Cursor IDE, Windsurf, and Google Firebase Studio. Sketch ideas and seamlessly collaborate with AI.">
+    <meta name="keywords" content="SketchPrompt, VS Code extension, AI collaboration, visual thinking, sketching, OpenVSX, Cursor IDE, Windsurf, Firebase Studio">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sketch-prompt.com/">
     <meta property="og:title" content="SketchPrompt - Visual Thinking for AI Collaboration">
-    <meta property="og:description" content="A powerful Cursor IDE and Windsurf extension for visual thinking and AI prompting. Sketch ideas and seamlessly collaborate with AI.">
+    <meta property="og:description" content="A powerful VS Code extension for visual thinking and AI prompting. Works in OpenVSX-compatible editors. Sketch ideas and seamlessly collaborate with AI.">
     <meta property="og:image" content="https://sketch-prompt.com/images/og-image.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://sketch-prompt.com/">
     <meta property="twitter:title" content="SketchPrompt - Visual Thinking for AI Collaboration">
-    <meta property="twitter:description" content="A powerful Cursor IDE and Windsurf extension for visual thinking and AI prompting. Sketch ideas and seamlessly collaborate with AI.">
+    <meta property="twitter:description" content="A powerful VS Code extension for visual thinking and AI prompting. Works in OpenVSX-compatible editors. Sketch ideas and seamlessly collaborate with AI.">
     <meta property="twitter:image" content="https://sketch-prompt.com/images/og-image.png">
 
     <link rel="stylesheet" href="styles.css">
@@ -37,6 +37,13 @@
                 <img src="images/logo-animated-black-cursor.gif" alt="SketchPrompt" class="logo" onerror="this.src='images/logo.svg'">
                 <span class="logo-text">SketchPrompt</span>
             </div>
+            
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
             <div class="nav-links">
                 <a href="#features" data-umami-event="nav-features">Features</a>
                 <a href="#installation" data-umami-event="nav-installation">Installation</a>
@@ -44,11 +51,6 @@
                 <a href="#security" data-umami-event="nav-security">Security</a>
                 <a href="#roadmap" data-umami-event="nav-roadmap">Roadmap</a>
                 <a href="#installation" class="nav-cta" data-umami-event="nav-cta-get-sketchprompt">Get SketchPrompt</a>
-            </div>
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
         </div>
     </nav>
@@ -60,10 +62,18 @@
                 <h1 class="hero-title">
                     <span class="cycling-value-prop">Sketch your ideas</span> when collaborating with AI
                 </h1>
-                <p class="hero-description">SketchPrompt is a Cursor IDE and Windsurf extension that brings visual thinking into your coding workflow. Sketch ideas, user flows, or systems — then use them as part of your AI prompts, right where you code.</p>
+                <p class="hero-description">SketchPrompt brings visual thinking into your AI coding workflow. Works in any OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc). Sketch ideas, user flows, or systems — then use them as part of your AI prompts, right where you code.</p>
                 <div class="hero-buttons">
                     <a href="#installation" class="btn btn-primary" data-umami-event="hero-cta-get-sketchprompt">Get SketchPrompt</a>
                     <a href="#features" class="btn btn-secondary" data-umami-event="hero-cta-learn-more">Learn more</a>
+                </div>
+                <div class="hero-badges">
+                    <img src="https://img.shields.io/badge/version-0.2.3-blue.svg?labelColor=%23cccccc&color=%233b82f6" alt="Version" class="hero-badge">
+                    <img src="https://img.shields.io/badge/license-MIT-green.svg?labelColor=%23cccccc&color=%233b82f6" alt="License" class="hero-badge">
+                    <img src="https://img.shields.io/open-vsx/dt/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6" alt="Downloads" class="hero-badge">
+                    <img src="https://img.shields.io/open-vsx/stars/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6" alt="Rating" class="hero-badge">
+                    <img src="https://img.shields.io/open-vsx/release-date/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6" alt="Release Date" class="hero-badge">
+                    <img src="https://img.shields.io/github/commit-activity/m/PascalX-Git/SketchPrompt?labelColor=%23cccccc&color=%233b82f6" alt="Commit Activity" class="hero-badge">
                 </div>
             </div>
         </div>
@@ -73,15 +83,26 @@
     <section id="features" class="features">
         <div class="container">
             <div class="section-tabs">
-                <div class="tab-buttons">
-                    <button class="tab-button active" data-tab="features">Features</button>
-                    <button class="tab-button" data-tab="why">Why SketchPrompt?</button>
+                <div class="tab-buttons compact-tabs">
+                    <button class="tab-button active" data-tab="features" data-umami-event="tab-features">Features</button>
+                    <button class="tab-button" data-tab="compatibility" data-umami-event="tab-compatibility">Compatibility</button>
+                    <button class="tab-button" data-tab="why" data-umami-event="tab-why">More</button>
                 </div>
                 
                 <div class="tab-content">
                     <div id="features-tab" class="tab-pane active">
                         <h2 class="section-title">Powerful Features</h2>
                         <div class="features-grid">
+                            <div class="feature-card card">
+                                <div class="feature-icon icon icon-primary squares">
+                                    <!-- Squares Stacked Icon - represents multiple editors -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 8.25 20.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25A2.25 2.25 0 0 1 13.5 8.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+                                    </svg>
+                                </div>
+                                <h3>Multi-Editor Support</h3>
+                                <p>Works in any OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc).</p>
+                            </div>
                             <div class="feature-card card">
                                 <div class="feature-icon icon icon-primary pencil">
                                     <!-- Pencil Outline Icon -->
@@ -93,17 +114,7 @@
                                 <p>Draw, doodle, and map out your ideas with intuitive tools—just like pen and paper, but smarter.</p>
                             </div>
                             <div class="feature-card card">
-                                <div class="feature-icon icon icon-secondary sparkles">
-                                    <!-- Sparkles Outline Icon -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
-                                    </svg>
-                                </div>
-                                <h3>AI-Ready</h3>
-                                <p>Structured for AI analysis and collaboration, making your sketches AI-friendly and ready for magic.</p>
-                            </div>
-                            <div class="feature-card card">
-                                <div class="feature-icon icon icon-success copy">
+                                <div class="feature-icon icon icon-primary copy">
                                     <!-- Copy Outline Icon -->
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" />
@@ -113,61 +124,160 @@
                                 <p>Copy your sketch with a click and drop it straight into your next AI conversation.</p>
                             </div>
                             <div class="feature-card card">
-                                <div class="feature-icon icon icon-warning folder">
-                                    <!-- Folder Outline Icon -->
+                                <div class="feature-icon icon icon-primary lock">
+                                    <!-- Lock Outline Icon -->
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
                                     </svg>
+                                </div>
+                                <h3>Privacy-First</h3>
+                                <p>Local processing with no data collection or cloud dependencies. Your sketches stay on your machine.</p>
+                            </div>
+                            <div class="feature-card card">
+                                <div class="feature-icon icon icon-primary folder">
+                                    <!-- Folder Outline Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75A2.25 2.25 0 014.5 4.5h3.379a1.5 1.5 0 011.06.44l1.44 1.44a1.5 1.5 0 001.06.44h7.061A2.25 2.25 0 0121.75 9v7.5a2.25 2.25 0 01-2.25 2.25H4.5A2.25 2.25 0 012.25 16.5V6.75z" /></svg>
                                 </div>
                                 <h3>Persistent Sketches</h3>
                                 <p>Your sketches are always saved and organized, ready to revisit, remix, or share anytime.</p>
                             </div>
-                            <div class="feature-card card">
-                                <div class="feature-icon icon icon-info shield">
-                                    <!-- Shield Outline Icon -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                                    </svg>
-                                </div>
-                                <h3>Security-First</h3>
-                                <p>Built with security in mind—open source, local processing, and regular security reviews.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="compatibility-tab" class="tab-pane">
+                        <h2 class="section-title">Editor Compatibility</h2>
+                        <div class="installation-method">
+                            <p>SketchPrompt is distributed via the OpenVSX registry. If your editor supports OpenVSX extensions, it works!</p>
+                            <div class="compatibility-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Editor</th>
+                                            <th>Compatible</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Cursor IDE</strong></td>
+                                            <td>✅ Yes</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Windsurf</strong></td>
+                                            <td>✅ Yes</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Google Firebase Studio</strong></td>
+                                            <td>✅ Yes</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Any OpenVSX-compatible editor</strong></td>
+                                            <td>✅ Yes</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Microsoft VS Code</strong></td>
+                                            <td>❌ No</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>GitHub Codespaces</strong></td>
+                                            <td>❌ No</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Visual Studio</strong></td>
+                                            <td>❌ No</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Builder.io</strong></td>
+                                            <td>❌ No</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Lovable</strong></td>
+                                            <td>❌ No</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                     
                     <div id="why-tab" class="tab-pane">
-                        <h2 class="section-title">Why SketchPrompt?</h2>
-                        <div class="why-cards">
-                            <div class="why-card card">
-                                <h3>Visual thinking is powerful</h3>
-                                <p>Sketching helps you clarify, remember, and communicate ideas more effectively than text alone.</p>
+                        <!-- Why SketchPrompt Section -->
+                        <div class="why-section">
+                            <h2 class="section-title">Why SketchPrompt?</h2>
+                            <div class="why-cards">
+                                <div class="why-card card">
+                                    <h3>Visual thinking is powerful</h3>
+                                    <p>Sketching helps you clarify, remember, and communicate ideas more effectively than text alone.</p>
+                                </div>
+                                <div class="why-card card">
+                                    <h3>Communicate intent to AI</h3>
+                                    <p>Don't waste time typing long explanations. Show your intent visually and let AI understand you faster.</p>
+                                </div>
+                                <div class="why-card card">
+                                    <h3>All-in-one workflow</h3>
+                                    <p>No more switching between tools, windows, or tabs. Sketch, prompt, and collaborate—all in one place.</p>
+                                </div>
+                                <div class="why-card card">
+                                    <h3>Seamless integration</h3>
+                                    <p>Built for VS Code-based editors, SketchPrompt fits right into your coding workflow.</p>
+                                </div>
+                                <div class="why-card card fun-fact">
+                                    <h3>Some fun facts</h3>
+                                    <p class="fun-fact-text" aria-live="polite"></p>
+                                    <div class="fact-indicator">
+                                        <span class="indicator-dot" aria-label="Fact 1"></span>
+                                        <span class="indicator-dot" aria-label="Fact 2"></span>
+                                        <span class="indicator-dot" aria-label="Fact 3"></span>
+                                        <span class="indicator-dot" aria-label="Fact 4"></span>
+                                        <span class="indicator-dot" aria-label="Fact 5"></span>
+                                        <span class="indicator-dot" aria-label="Fact 6"></span>
+                                        <span class="indicator-dot" aria-label="Fact 7"></span>
+                                        <span class="indicator-dot" aria-label="Fact 8"></span>
+                                        <span class="indicator-dot" aria-label="Fact 9"></span>
+                                        <span class="indicator-dot" aria-label="Fact 10"></span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="why-card card">
-                                <h3>Communicate intent to AI</h3>
-                                <p>Don't waste time typing long explanations. Show your intent visually and let AI understand you faster.</p>
-                            </div>
-                            <div class="why-card card">
-                                <h3>All-in-one workflow</h3>
-                                <p>No more switching between tools, windows, or tabs. Sketch, prompt, and collaborate—all in one place.</p>
-                            </div>
-                            <div class="why-card card">
-                                <h3>Seamless integration</h3>
-                                <p>Built for Cursor IDE and Windsurf, SketchPrompt fits right into your coding workflow.</p>
-                            </div>
-                            <div class="why-card card fun-fact">
-                                <h3>Some fun facts</h3>
-                                <p class="fun-fact-text" aria-live="polite"></p>
-                                <div class="fact-indicator">
-                                    <span class="indicator-dot" aria-label="Fact 1"></span>
-                                    <span class="indicator-dot" aria-label="Fact 2"></span>
-                                    <span class="indicator-dot" aria-label="Fact 3"></span>
-                                    <span class="indicator-dot" aria-label="Fact 4"></span>
-                                    <span class="indicator-dot" aria-label="Fact 5"></span>
-                                    <span class="indicator-dot" aria-label="Fact 6"></span>
-                                    <span class="indicator-dot" aria-label="Fact 7"></span>
-                                    <span class="indicator-dot" aria-label="Fact 8"></span>
-                                    <span class="indicator-dot" aria-label="Fact 9"></span>
-                                    <span class="indicator-dot" aria-label="Fact 10"></span>
+                        </div>
+
+                        <!-- Use Cases Section -->
+                        <div class="use-cases-section">
+                            <h2 class="section-title">Common Use Cases</h2>
+                            <div class="use-cases-grid">
+                                <div class="use-case-card card">
+                                    <div class="feature-icon icon icon-primary chat">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+                                        </svg>
+                                    </div>
+                                    <h3>AI Prompt Enhancement</h3>
+                                    <p>Sketch your ideas, then copy them directly into AI chats. Show ChatGPT or Claude your UI concepts, data flows, or logic diagrams instead of typing long explanations.</p>
+                                </div>
+                                <div class="use-case-card card">
+                                    <div class="feature-icon icon icon-primary ui">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+                                        </svg>
+                                    </div>
+                                    <h3>Quick UI Wireframes</h3>
+                                    <p>Rapidly sketch interface layouts and component designs. Perfect for exploring ideas before coding or explaining concepts to AI assistants.</p>
+                                </div>
+                                <div class="use-case-card card">
+                                    <div class="feature-icon icon icon-primary flow">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
+                                        </svg>
+                                    </div>
+                                    <h3>Data Flows & Logic</h3>
+                                    <p>Map out simple data flows, API structures, and decision logic. Great for planning features, debugging, or explaining complex systems to AI.</p>
+                                </div>
+                                <div class="use-case-card card">
+                                    <div class="feature-icon icon icon-primary brain">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+                                        </svg>
+                                    </div>
+                                    <h3>Code Planning</h3>
+                                    <p>Sketch out architecture, component relationships, or algorithm logic before writing code. Helps clarify thinking and communicate ideas to AI coding assistants.</p>
                                 </div>
                             </div>
                         </div>
@@ -177,36 +287,34 @@
         </div>
     </section>
 
-    <!-- Installation Section -->
+    <!-- Quick Installation Section -->
     <section id="installation" class="installation">
         <div class="container">
             <h2 class="section-title">Quick Installation</h2>
-            
             <div class="installation-tabs">
-                <div class="tab-buttons">
-                    <button class="tab-button active" data-tab="cursor">Cursor IDE</button>
-                    <button class="tab-button" data-tab="windsurf">Windsurf</button>
-                    <button class="tab-button" data-tab="github">GitHub</button>
+                <div class="tab-buttons compact-tabs">
+                    <button class="tab-button active" data-tab="compatible" data-umami-event="tab-compatible">Compatible Editors</button>
+                    <button class="tab-button" data-tab="github" data-umami-event="tab-github">GitHub</button>
                 </div>
                 
                 <div class="tab-content">
-                    <div id="cursor-tab" class="tab-pane active">
+                    <div id="compatible-tab" class="tab-pane active">
                         <div class="installation-method">
-                            <h3>Install via Cursor IDE Extensions</h3>
-                            <p>For most users, install directly from the Cursor IDE extensions marketplace</p>
+                            <h3>Install from your editor's extension marketplace</h3>
+                            <p>Install SketchPrompt directly from your editor's built-in extension marketplace. Works in any OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc).</p>
                             <div class="installation-steps">
                                 <div class="step">
                                     <div class="step-number">1</div>
                                     <div class="step-content">
-                                        <h3>Open Cursor IDE</h3>
-                                        <p>Launch Cursor IDE on your computer</p>
+                                        <h3>Open your editor</h3>
+                                        <p>Launch your OpenVSX-compatible editor</p>
                                     </div>
                                 </div>
                                 <div class="step">
                                     <div class="step-number">2</div>
                                     <div class="step-content">
                                         <h3>Open Extensions</h3>
-                                        <p>Press <code>Cmd/Ctrl + Shift + X</code> or click the Extensions icon in the sidebar</p>
+                                        <p>Press <code>Cmd/Ctrl + Shift + X</code> or click the Extensions icon</p>
                                     </div>
                                 </div>
                                 <div class="step">
@@ -220,51 +328,7 @@
                                     <div class="step-number">4</div>
                                     <div class="step-content">
                                         <h3>Install Extension</h3>
-                                        <p>Click "Install" and restart Cursor IDE (if prompted)</p>
-                                    </div>
-                                </div>
-                                <div class="step">
-                                    <div class="step-number">5</div>
-                                    <div class="step-content">
-                                        <h3>Start Sketching</h3>
-                                        <p>Use <code>Cmd/Ctrl + Shift + P</code> and run "SketchPrompt: New Sketch"</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div id="windsurf-tab" class="tab-pane">
-                        <div class="installation-method">
-                            <h3>Install via Windsurf Extensions</h3>
-                            <p>For Windsurf users, install directly from the Windsurf extensions marketplace</p>
-                            <div class="installation-steps">
-                                <div class="step">
-                                    <div class="step-number">1</div>
-                                    <div class="step-content">
-                                        <h3>Open Windsurf</h3>
-                                        <p>Launch Windsurf on your computer</p>
-                                    </div>
-                                </div>
-                                <div class="step">
-                                    <div class="step-number">2</div>
-                                    <div class="step-content">
-                                        <h3>Open Extensions</h3>
-                                        <p>Press <code>Cmd/Ctrl + Shift + X</code> or click the Extensions icon in the sidebar</p>
-                                    </div>
-                                </div>
-                                <div class="step">
-                                    <div class="step-number">3</div>
-                                    <div class="step-content">
-                                        <h3>Search for SketchPrompt</h3>
-                                        <p>Type "SketchPrompt" in the search box</p>
-                                    </div>
-                                </div>
-                                <div class="step">
-                                    <div class="step-number">4</div>
-                                    <div class="step-content">
-                                        <h3>Install Extension</h3>
-                                        <p>Click "Install" and restart Windsurf (if prompted)</p>
+                                        <p>Click "Install" and restart your editor (if prompted)</p>
                                     </div>
                                 </div>
                                 <div class="step">
@@ -314,8 +378,8 @@
                                 <div class="step">
                                     <div class="step-number">5</div>
                                     <div class="step-content">
-                                        <h3>Install in Cursor IDE or Windsurf</h3>
-                                        <p>Install the generated <code>.vsix</code> file in Cursor IDE or Windsurf</p>
+                                        <h3>Install in your editor</h3>
+                                        <p>Install the generated <code>.vsix</code> file in your OpenVSX-compatible editor</p>
                                     </div>
                                 </div>
                             </div>
@@ -328,16 +392,17 @@
 
     <!-- Usage Section -->
     <section id="usage" class="usage">
-        <div class="container usage-steps">
+        <div class="container">
             <h2 class="section-title">How to Use</h2>
             <div class="installation-method">
-                <p>Follow these steps to create your first sketch in Cursor IDE or Windsurf</p>
+                <h3>Get Started with SketchPrompt</h3>
+                <p>Follow these steps to create your first sketch in any OpenVSX-compatible editor</p>
                 <div class="installation-steps">
                     <div class="step">
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h3>Open the Command Palette</h3>
-                            <p>Press <code>Cmd/Ctrl + Shift + P</code> in Cursor IDE or Windsurf.</p>
+                            <p>Press <code>Cmd/Ctrl + Shift + P</code> in your VS Code-based editor.</p>
                         </div>
                     </div>
                     <div class="step">
@@ -362,14 +427,56 @@
                         <div class="step-content">
                             <h3>Copy Your Sketch to a Prompt</h3>
                             <p>
-                                <strong>Option 1:</strong> Take a screenshot of your sketch using your system’s screenshot shortcut
+                                <strong>Option 1:</strong> Take a screenshot of your sketch using your system's screenshot shortcut
                                 (e.g., <code>Cmd + Shift + 4</code> on Mac, <code>Win + Shift + S</code> on Windows).<br>
                                 <strong>Option 2:</strong> Select the part of your sketch, <strong>right-click</strong>, choose <strong>Copy as PNG</strong>,
-                                then paste it directly into Cursor chat or Windsurf.
+                                then paste it directly into any AI chat.
                             </p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="security alt-bg">
+        <div class="container">
+            <h2 class="section-title">Security You Can Trust</h2>
+            <p class="section-subtitle">Built with security-first principles for peace of mind</p>
+            <div class="security-grid">
+                <div class="security-card card">
+                    <div class="feature-icon icon icon-primary shield">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                        </svg>
+                    </div>
+                    <h3>Local-First Architecture</h3>
+                    <p>Your sketches stay on your machine. No cloud dependencies or data transmission required.</p>
+                </div>
+                <div class="security-card card">
+                    <div class="feature-icon icon icon-primary code">
+                        <!-- Code/Open Source Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                        </svg>
+                    </div>
+                    <h3>Open Source & Auditable</h3>
+                    <p>Full source code available for security review. No hidden functionality or surprises.</p>
+                </div>
+                <div class="security-card card">
+                    <div class="feature-icon icon icon-primary eye">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.639 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.639 0-8.573-3.007-9.963-7.178Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                    </div>
+                    <h3>Regular Security Reviews</h3>
+                    <p>Iterative security assessments before each release to ensure your safety.</p>
+                </div>
+            </div>
+            <div class="security-cta">
+                <a href="https://github.com/pascalx-git/SketchPrompt/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" data-umami-event="security-details">View Security Details</a>
             </div>
         </div>
     </section>
@@ -398,54 +505,13 @@
         </div>
     </section>
 
-    <!-- Security Section -->
-    <section id="security" class="security">
-        <div class="container">
-            <h2 class="section-title">Security You Can Trust</h2>
-            <p class="section-subtitle">Built with security-first principles for peace of mind</p>
-            <div class="security-grid">
-                <div class="security-card card">
-                    <div class="feature-icon icon icon-info shield">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                        </svg>
-                    </div>
-                    <h3>Local-First Architecture</h3>
-                    <p>Your sketches stay on your machine. No cloud dependencies or data transmission required.</p>
-                </div>
-                <div class="security-card card">
-                    <div class="feature-icon icon icon-success check">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                        </svg>
-                    </div>
-                    <h3>Open Source & Auditable</h3>
-                    <p>Full source code available for security review. No hidden functionality or surprises.</p>
-                </div>
-                <div class="security-card card">
-                    <div class="feature-icon icon icon-warning eye">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.639 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.639 0-8.573-3.007-9.963-7.178Z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
-                    </div>
-                    <h3>Regular Security Reviews</h3>
-                    <p>Iterative security assessments before each release to ensure your safety.</p>
-                </div>
-            </div>
-            <div class="security-cta">
-                <a href="https://github.com/pascalx-git/SketchPrompt/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" data-umami-event="security-details">View Security Details</a>
-            </div>
-        </div>
-    </section>
-
     <!-- CTA Section -->
     <section class="cta">
         <div class="container">
             <h2>Ready to transform your AI coding workflow?</h2>
             <p>Join us in building the future of visual thinking for human-AI collaboration.</p>
             <div class="cta-buttons">
-                <a href="#installation" class="btn btn-primary" data-umami-event="cta-use-sketchprompt">Get SketchPrompt </a>
+                <a href="#installation" class="btn btn-primary" data-umami-event="cta-use-sketchprompt">Get SketchPrompt</a>
                 <a href="https://github.com/pascalx-git/SketchPrompt" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" data-umami-event="cta-view-github">View on GitHub</a>
             </div>
         </div>
@@ -472,7 +538,8 @@
                     <h4>Resources</h4>
                     <a href="https://cursor.sh" target="_blank" rel="noopener noreferrer" data-umami-event="footer-cursor-ide">Cursor IDE</a>
                     <a href="https://windsurf.com" target="_blank" rel="noopener noreferrer" data-umami-event="footer-windsurf">Windsurf</a>
-                    <a href="https://github.com/pascalx-git/SketchPrompt/blob/main/Help.md" target="_blank" rel="noopener noreferrer" data-umami-event="footer-help">Help</a>
+                    <a href="https://firebase.studio/" target="_blank" rel="noopener noreferrer" data-umami-event="footer-firebase-studio">Firebase Studio</a>
+                    <a href="https://github.com/pascalx-git/SketchPrompt/blob/main/HELP.md" target="_blank" rel="noopener noreferrer" data-umami-event="footer-help">Help</a>
                 </div>
             </div>
             <div class="footer-bottom">

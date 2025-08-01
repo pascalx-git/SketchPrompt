@@ -1,8 +1,8 @@
 # SketchPrompt Security
 
-**Extension**: SketchPrompt v0.2.0  
-**Last Updated**: July 14 2024  
-**Security Status**: 🟢 **PRODUCTION READY**  
+**Extension**: SketchPrompt v0.2.4  
+**Last Updated**: July 31 2025  
+**Security Status**: 🟡 **PRODUCTION READY WITH CAVEATS**  
 **Security Process**: Iterative review and improvement
 
 ---
@@ -59,31 +59,38 @@ Our current architecture prioritizes local processing and user privacy while mai
 - File operations secure
 
 ### ✅ **Performance Tests**
-- Extension size: Optimized and minimal
-- Build time: Efficient
+- Extension size: 3.0MB (acceptable)
+- Build time: < 10 seconds
 - Memory usage: Normal
+
+### ⚠️ **Dependency Tests**
+- 2 moderate vulnerabilities in development dependencies
+- xml2js prototype pollution (CVSS 6.5) - development only
+- vsce dependency chain vulnerability - build tool only
 
 ---
 
 ## Risk Assessment
 
-### **Current Security Posture**: 🟢 **LOW RISK**
+### **Current Security Posture**: 🟡 **MEDIUM RISK**
 - ✅ CSP hardened (no unsafe directives)
 - ✅ All dependencies bundled locally
 - ✅ Input validation implemented
 - ✅ Path traversal protection active
 - ✅ Error information leakage prevented
 - ✅ TLDraw functionality fully operational
+- ⚠️ Development dependency vulnerabilities (xml2js, vsce)
+- ⚠️ Supply chain risks in build tools
 
 ---
 
 ## Production Readiness
 
-**Status**: 🟢 **READY FOR PRODUCTION**
+**Status**: 🟡 **READY WITH CAVEATS**
 
-Through iterative security reviews and prompt vulnerability remediation, all critical security issues have been addressed. The current implementation balances security with functionality, making it suitable for production deployment.
+The extension is secure for production deployment, but development dependencies should be updated in the next release cycle. The vulnerabilities are in build tools only and do not affect the runtime security of the extension.
 
-**Recommendation**: Safe to deploy to users.
+**Recommendation**: Safe to deploy to users, but address dependency vulnerabilities in next release.
 
 ---
 
@@ -122,5 +129,26 @@ As we add AI and collaboration features, we will:
 
 ---
 
-**Last Updated**: July 14 2024  
-**Next Security Review**: Per release 
+## Version Comparison
+
+### **v0.2.0 → v0.2.4 Security Improvements**
+- ✅ **CSP Hardened**: Removed unsafe directives
+- ✅ **Input Validation**: AJV schema validation implemented
+- ✅ **Path Security**: Traversal protection active
+- ✅ **Error Handling**: Sanitized error messages
+- ✅ **Local Bundling**: Minimal external dependencies
+
+### **Current Concerns**
+- ⚠️ xml2js prototype pollution (moderate, development only)
+- ⚠️ vsce dependency chain vulnerability (build tool only)
+- ⚠️ Development toolchain security
+
+### **Immediate Actions Needed**
+1. **Monitor vsce updates** for xml2js dependency fix
+2. **Consider alternative packaging** methods if needed
+3. **Implement automated security scanning** in CI/CD
+
+---
+
+**Last Updated**: July 31 2025  
+**Next Security Review**: As part of next release

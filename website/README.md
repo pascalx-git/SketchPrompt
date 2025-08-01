@@ -1,6 +1,6 @@
 # SketchPrompt Website
 
-This is the marketing website for SketchPrompt, a powerful Cursor IDE and Windsurf extension for visual thinking and AI collaboration.
+This is the marketing website for SketchPrompt, a powerful VS Code extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Works in any OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc).
 
 ## Quick Start
 
@@ -68,10 +68,10 @@ The website uses CSS custom properties for easy color customization. Edit the `:
 
 ```css
 :root {
-    --primary-color: #6366f1;
-    --primary-dark: #4f46e5;
-    --secondary-color: #8b5cf6;
-    --accent-color: #06b6d4;
+    --primary-color: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary-color: #06b6d4;
+    --accent-color: #8b5cf6;
 }
 ```
 

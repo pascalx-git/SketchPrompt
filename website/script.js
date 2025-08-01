@@ -162,8 +162,6 @@ function cycleHeroValueProp() {
         return;
     }
     
-    console.log('Cycling hero value prop, current index:', currentHeroIndex);
-    
     // Fade out
     heroElement.classList.add('fade-out');
     
@@ -174,26 +172,21 @@ function cycleHeroValueProp() {
         
         // Fade in
         heroElement.classList.remove('fade-out');
-        console.log('Updated to:', heroValueProps[currentHeroIndex]);
     }, 400);
 }
 
 function initializeHeroCycling() {
     heroElement = document.querySelector('.cycling-value-prop');
-    console.log('Initializing hero cycling, found element:', heroElement);
     if (heroElement) {
         currentHeroIndex = 0;
         heroElement.textContent = heroValueProps[0];
-        console.log('Set initial text to:', heroValueProps[0]);
         
         if (heroInterval) clearInterval(heroInterval);
         // Start cycling after a short delay to make it more obvious
         setTimeout(() => {
-            heroInterval = setInterval(cycleHeroValueProp,4000); // Change every 2 seconds for testing
-            console.log('Started hero cycling interval');
+            heroInterval = setInterval(cycleHeroValueProp,4000); // Change every 4 seconds
         }, 1000); // Start after 1 second
     } else {
-        console.log('Hero element not found, retrying in 1 second');
         setTimeout(initializeHeroCycling, 1000);
     }
 }
@@ -301,18 +294,30 @@ document.addEventListener('DOMContentLoaded', function() {
   const navToggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
   if (navToggle && navLinks) {
-    navToggle.addEventListener('click', function() {
+    navToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
       navLinks.classList.toggle('active');
       navToggle.classList.toggle('active');
     });
-  }
-  const navLinksItems = document.querySelectorAll('.nav-links a');
-  navLinksItems.forEach(link => {
-    link.addEventListener('click', function() {
-      navLinks.classList.remove('active');
-      navToggle.classList.remove('active');
+    
+    // Close menu when clicking on a link
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        navToggle.classList.remove('active');
+      });
     });
-  });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('active');
+        navToggle.classList.remove('active');
+      }
+    });
+  }
 
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -324,7 +329,17 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+  
+  // Prevent smooth scrolling from interfering with mobile menu
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.nav-toggle')) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  });
 });
+
+
 
 // Navbar background on scroll
 window.addEventListener('scroll', function() {
@@ -406,15 +421,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Parallax effect for hero section
-window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        const rate = scrolled * -0.5;
-        hero.style.transform = `translateY(${rate}px)`;
-    }
-});
+
 
 // Add active state to navigation links based on scroll position
 window.addEventListener('scroll', function() {
@@ -438,47 +445,4 @@ window.addEventListener('scroll', function() {
     });
 });
 
-// Add CSS for mobile navigation
-const style = document.createElement('style');
-style.textContent = `
-    @media (max-width: 768px) {
-        .nav-links {
-            position: fixed;
-            top: 70px;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            flex-direction: column;
-            padding: 2rem;
-            gap: 1rem;
-            transform: translateY(-100%);
-            opacity: 0;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .nav-links.active {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .nav-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .nav-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .nav-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-        
-        .nav-links a.active {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-    }
-`;
-document.head.appendChild(style); 
+ 

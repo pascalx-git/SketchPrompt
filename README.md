@@ -1,49 +1,70 @@
 # ![SketchPrompt Logo](media/logo-icon.png) SketchPrompt
 
-[![Version](https://img.shields.io/badge/version-0.2.3-blue.svg)](https://github.com/pascalx-git/SketchPrompt)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/pascalx-git/SketchPrompt/blob/main/LICENSE)
-[![Cursor IDE](https://img.shields.io/badge/Cursor%20IDE-Extension-purple.svg)](https://cursor.sh)
-[![Windsurf](https://img.shields.io/badge/Windsurf-Extension-blue.svg)](https://windsurf.com)
+[![Version](https://img.shields.io/badge/version-0.2.3-blue.svg?labelColor=%23cccccc&color=%233b82f6)](https://github.com/pascalx-git/SketchPrompt)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?labelColor=%23cccccc&color=%233b82f6)](LICENSE)
+[![Open VSX Downloads](https://img.shields.io/open-vsx/dt/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6)](https://open-vsx.org/extension/PascalX/SketchPrompt)
+[![Open VSX Rating](https://img.shields.io/open-vsx/stars/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6)](https://open-vsx.org/extension/PascalX/SketchPrompt)
+[![Open VSX Release Date](https://img.shields.io/open-vsx/release-date/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6)](https://open-vsx.org/extension/PascalX/SketchPrompt)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/PascalX-Git/SketchPrompt?labelColor=%23cccccc&color=%233b82f6)](https://github.com/pascalx-git/SketchPrompt)
 
 [See Help & Usage Guide →](HELP.md)
 
-A powerful Cursor IDE and Windsurf extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Sketch > Copy > Paste into Cursor Chat or Windsurf. Done. 
+A powerful VS Code extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Works in any OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc). Sketch > Copy > Paste into any AI chat. Done. 
 
 **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
 
 ## Features
 
-- **Rich Sketching**: Full sketching canvas integration with shapes, text, drawing tools, and more
-- **AI-Ready**: Structured format for future AI analysis and collaboration
-- **File Persistence**: Save and load sketches as `.sketchprompt` files with version control
-- **Copy to Prompt**: Copy or export sketches as images and seamlessly insert into your prompts
-- **Custom Editor**: Dedicated editor for `.sketchprompt` files
+- **Multi-Editor Support**: Works in any OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc.)
+- **Rich Sketching**: Full sketching canvas with shapes, text, drawing tools, and more
+- **Copy to Prompt**: Copy sketches as images and seamlessly insert into any AI chat
+- **Privacy-First**: Local processing with no data collection or cloud dependencies
 - **Auto-Save**: Your work is automatically saved as you sketch
-- **Collaboration Ready**: Foundation for multi-user and AI-assisted sketching
+- **Custom Editor**: Dedicated editor for `.sketchprompt` files with smart file watching
+- **AI-Ready**: Structured format for future AI analysis and collaboration
+- **Security-Focused**: Open source, auditable code with regular security reviews
+
+## Compatibility
+
+SketchPrompt is distributed via the [OpenVSX registry](https://open-vsx.org/) and works in any OpenVSX-compatible editor:
+
+### **Supported Editors**
+- **Cursor IDE** - Full support with all features
+- **Windsurf** - Full support with all features  
+- **Google Firebase Studio** - Full support with all features
+- **VS Code** - Full support with all features
+- **Any OpenVSX-compatible editor** - Full support
+
+### **Installation Method**
+All editors use the same installation process:
+1. Open your editor's extension marketplace
+2. Search for "SketchPrompt"
+3. Click Install
+
+### **Feature Parity**
+All features work identically across all supported editors:
+- Sketching canvas and tools
+- File persistence and auto-save
+- Copy to prompt functionality
+- Custom `.sketchprompt` file editor
+- Command palette integration
 
 ## Installation
 
-### Option 1: For Cursor IDE Users
-**Install SketchPrompt from Cursor IDE Extensions:**
-1. Open Cursor IDE
+### Option 1: For OpenVSX-Compatible Editors
+**Install SketchPrompt from your editor's extension marketplace:**
+1. Open your OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc.)
 2. Go to Extensions (Cmd/Ctrl + Shift + X)
 3. Search for "SketchPrompt"
 4. Click Install
 
-### Option 2: For Windsurf Users
-**Install SketchPrompt from Windsurf Extensions:**
-1. Open Windsurf
-2. Go to Extensions (Cmd/Ctrl + Shift + X)
-3. Search for "SketchPrompt"
-4. Click Install
-
-### Option 3: For Developers & Contributors
+### Option 2: For Developers & Contributors
 **Build from source to contribute or customize:**
 1. Clone this repository: `git clone https://github.com/pascalx-git/SketchPrompt.git`
 2. Install dependencies: `npm install`
 3. Build the extension: `npm run vscode:prepublish`
 4. Package the extension: `npx vsce package`
-5. Install the `.vsix` file in Cursor IDE or Windsurf
+5. Install the `.vsix` file in any OpenVSX-compatible editor
 
 **Alternative**: Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed tutorials and documentation.
 
@@ -57,7 +78,7 @@ A powerful Cursor IDE and Windsurf extension for visual thinking and AI promptin
 - A new `.sketchprompt` file will be created in the `SketchPrompt` folder
 - The file will open in the SketchPrompt editor
 
-*Works the same way in both Cursor IDE and Windsurf*
+*Works in any OpenVSX-compatible editor*
 
 ### Editing Sketches
 
@@ -70,7 +91,7 @@ A powerful Cursor IDE and Windsurf extension for visual thinking and AI promptin
 - The `Help.md` file contains usage tips and a link to the [GitHub repo](https://github.com/pascalx-git/SketchPrompt) for the latest updates.
 - Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed documentation and tutorials.
 
-*Available in both Cursor IDE and Windsurf*
+*Available in any OpenVSX-compatible editor*
 
 ## Working with .sketchprompt Files
 
@@ -108,13 +129,13 @@ npm run watch
 
 ### Testing
 
-1. Press `F5` in Cursor IDE or Windsurf to launch the extension in debug mode
+1. Press `F5` in any OpenVSX-compatible editor to launch the extension in debug mode
 2. Create a new sketch and test the functionality
 3. Check the developer console for any errors
 
 ## Architecture
 
-- **Extension**: TypeScript-based VS Code extension (compatible with Cursor IDE and Windsurf)
+- **Extension**: TypeScript-based VS Code extension (compatible with VS Code-based editors that support OpenVSX, like Cursor IDE, Windsurf, Firebase Studio, etc.)
 - **Webview**: React app with TLDraw integration
 - **Build**: Vite for webview bundling, TypeScript for extension compilation
 - **Auto-Save**: Debounced, content-aware saving with deep equality checks
@@ -203,15 +224,15 @@ SketchPrompt is licensed under the MIT License. This project bundles the TLDraw 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test thoroughly in Cursor IDE and Windsurf
+4. Test thoroughly in any OpenVSX-compatible editor
 5. Submit a pull request
 
 ## Links
 
 - **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
 - **GitHub**: [https://github.com/pascalx-git/SketchPrompt](https://github.com/pascalx-git/SketchPrompt)
-- **Help**: Run "SketchPrompt: Help" in Cursor IDE or Windsurf or see [Help.md](Help.md)
+- **Help**: Run "SketchPrompt: Help" in any OpenVSX-compatible editor or see [Help.md](Help.md)
 
 ---
 
-**Version**: 0.2.3 | **Last Updated**: July 23 2024 | **Compatibility**: Cursor IDE, Windsurf
+**Version**: 0.2.3 | **Last Updated**: July 31 2024 | **Compatibility**: OpenVSX-compatible editors
