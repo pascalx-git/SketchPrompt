@@ -30,3 +30,6 @@ Thumbs.db
 
 # Steer > documentation
 .steer/
+
+# User-generated sketch files
+*.sketchprompt

@@ -1,6 +1,6 @@
 # ![SketchPrompt Logo](media/logo-icon.png) SketchPrompt
 
-[![Version](https://img.shields.io/badge/version-0.2.3-blue.svg?labelColor=%23cccccc&color=%233b82f6)](https://github.com/pascalx-git/SketchPrompt)
+[![Version](https://img.shields.io/badge/version-0.2.4-blue.svg?labelColor=%23cccccc&color=%233b82f6)](https://github.com/pascalx-git/SketchPrompt)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?labelColor=%23cccccc&color=%233b82f6)](LICENSE)
 [![Open VSX Downloads](https://img.shields.io/open-vsx/dt/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6)](https://open-vsx.org/extension/PascalX/SketchPrompt)
 [![Open VSX Rating](https://img.shields.io/open-vsx/stars/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6)](https://open-vsx.org/extension/PascalX/SketchPrompt)
@@ -9,20 +9,21 @@
 
 [See Help & Usage Guide →](HELP.md)
 
-A powerful VS Code extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Works in any OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc). Sketch > Copy > Paste into any AI chat. Done. 
+Visual thinking for coding with AI. Sketch ideas and use them in your prompts to improve your workflow with AI models. Works in OpenVSX-compatible editors like Cursor, Windsurf, Firebase Studio, etc.
 
 **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
 
 ## Features
 
 - **Multi-Editor Support**: Works in any OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc.)
-- **Rich Sketching**: Full sketching canvas with shapes, text, drawing tools, and more
-- **Copy to Prompt**: Copy sketches as images and seamlessly insert into any AI chat
-- **Privacy-First**: Local processing with no data collection or cloud dependencies
-- **Auto-Save**: Your work is automatically saved as you sketch
-- **Custom Editor**: Dedicated editor for `.sketchprompt` files with smart file watching
-- **AI-Ready**: Structured format for future AI analysis and collaboration
-- **Security-Focused**: Open source, auditable code with regular security reviews
+- **Rich Sketching**: Draw, doodle, and map out your ideas with intuitive tools—just like pen and paper, but smarter
+- **Copy to Prompt**: Copy your sketch with a click and drop it straight into your next AI conversation
+- **Privacy-First**: Local processing with no data collection or cloud dependencies. Your sketches stay on your machine
+- **Persistent Sketches**: Your sketches are always saved and organized, ready to revisit, remix, or share anytime
+- **Smart Auto-Save**: Your work is automatically saved as you sketch with optimized timing
+- **Reliable File Handling**: Robust error recovery and file validation to keep your work safe
+- **AI-Ready Format**: Structured data that can be version controlled and analyzed by AI
+- **Open Source**: Transparent, auditable code with regular security reviews
 
 ## Compatibility
 
@@ -32,7 +33,6 @@ SketchPrompt is distributed via the [OpenVSX registry](https://open-vsx.org/) an
 - **Cursor IDE** - Full support with all features
 - **Windsurf** - Full support with all features  
 - **Google Firebase Studio** - Full support with all features
-- **VS Code** - Full support with all features
 - **Any OpenVSX-compatible editor** - Full support
 
 ### **Installation Method**
@@ -80,27 +80,31 @@ All features work identically across all supported editors:
 
 *Works in any OpenVSX-compatible editor*
 
+
 ### Editing Sketches
 
 - Open any `.sketchprompt` file to edit it visually
 - All changes are auto-saved
 
-### Getting Help
-
-- Run **"SketchPrompt: Help"** from the command palette to open the local `Help.md` file in your workspace.
-- The `Help.md` file contains usage tips and a link to the [GitHub repo](https://github.com/pascalx-git/SketchPrompt) for the latest updates.
-- Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed documentation and tutorials.
-
-*Available in any OpenVSX-compatible editor*
-
 ## Working with .sketchprompt Files
 
 - `.sketchprompt` files are automatically opened in the SketchPrompt editor
-- **Smart Auto-Save**: Only saves when content actually changes (not on mouse movement)
+- **Smart Auto-Save**: Only saves when content actually changes with optimized timing (1-10 second intervals)
 - **File Watching**: Automatically reloads when files are modified externally
 - **JSON Format**: Files contain structured data that can be version controlled and analyzed by AI
 - **Visual Feedback**: Real-time status updates and notifications keep you informed
 - **Smart Recovery**: Automatic backup and recovery from file corruption
+- **Enhanced Error Handling**: Robust file path validation with user-friendly error messages
+- **Performance Monitoring**: Save frequency tracking and status bar indicators
+
+### Getting Help & Sharing Feedback
+
+- **Help**: Run **"SketchPrompt: Help"** from the command palette to open the local `Help.md` file
+- **Feedback**: Run **"SketchPrompt: Share Feedback"** to share your thoughts and suggestions or visit our [feedback survey](https://form.typeform.com/to/uaM98Tzb)
+- **Documentation**: Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed tutorials and documentation
+- **GitHub**: Check the [GitHub repo](https://github.com/pascalx-git/SketchPrompt) for the latest updates and issues
+
+We value your feedback! It helps us improve SketchPrompt for everyone.
 
 ## Development
 
@@ -135,7 +139,7 @@ npm run watch
 
 ## Architecture
 
-- **Extension**: TypeScript-based VS Code extension (compatible with VS Code-based editors that support OpenVSX, like Cursor IDE, Windsurf, Firebase Studio, etc.)
+- **Extension**: TypeScript-based extension for OpenVSX-compatible editors (Cursor IDE, Windsurf, Firebase Studio, etc.)
 - **Webview**: React app with TLDraw integration
 - **Build**: Vite for webview bundling, TypeScript for extension compilation
 - **Auto-Save**: Debounced, content-aware saving with deep equality checks
@@ -188,8 +192,9 @@ SketchPrompt is designed with privacy in mind. All sketch data stays on your loc
 
 ### Current Focus: Core Extension Features
 - Stabilizing the core sketching experience
-- Improving auto-save reliability
+- Improving auto-save reliability and performance
 - Enhancing the file format for better AI integration
+- Robust error handling and file path validation
 
 ### Next Phase: AI-Assisted Sketching
 - Integrating AI capabilities to analyze sketches
@@ -227,12 +232,29 @@ SketchPrompt is licensed under the MIT License. This project bundles the TLDraw 
 4. Test thoroughly in any OpenVSX-compatible editor
 5. Submit a pull request
 
+## Feedback & Support
+
+We love hearing from our users! Your feedback helps us make SketchPrompt better for everyone.
+
+### Share Your Thoughts
+- **In-Extension**: Run "SketchPrompt: Share Feedback" from the command palette
+- **Website**: Visit [https://sketch-prompt.com](https://sketch-prompt.com) for detailed documentation
+- **GitHub**: Report issues or suggest features on [GitHub](https://github.com/pascalx-git/SketchPrompt/issues)
+
+### What We'd Love to Know
+- How you're using SketchPrompt in your workflow
+- Features that would make it more useful
+- Any issues or bugs you encounter
+- General experience and satisfaction
+
 ## Links
 
 - **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
 - **GitHub**: [https://github.com/pascalx-git/SketchPrompt](https://github.com/pascalx-git/SketchPrompt)
 - **Help**: Run "SketchPrompt: Help" in any OpenVSX-compatible editor or see [Help.md](Help.md)
+- **Contact**: [hey@sketch-prompt.com](mailto:hey@sketch-prompt.com)
+- **YouTube**: [https://www.youtube.com/@SketchPrompt](https://www.youtube.com/@SketchPrompt)
 
 ---
 
-**Version**: 0.2.3 | **Last Updated**: July 31 2024 | **Compatibility**: OpenVSX-compatible editors
+**Version**: 0.2.4 | **Last Updated**: July 31 2024 | **Compatibility**: OpenVSX-compatible editors

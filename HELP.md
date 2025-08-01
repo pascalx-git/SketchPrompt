@@ -8,7 +8,7 @@
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/PascalX-Git/SketchPrompt?labelColor=%23cccccc&color=%233b82f6)](https://github.com/pascalx-git/SketchPrompt)
 
 ## What is SketchPrompt?
-SketchPrompt is a powerful VS Code extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Works in any OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc). Sketch > Copy > Paste into any AI chat. Done.
+SketchPrompt is a visual thinking tool for coding with AI. Sketch ideas and use them in your prompts to improve your workflow with AI models. Works in OpenVSX-compatible editors like Cursor, Windsurf, Firebase Studio, etc.
 
 **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
 

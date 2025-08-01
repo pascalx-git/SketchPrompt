@@ -19,6 +19,7 @@ function SketchPromptApp() {
   const loaded = useRef(false);
   const editorRef = useRef<any>(null);
   const [initialSnapshot, setInitialSnapshot] = useState<any | null>(null);
+  const [persistenceKey, setPersistenceKey] = useState<string | null>(null);
 
   // Enhanced theme detection for VS Code
   const detectVSCodeTheme = (): boolean => {
@@ -53,6 +54,12 @@ function SketchPromptApp() {
       const message = event.data;
       if (message.type === 'loadSketch' && !loaded.current) {
         try {
+          // Set persistence key if provided
+          if (message.persistenceKey) {
+            setPersistenceKey(message.persistenceKey);
+            
+          }
+          
           if (message.data && (message.data.document || message.data.session)) {
             setInitialSnapshot(message.data); // Save for loading after mount
             loaded.current = true;
@@ -77,7 +84,7 @@ function SketchPromptApp() {
     const updateTheme = () => {
       const newIsDarkMode = detectVSCodeTheme();
       setIsDarkMode(newIsDarkMode);
-      console.log('[SketchPrompt] Theme detected:', newIsDarkMode ? 'dark' : 'light');
+      
     };
 
     // Set initial theme
@@ -120,10 +127,13 @@ function SketchPromptApp() {
   // Save on change (https://tldraw.dev/docs/persistence)
   function handleMount(editor: any) {
     editorRef.current = editor;
+    
+    
     // Load initial snapshot if available
     if (initialSnapshot) {
       try {
         loadSnapshot(editor.store, initialSnapshot);
+        
       } catch (error) {
         console.error('Failed to load snapshot:', error);
       }
@@ -145,6 +155,7 @@ function SketchPromptApp() {
       <Tldraw 
         onMount={handleMount} 
         inferDarkMode={true}
+        persistenceKey={persistenceKey || `sketchprompt-fallback-${Date.now()}`}
       />
     </div>
   );

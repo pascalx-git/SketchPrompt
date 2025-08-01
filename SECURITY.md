@@ -1,6 +1,6 @@
 # SketchPrompt Security
 
-**Extension**: SketchPrompt v0.2.4  
+**Extension**: SketchPrompt - Visual thinking tool for coding with AI  
 **Last Updated**: July 31 2025  
 **Security Status**: 🟡 **PRODUCTION READY WITH CAVEATS**  
 **Security Process**: Iterative review and improvement
@@ -68,6 +68,11 @@ Our current architecture prioritizes local processing and user privacy while mai
 - xml2js prototype pollution (CVSS 6.5) - development only
 - vsce dependency chain vulnerability - build tool only
 
+### ⚠️ **Privacy & User Experience Tests**
+- Feedback system uses external Typeform URL (user-initiated only)
+- Local usage tracking for future features (no external transmission)
+- Privacy controls being enhanced for user consent
+
 ---
 
 ## Risk Assessment
@@ -81,6 +86,7 @@ Our current architecture prioritizes local processing and user privacy while mai
 - ✅ TLDraw functionality fully operational
 - ⚠️ Development dependency vulnerabilities (xml2js, vsce)
 - ⚠️ Supply chain risks in build tools
+- ⚠️ Privacy controls being enhanced
 
 ---
 
@@ -103,6 +109,8 @@ The extension is secure for production deployment, but development dependencies 
 
 **Security Contact**: GitHub issues or discussions
 
+**For Developers**: See `.steer/SECURITY_ANALYSIS_REPORT.md` for detailed technical analysis and security implementation details.
+
 ---
 
 ## Privacy & Data Handling
@@ -111,9 +119,16 @@ SketchPrompt is designed with privacy as a fundamental principle. Here's how we 
 
 ### **Current Privacy Features**
 - **Local processing**: All sketches and data stay on your machine
-- **No data collection**: We don't track usage, errors, or performance metrics
+- **Minimal usage tracking**: Anonymous usage counters for future analytics (local storage only)
 - **No cloud dependencies**: No external services required for core functionality
-- **No analytics**: No anonymous usage tracking or statistics collection
+- **Manual feedback**: User-initiated feedback collection via Typeform
+- **No automatic prompts**: Users control when to provide feedback
+
+### **Privacy Enhancements in Progress**
+We're continuously improving our privacy controls:
+- **User consent mechanisms**: Adding opt-out options for usage tracking
+- **Feedback system improvements**: Enhanced URL validation and user controls
+- **Privacy-first design**: All new features prioritize user privacy
 
 ### **Future Privacy Considerations**
 As we add AI and collaboration features, we will:
@@ -142,11 +157,13 @@ As we add AI and collaboration features, we will:
 - ⚠️ xml2js prototype pollution (moderate, development only)
 - ⚠️ vsce dependency chain vulnerability (build tool only)
 - ⚠️ Development toolchain security
+- ⚠️ Privacy controls being enhanced (low priority)
 
 ### **Immediate Actions Needed**
 1. **Monitor vsce updates** for xml2js dependency fix
 2. **Consider alternative packaging** methods if needed
 3. **Implement automated security scanning** in CI/CD
+4. **Enhance privacy controls** for user consent and feedback system
 
 ---
 

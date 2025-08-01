@@ -105,14 +105,14 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
     if (this.statusBarItem) {
       this.statusBarItem.text = text;
       this.statusBarItem.tooltip = tooltip;
-      console.log('[SketchPrompt] Status bar updated:', text);
+      
     } else {
       // Recreate status bar if it was disposed
       this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 99);
       this.statusBarItem.text = text;
       this.statusBarItem.tooltip = tooltip;
       this.statusBarItem.show();
-      console.log('[SketchPrompt] Status bar recreated and updated:', text);
+      
     }
   }
 
@@ -126,7 +126,7 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
     webviewPanel: vscode.WebviewPanel,
     _token: vscode.CancellationToken
   ): Promise<void> {
-    console.log('[SketchPrompt] resolveCustomTextEditor called for', document.uri.fsPath);
+    
     
     // Create status bar item for this editor instance
     if (!this.statusBarItem) {
@@ -134,7 +134,7 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
       this.statusBarItem.text = '$(pencil) SketchPrompt: Ready';
       this.statusBarItem.tooltip = 'SketchPrompt is ready to use';
       this.statusBarItem.show();
-      console.log('[SketchPrompt] Status bar item created and shown');
+      
     }
 
     webviewPanel.webview.options = {
@@ -142,20 +142,56 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
       localResourceRoots: [this.context.extensionUri]
     };
 
-    // Notify if file does not exist
+    // Enhanced file path validation
     try {
-      // This will throw if the file does not exist
-      await vscode.workspace.fs.stat(document.uri);
+      const filePath = document.uri.fsPath;
+      
+      // Check if file exists
+      if (!fs.existsSync(filePath)) {
+        const errorMessage = `File not found: ${path.basename(filePath)}. The file may have been moved, renamed, or deleted.`;
+        vscode.window.showErrorMessage(errorMessage);
+        this.updateStatusBar('$(error) SketchPrompt: File Not Found', errorMessage);
+        return;
+      }
+
+      // Check if file is readable
+      try {
+        fs.accessSync(filePath, fs.constants.R_OK);
+      } catch (accessError) {
+        const errorMessage = `Cannot read file: ${path.basename(filePath)}. Check file permissions.`;
+        vscode.window.showErrorMessage(errorMessage);
+        this.updateStatusBar('$(error) SketchPrompt: Access Denied', errorMessage);
+        return;
+      }
+
+      // Validate file path for special characters or problematic names
+      const fileName = path.basename(filePath);
+      if (fileName.includes('..') || fileName.includes('//') || fileName.includes('\\')) {
+        const errorMessage = `Invalid file path detected: ${fileName}. Please use a different file name.`;
+        vscode.window.showWarningMessage(errorMessage);
+        this.updateStatusBar('$(warning) SketchPrompt: Path Issue', errorMessage);
+      }
+
     } catch (err) {
-      vscode.window.showWarningMessage(
-        'File not found. If you renamed or deleted this file outside the editor, please refresh the file explorer.'
-      );
+      const errorMessage = `Unable to access file: ${path.basename(document.uri.fsPath)}. Please check if the file exists and is accessible.`;
+      vscode.window.showErrorMessage(errorMessage);
+      this.updateStatusBar('$(error) SketchPrompt: File Error', errorMessage);
+      return;
     }
 
     webviewPanel.webview.html = this.getHtmlForWebview(webviewPanel.webview);
 
     let lastSavedDocument: any = undefined;
     let ignoreNextWatcher = false;
+
+    // Create unique persistence key based on file path to prevent interference between files
+    const filePath = document.uri.fsPath;
+    // Include file modification time to ensure uniqueness when files are recreated
+    // This prevents TLDraw from loading old data from localStorage when a file is deleted and recreated
+    const stats = fs.statSync(filePath);
+    const fileTime = stats.mtime.getTime();
+    const pathHash = Buffer.from(filePath).toString('base64').replace(/[^a-zA-Z0-9]/g, '');
+    const persistenceKey = `sketchprompt-${pathHash}-${fileTime}`;
 
     // Send the initial sketch data to the webview
     const sendSketchData = () => {
@@ -165,9 +201,11 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
         const data = sanitizeSketchData(rawData);
         // Always send the full snapshot (document + session)
         lastSavedDocument = data.document || {};
+        
         webviewPanel.webview.postMessage({
           type: 'loadSketch',
-          data: data // { document, session }
+          data: data, // { document, session }
+          persistenceKey: persistenceKey
         });
         // Update status bar to show loaded
         this.updateStatusBar('$(pencil) SketchPrompt: Ready', `Editing ${path.basename(document.uri.fsPath)}`);
@@ -187,7 +225,8 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
           lastSavedDocument = data.document || {};
           webviewPanel.webview.postMessage({
             type: 'loadSketch',
-            data: data
+            data: data,
+            persistenceKey: persistenceKey
           });
           
           // Show recovery message with multiple feedback channels
@@ -219,7 +258,8 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
           // Complete failure - use empty sketch but preserve backup
         webviewPanel.webview.postMessage({
           type: 'loadSketch',
-          data: { document: {}, session: {} }
+          data: { document: {}, session: {} },
+          persistenceKey: persistenceKey
         });
           
           const message = backupPath 
@@ -259,12 +299,22 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
     };
     sendSketchData();
 
-    // Debounced save logic
+    // Improved debounced save logic with better performance monitoring
+    let saveCount = 0;
+    let lastSaveTime = 0;
+    const MIN_SAVE_INTERVAL = 1000; // Minimum 1 second between saves
+    const MAX_SAVE_INTERVAL = 10000; // Maximum 10 seconds between saves
+    
     const debouncedSave = debounce(async (data: any) => {
       try {
         if (document.uri.scheme === 'file') {
-          // Only save if document actually changed
-          if (!deepEqual(data.document, lastSavedDocument)) {
+          const now = Date.now();
+          const timeSinceLastSave = now - lastSaveTime;
+          
+          // Only save if document actually changed and enough time has passed
+          if (!deepEqual(data.document, lastSavedDocument) && timeSinceLastSave >= MIN_SAVE_INTERVAL) {
+            saveCount++;
+            
             // Update status bar to show saving
             this.updateStatusBar('$(sync~spin) SketchPrompt: Saving...', 'Saving sketch...');
             
@@ -275,12 +325,19 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
             await vscode.workspace.applyEdit(edit);
             await document.save();
             lastSavedDocument = data.document;
+            lastSaveTime = now;
             
             // Update status bar to show saved briefly, then return to ready
-            this.updateStatusBar('$(pass-filled) SketchPrompt: Saved', 'Sketch saved successfully');
+            this.updateStatusBar('$(pass-filled) SketchPrompt: Saved', `Sketch saved successfully (${saveCount} saves)`);
             this.scheduleStatusBarUpdate(() => {
               this.updateStatusBar('$(pencil) SketchPrompt: Ready', `Editing ${path.basename(document.uri.fsPath)}`);
             }, 2000);
+          } else if (timeSinceLastSave < MIN_SAVE_INTERVAL) {
+            // Show that save was skipped due to timing
+            this.updateStatusBar('$(clock) SketchPrompt: Save Skipped', 'Save skipped - too frequent');
+            this.scheduleStatusBarUpdate(() => {
+              this.updateStatusBar('$(pencil) SketchPrompt: Ready', `Editing ${path.basename(document.uri.fsPath)}`);
+            }, 1000);
           }
         }
       } catch (error) {
@@ -295,7 +352,7 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
           }, 3000);
         }
       }
-    }, 300);
+    }, 500); // Increased debounce delay for better performance
 
     // Listen for messages from the webview
     webviewPanel.webview.onDidReceiveMessage(async (message) => {
@@ -341,23 +398,18 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
     // Watch for file changes on disk (auto-reload)
     const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
     const relativePattern = workspaceFolder ? new vscode.RelativePattern(workspaceFolder, path.basename(document.uri.fsPath)) : document.uri.fsPath;
-    console.log('[SketchPrompt] Setting up file watcher for', relativePattern);
+    
     const fileWatcher = vscode.workspace.createFileSystemWatcher(relativePattern);
     fileWatcher.onDidChange(() => {
-      console.log('[SketchPrompt] File watcher: onDidChange triggered for', document.uri.fsPath, 'ignoreNextWatcher:', ignoreNextWatcher);
-      if (ignoreNextWatcher) {
-        console.log('[SketchPrompt] Ignoring watcher event due to ignoreNextWatcher flag');
-        ignoreNextWatcher = false;
-        return;
-      }
+      
       debouncedReload();
     });
     fileWatcher.onDidCreate(() => {
-      console.log('[SketchPrompt] File watcher: onDidCreate triggered for', document.uri.fsPath);
+      
       debouncedReload();
     });
     fileWatcher.onDidDelete(() => {
-      console.log('[SketchPrompt] File watcher: onDidDelete triggered for', document.uri.fsPath);
+      
       vscode.window.showWarningMessage('Sketch file was deleted.');
     });
 
@@ -376,29 +428,30 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
       // Dispose status bar item
       if (this.statusBarItem) {
         this.statusBarItem.dispose();
-        console.log('[SketchPrompt] Status bar item disposed');
+        
       }
     });
 
     // Debounced reload to avoid excessive reloads
     const debouncedReload = debounce(() => {
-      console.log('[SketchPrompt] debouncedReload called for', document.uri.fsPath);
+      
       try {
         if (!document.isDirty) {
           // Auto-reload if not dirty
           const text = document.getText();
           const data = text ? JSON.parse(text) : {};
           if (!deepEqual(data.document, lastSavedDocument)) {
-            console.log('[SketchPrompt] Reloading sketch: file content differs from memory');
+            
             vscode.window.showInformationMessage('Sketch file changed externally. Reloading...');
             // Always send the full snapshot
             webviewPanel.webview.postMessage({
               type: 'loadSketch',
-              data: data // { document, session }
+              data: data, // { document, session }
+              persistenceKey: persistenceKey
             });
             lastSavedDocument = data.document || {};
           } else {
-            console.log('[SketchPrompt] No reload needed: file content matches memory');
+            
           }
         } else {
           // If dirty, show notification with reload button

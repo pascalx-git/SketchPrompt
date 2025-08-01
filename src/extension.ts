@@ -22,13 +22,36 @@ function validateFilePath(basePath: string, userPath: string): string {
 	return resolvedPath;
 }
 
+// Feedback collection utilities
+class FeedbackManager {
+	private static readonly FEEDBACK_URL = 'https://form.typeform.com/to/uaM98Tzb';
+	private static readonly USAGE_COUNT_KEY = 'sketchprompt.usageCount';
+	
+	constructor(private context: vscode.ExtensionContext) {}
+	
+	// Track usage for analytics (auto-prompting moved to backlog)
+	async trackUsage(): Promise<void> {
+		const usageCount = this.context.globalState.get(FeedbackManager.USAGE_COUNT_KEY, 0) + 1;
+		await this.context.globalState.update(FeedbackManager.USAGE_COUNT_KEY, usageCount);
+		
+	}
+	
+	// Manual feedback command
+	async requestFeedback(): Promise<void> {
+		await this.openFeedbackForm();
+	}
+	
+	// Open feedback form in browser
+	async openFeedbackForm(): Promise<void> {
+		await vscode.env.openExternal(vscode.Uri.parse(FeedbackManager.FEEDBACK_URL));
+	}
+}
+
 export async function activate(context: vscode.ExtensionContext) {
-	console.log('[SketchPrompt] Extension activated');
-	console.log('SketchPrompt is now active!');
 
 
-
-
+	// Initialize feedback manager
+	const feedbackManager = new FeedbackManager(context);
 
 	// On activation, ensure SketchPrompt folder and default file exist
 	const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -66,6 +89,9 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	// Register the command to create a new sketch
 	let newSketchDisposable = vscode.commands.registerCommand('sketchprompt.newSketch', async () => {
+		// Track usage for feedback
+		await feedbackManager.trackUsage();
+		
 		const workspaceFolders = vscode.workspace.workspaceFolders;
 		if (!workspaceFolders) {
 			vscode.window.showErrorMessage('Please open a workspace folder to use SketchPrompt.');
@@ -93,11 +119,15 @@ export async function activate(context: vscode.ExtensionContext) {
 		// Write empty JSON to file
 		fs.writeFileSync(filePath, JSON.stringify({}));
 		const fileUri = vscode.Uri.file(filePath);
-		await vscode.commands.executeCommand('vscode.openWith', fileUri, 'sketchprompt.editor');
+		
+		// Open the new sketch file
+		await vscode.commands.executeCommand('vscode.open', fileUri);
 		
 
 	});
 	context.subscriptions.push(newSketchDisposable);
+
+
 
 	// Register the help command to open Help.md
 	let helpDisposable = vscode.commands.registerCommand('sketchprompt.help', async () => {
@@ -117,6 +147,12 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	});
 	context.subscriptions.push(helpDisposable);
+
+	// Register feedback command
+	let feedbackDisposable = vscode.commands.registerCommand('sketchprompt.feedback', async () => {
+		await feedbackManager.requestFeedback();
+	});
+	context.subscriptions.push(feedbackDisposable);
 
 	// Register the custom editor for .sketchprompt files
 	const customEditorProvider = vscode.window.registerCustomEditorProvider(

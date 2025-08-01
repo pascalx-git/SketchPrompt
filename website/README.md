@@ -1,6 +1,6 @@
 # SketchPrompt Website
 
-This is the marketing website for SketchPrompt, a powerful VS Code extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. Works in any OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc).
+This is the marketing website for SketchPrompt, a visual thinking tool for coding with AI. Sketch ideas and use them in your prompts to improve your workflow with AI models. Works in OpenVSX-compatible editors like Cursor, Windsurf, Firebase Studio, etc.
 
 ## Quick Start
 

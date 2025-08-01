@@ -51,3 +51,9 @@ media/*.sketch
 
 # Package files
 package-lock.json
+
+# User-generated sketch files
+*.sketchprompt
+
+# User-generated sketch files
+*.sketchprompt

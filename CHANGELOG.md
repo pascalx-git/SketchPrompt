@@ -1,15 +1,52 @@
 # SketchPrompt Release Notes
 
 ## Introduction
-SketchPrompt is a powerful Cursor IDE and Windsurf extension for visual thinking and AI prompting—best used for quickly sketching ideas and intent to make human-AI collaboration more seamless. With SketchPrompt, you can visually communicate, iterate, and share ideas directly inside your coding workflow.
+Visual thinking for coding with AI. Sketch ideas and use them in your prompts to improve your workflow with AI models. Works in OpenVSX-compatible editors like Cursor, Windsurf, Firebase Studio, etc.
 
 ### See Also
 - [README.md](README.md) – Full usage, installation, and feature guide
-- [Help.md](Help.md) – Quick help and tips inside your workspace 
+- [HELP.md](HELP.md) – Quick help and tips inside your workspace 
+
+---
+
+## v0.2.4 – Universal Editor Support & Enhanced Experience
+
+**Released:** August 1, 2025
+
+This release expands SketchPrompt's reach to all OpenVSX-compatible editors and improves discoverability with enhanced badges and documentation. Your visual thinking tool is now available to a much wider audience of developers and designers.
+
+### What's New in 0.2.4
+
+#### **Universal OpenVSX Compatibility**
+- **Multi-Editor Support**: SketchPrompt now works in any editor that supports OpenVSX extensions, including Cursor IDE, Windsurf, Google Firebase Studio, and more
+- **Unified Installation**: Same powerful features across all compatible editors with consistent installation process
+- **Broader Accessibility**: Reach more users who prefer different development environments
+
+#### **Enhanced Discoverability & Trust**
+- **OpenVSX Badges**: Added download count, rating, and release date badges to showcase extension popularity and reliability
+- **Visual Credibility**: Real-time metrics help users understand the extension's adoption and community trust
+- **Professional Presentation**: Updated badge styling with consistent blue theme for better visual appeal
+
+#### **Documentation & Marketing Improvements**
+- **Updated Descriptions**: Clear messaging about OpenVSX compatibility and multi-editor support
+- **Enhanced Website**: Improved visual styles and user experience on the marketing website
+- **Better Positioning**: Emphasizes the extension's value for visual thinking across all development workflows
+
+#### **Technical Enhancements**
+- **Package Updates**: Updated dependencies to latest secure versions
+- **Build Optimization**: Streamlined build process and improved performance
+- **Code Quality**: Removed console logs and optimized JavaScript for better performance
+- **File Persistence Fix**: Implemented unique persistence keys to prevent file conflicts when creating multiple sketch files
+- **Bug Fix**: Fixed issue where recreated files with same name would restore old content from browser storage
+- **Enhanced File Path Validation**: Robust file existence and permission checks with user-friendly error messages
+- **Improved Auto-Save Performance**: Smart save timing with minimum/maximum intervals and save frequency tracking
+- **Better Error Handling**: Comprehensive file path validation and graceful error recovery
 
 ---
 
 ## v0.2.3 – Windsurf Compatibility
+
+**Released:** July 25, 2025
 
 This release adds full compatibility with Windsurf, making SketchPrompt available to both Cursor IDE and Windsurf users. The extension now works seamlessly across both platforms with the same powerful features.
 
@@ -29,6 +66,8 @@ This release adds full compatibility with Windsurf, making SketchPrompt availabl
 ---
 
 ## v0.2.2 – Enhanced User Feedback & Error Recovery
+
+**Released:** July 18, 2025
 
 This release improves the user experience with comprehensive feedback systems and robust error recovery. Your sketches are now more protected and you'll always know what's happening.
 
@@ -62,12 +101,16 @@ This release improves the user experience with comprehensive feedback systems an
 
 ## v0.2.1 – Marketplace & Documentation Updates
 
+**Released:** July 16, 2025
+
 - Updated extension description and marketplace metadata for better discoverability
 - Added comprehensive security messaging to website and documentation
 
 ---
 
 ## v0.2.0 – Security & Reliability Improvements
+
+**Released:** July 16, 2025
 
 This release makes SketchPrompt more reliable with critical bug fixes and enhanced security features. Your sketches are now more secure and the extension is more stable.
 
@@ -100,6 +143,8 @@ This release makes SketchPrompt more reliable with critical bug fixes and enhanc
 ---
 
 ## v0.1.0 – Initial Public Alpha Release
+
+**Released:** July 8, 2025 
 
 Welcome to the very first public release of SketchPrompt! This alpha version lays the foundation for a seamless visual sketching experience inside Cursor IDE and Windsurf, designed for developers, designers, and anyone who thinks with visuals as well as words.
 
