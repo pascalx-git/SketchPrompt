@@ -445,4 +445,185 @@ window.addEventListener('scroll', function() {
     });
 });
 
- 
+// Editor installation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const installButtons = document.querySelectorAll('.install-btn');
+    const heroInstallBtn = document.querySelector('.hero-install-btn');
+    const navInstallBtn = document.querySelector('.nav-install-btn');
+    const ctaInstallBtn = document.querySelector('.cta-install-btn');
+    
+    // Handle hero button click
+    if (heroInstallBtn) {
+        heroInstallBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            handleInstallClick();
+        });
+    }
+    
+    // Handle navigation button click
+    if (navInstallBtn) {
+        navInstallBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            handleInstallClick();
+        });
+    }
+    
+    // Handle CTA button click
+    if (ctaInstallBtn) {
+        ctaInstallBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            handleInstallClick();
+        });
+    }
+    
+    function handleInstallClick() {
+        // Check if device is mobile/tablet
+        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                              (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
+        
+        if (isMobileDevice) {
+            // On mobile devices, scroll to installation section instead of showing modal
+            const installationSection = document.querySelector('#installation');
+            if (installationSection) {
+                installationSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            showEditorSelectionModal();
+        }
+    }
+    
+    installButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const editor = this.getAttribute('data-editor');
+            installExtension(editor);
+        });
+    });
+    
+    function showEditorSelectionModal() {
+        const modal = document.createElement('div');
+        modal.className = 'editor-selection-modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Choose your code editor</h2>
+                    <button class="modal-close" onclick="this.parentElement.parentElement.parentElement.remove()">&times;</button>
+                </div>
+                <p class="modal-description">SketchPrompt is an extension that works with many code editors. Select your editor to install SketchPrompt directly.</p>
+                <div class="modal-editor-options">
+                    <div class="modal-editor-option" data-editor="cursor">
+                        <div class="modal-editor-info">
+                            <img src="https://cursor.sh/favicon.ico" alt="Cursor" class="modal-editor-icon" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTQgMTBIMjJMMTQgMTJMMTYgMjJMMTIgMThMMTAgMjJMMTIgMTJMMiAxMEwxMiAyWiIgZmlsbD0iIzMzMyIvPgo8L3N2Zz4K'">
+                            <span class="modal-editor-name">Cursor</span>
+                        </div>
+                        <button class="btn btn-secondary modal-install-btn" data-editor="cursor">Install SketchPrompt</button>
+                    </div>
+                    <div class="modal-editor-option" data-editor="windsurf">
+                        <div class="modal-editor-info">
+                            <img src="https://windsurf.com/favicon.ico" alt="Windsurf" class="modal-editor-icon" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTQgMTBIMjJMMTQgMTJMMTYgMjJMMTIgMThMMTAgMjJMMTIgMTJMMiAxMEwxMiAyWiIgZmlsbD0iIzMzMyIvPgo8L3N2Zz4K'">
+                            <span class="modal-editor-name">Windsurf</span>
+                        </div>
+                        <button class="btn btn-secondary modal-install-btn" data-editor="windsurf">Install SketchPrompt</button>
+                    </div>
+                    <div class="modal-editor-option" data-editor="firebase-studio">
+                        <div class="modal-editor-info">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROklQN6uy2soSSqi6okf-w-yyymRbETduSeA&s" alt="Google Firebase Studio" class="modal-editor-icon" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTQgMTBIMjJMMTQgMTJMMTYgMjJMMTIgMThMMTAgMjJMMTIgMTJMMiAxMEwxMiAyWiIgZmlsbD0iIzMzMyIvPgo8L3N2Zz4K'">
+                            <span class="modal-editor-name">Google Firebase Studio</span>
+                        </div>
+                        <a href="https://firebase.studio" target="_blank" rel="noopener noreferrer" class="btn btn-secondary modal-visit-btn">Visit Firebase Studio</a>
+                    </div>
+                </div>
+                <div class="modal-note">
+                    <p><strong>Note:</strong> If your editor isn't listed, you can still install SketchPrompt from your editor's extension marketplace by searching for "SketchPrompt".</p>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Add event listeners to modal install buttons
+        const modalInstallButtons = modal.querySelectorAll('.modal-install-btn');
+        modalInstallButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const editor = this.getAttribute('data-editor');
+                modal.remove();
+                installExtension(editor);
+            });
+        });
+        
+        // Handle Firebase Studio visit link (not an install action)
+        const modalVisitBtn = modal.querySelector('.modal-visit-btn');
+        if (modalVisitBtn) {
+            modalVisitBtn.addEventListener('click', function(e) {
+                // Let the link work normally - no preventDefault
+                modal.remove();
+            });
+        }
+        
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+    }
+    
+    function installExtension(editor) {
+        const extensionId = 'PascalX.SketchPrompt';
+        
+        // Define editor-specific installation URLs
+        const editorUrls = {
+            'cursor': `cursor:extension/${extensionId}`,
+            'windsurf': `windsurf:extension/${extensionId}`,
+            'firebase-studio': null // Firebase Studio is web-based, no extension installation
+        };
+        
+        const url = editorUrls[editor];
+        if (url) {
+            // Try to open the editor-specific URL
+            window.location.href = url;
+            
+            // Fallback: Show a message if the editor isn't installed
+            setTimeout(() => {
+                // If we're still on the same page after 2 seconds, show fallback
+                if (document.visibilityState === 'visible') {
+                    showEditorFallback(editor);
+                }
+            }, 2000);
+        }
+    }
+    
+    function showEditorFallback(editor) {
+        const editorNames = {
+            'cursor': 'Cursor IDE',
+            'windsurf': 'Windsurf',
+            'firebase-studio': 'Google Firebase Studio'
+        };
+        
+        const editorName = editorNames[editor] || editor;
+        
+        // Create a modal or notification
+        const fallback = document.createElement('div');
+        fallback.className = 'editor-fallback';
+        fallback.innerHTML = `
+            <div class="fallback-content">
+                <h3>${editorName} not detected</h3>
+                <p>It looks like ${editorName} isn't installed or running on your system.</p>
+                <div class="fallback-actions">
+                    <a href="https://${editor === 'cursor' ? 'cursor.sh' : editor === 'windsurf' ? 'windsurf.com' : 'firebase.studio'}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">${editor === 'firebase-studio' ? 'Visit' : 'Download'} ${editorName}</a>
+                    <button class="btn btn-secondary" onclick="this.parentElement.parentElement.parentElement.remove()">Close</button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(fallback);
+        
+        // Auto-remove after 10 seconds
+        setTimeout(() => {
+            if (fallback.parentElement) {
+                fallback.remove();
+            }
+        }, 10000);
+    }
+});

@@ -3,6 +3,22 @@ import * as path from 'path';
 import * as fs from 'fs';
 import Ajv from 'ajv';
 
+// Preview management interfaces
+interface SketchMetadata {
+  shapeCount: number;
+  shapeTypes: Record<string, number>;
+  textContent: string[];
+  lastModified: Date;
+  fileName: string;
+  complexity: 'simple' | 'moderate' | 'complex';
+}
+
+interface PreviewData {
+  blob: Blob;
+  metadata: SketchMetadata;
+  timestamp: number;
+}
+
 function debounce<T extends (...args: any[]) => void>(fn: T, delay: number): T {
   let timer: NodeJS.Timeout | null = null;
   return function(this: any, ...args: any[]) {
@@ -96,8 +112,13 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
   public static readonly viewType = 'sketchprompt.editor';
   private statusBarItem: vscode.StatusBarItem | undefined;
   private statusBarTimeouts: NodeJS.Timeout[] = [];
+  private previewDirectory: string | undefined;
+  private webviewPanel: vscode.WebviewPanel | undefined;
 
-  constructor(private readonly context: vscode.ExtensionContext) {
+  constructor(
+    private readonly context: vscode.ExtensionContext,
+    private readonly instances?: Map<string, SketchPromptCustomEditor>
+  ) {
     // Status bar item will be created when editor is resolved
   }
 
@@ -121,11 +142,111 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
     this.statusBarTimeouts.push(timeout);
   }
 
+  private async ensurePreviewDirectory(documentUri: vscode.Uri): Promise<string> {
+    if (!this.previewDirectory) {
+      const workspaceFolder = vscode.workspace.getWorkspaceFolder(documentUri);
+      if (workspaceFolder) {
+        this.previewDirectory = path.join(workspaceFolder.uri.fsPath, '.sketchprompt');
+        if (!fs.existsSync(this.previewDirectory)) {
+          fs.mkdirSync(this.previewDirectory, { recursive: true });
+        }
+      }
+    }
+    return this.previewDirectory || '';
+  }
+
+  private async savePreviewImage(blob: Blob, documentUri: vscode.Uri, timestamp: number): Promise<string> {
+    try {
+      const previewDir = await this.ensurePreviewDirectory(documentUri);
+      if (!previewDir) {
+        throw new Error('No workspace folder found');
+      }
+
+      // Convert blob to buffer
+      const arrayBuffer = await blob.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+
+      // Generate filename based on document name and timestamp
+      const documentName = path.basename(documentUri.fsPath, '.sketchprompt');
+      const previewFileName = `${documentName}-preview-${timestamp}.png`;
+      const previewPath = path.join(previewDir, previewFileName);
+
+      // Save the image
+      fs.writeFileSync(previewPath, buffer);
+
+      // Clean up old previews (keep last 5)
+      this.cleanupOldPreviews(previewDir, documentName);
+
+      return previewPath;
+    } catch (error) {
+      console.error('Failed to save preview image:', error);
+      throw error;
+    }
+  }
+
+  private cleanupOldPreviews(previewDir: string, documentName: string): void {
+    try {
+      const files = fs.readdirSync(previewDir);
+      const documentPreviews = files
+        .filter(file => file.startsWith(documentName) && file.endsWith('.png'))
+        .map(file => ({
+          name: file,
+          path: path.join(previewDir, file),
+          mtime: fs.statSync(path.join(previewDir, file)).mtime.getTime()
+        }))
+        .sort((a, b) => b.mtime - a.mtime); // Sort by modification time, newest first
+
+      // Keep only the last 5 previews
+      if (documentPreviews.length > 5) {
+        documentPreviews.slice(5).forEach(preview => {
+          try {
+            fs.unlinkSync(preview.path);
+          } catch (error) {
+            console.error(`Failed to delete old preview ${preview.name}:`, error);
+          }
+        });
+      }
+    } catch (error) {
+      console.error('Failed to cleanup old previews:', error);
+    }
+  }
+
+  private generateMarkdownReference(previewPath: string, metadata: SketchMetadata): string {
+    const timestamp = metadata.lastModified.toLocaleTimeString();
+    const shapeSummary = Object.entries(metadata.shapeTypes)
+      .map(([type, count]) => `${count} ${type}`)
+      .join(', ');
+
+    const relativePath = path.relative(
+      vscode.workspace.getWorkspaceFolder(vscode.Uri.file(previewPath))?.uri.fsPath || '',
+      previewPath
+    );
+
+    return `## Sketch: ${metadata.fileName}
+![Sketch Preview](${relativePath})
+
+*Auto-generated preview of sketch containing ${metadata.shapeCount} shapes (${shapeSummary}), complexity: ${metadata.complexity}, last updated ${timestamp}*
+
+**Text Content**: ${metadata.textContent.length > 0 ? metadata.textContent.join(', ') : 'No text content'}`;
+  }
+
+  public sendMessageToWebview(message: any): void {
+    if (this.webviewPanel) {
+      this.webviewPanel.webview.postMessage(message);
+    }
+  }
+
   public async resolveCustomTextEditor(
     document: vscode.TextDocument,
     webviewPanel: vscode.WebviewPanel,
     _token: vscode.CancellationToken
   ): Promise<void> {
+    this.webviewPanel = webviewPanel;
+    
+    // Store this instance in the instances map
+    if (this.instances) {
+      this.instances.set(document.uri.toString(), this);
+    }
     
     
     // Create status bar item for this editor instance
@@ -392,6 +513,44 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
           }
           break;
         }
+        case 'savePreview': {
+          try {
+            const { blob, metadata, timestamp } = message.data as PreviewData;
+            
+            // Update metadata with actual filename
+            metadata.fileName = path.basename(document.uri.fsPath, '.sketchprompt');
+            
+            // Save the preview image
+            const previewPath = await this.savePreviewImage(blob, document.uri, timestamp);
+            
+            // Generate markdown reference
+            const markdownRef = this.generateMarkdownReference(previewPath, metadata);
+            
+            // Update status bar
+            this.updateStatusBar('$(camera) Preview Generated', 'AI-ready sketch preview created');
+            
+            // Show success notification
+            vscode.window.showInformationMessage('AI preview generated successfully!');
+            
+            // Copy markdown reference to clipboard
+            await vscode.env.clipboard.writeText(markdownRef);
+            
+            // Show notification about clipboard
+            vscode.window.showInformationMessage('Preview markdown copied to clipboard! You can paste it in AI chat.');
+            
+          } catch (error) {
+            console.error('Failed to save preview:', error);
+            vscode.window.showErrorMessage('Failed to generate AI preview');
+            this.updateStatusBar('$(error) Preview Failed', 'Failed to generate preview');
+          }
+          break;
+        }
+        case 'updateStatus': {
+          // Handle status updates from webview
+          const { text, tooltip } = message.data;
+          this.updateStatusBar(text, tooltip);
+          break;
+        }
       }
     });
 
@@ -429,6 +588,10 @@ export class SketchPromptCustomEditor implements vscode.CustomTextEditorProvider
       if (this.statusBarItem) {
         this.statusBarItem.dispose();
         
+      }
+      // Remove from instances map
+      if (this.instances) {
+        this.instances.delete(document.uri.toString());
       }
     });
 

@@ -82,6 +82,7 @@
     "onCommand:sketchprompt.newSketch",
     "onCommand:sketchprompt.help",
     "onCommand:sketchprompt.feedback",
+    "onCommand:sketchprompt.generatePreview",
     "onCommand:sketchprompt.openCanvas",
     "onCommand:workbench.action.openWith",
     "onLanguage:sketchprompt"
@@ -100,6 +101,10 @@
       {
         "command": "sketchprompt.feedback",
         "title": "SketchPrompt: Share Feedback"
+      },
+      {
+        "command": "sketchprompt.generatePreview",
+        "title": "SketchPrompt: Generate AI Preview"
       }
     ],
     "menus": {

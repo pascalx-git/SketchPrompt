@@ -1,6 +1,6 @@
 # SketchPrompt Help & Usage Guide
 
-[![Version](https://img.shields.io/badge/version-0.2.3-blue.svg?labelColor=%23cccccc&color=%233b82f6)](https://github.com/pascalx-git/SketchPrompt)
+[![Version](https://img.shields.io/badge/version-0.2.4-blue.svg?labelColor=%23cccccc&color=%233b82f6)](https://github.com/pascalx-git/SketchPrompt)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?labelColor=%23cccccc&color=%233b82f6)](LICENSE)
 [![Open VSX Downloads](https://img.shields.io/open-vsx/dt/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6)](https://open-vsx.org/extension/PascalX/SketchPrompt)
 [![Open VSX Rating](https://img.shields.io/open-vsx/stars/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6)](https://open-vsx.org/extension/PascalX/SketchPrompt)
@@ -13,16 +13,15 @@ SketchPrompt is a visual thinking tool for coding with AI. Sketch ideas and use 
 **Website**: [https://sketch-prompt.com](https://sketch-prompt.com)
 
 ## Key Features
-- **Rich Sketching**: Full sketching canvas integration with shapes, text, drawing tools, and more
-- **AI-Ready**: Structured format for future AI analysis and collaboration 
-- **File Persistence**: Save and load sketches as `.sketchprompt` files with version control
-- **Copy to Prompt**: Copy or export sketches as images and seamlessly insert into your prompts
-- **Custom Editor**: Dedicated editor for `.sketchprompt` files
-- **Auto-Save**: Your work is automatically saved as you sketch
-- **Smart Recovery**: Automatic backup and recovery from file corruption
-- **Visual Feedback**: Real-time status updates and notifications keep you informed
-- **JSON Format**: Files contain structured data that can be version controlled and analyzed by AI
-- **Collaboration Ready**: Foundation for multi-user and AI-assisted sketching
+- **Rich Sketching**: Draw, doodle, and map out your ideas with intuitive tools—just like pen and paper, but smarter
+- **Copy to Prompt**: Copy your sketch with a click and drop it straight into your next AI conversation
+- **Privacy-First**: Local processing with no data collection or cloud dependencies. Your sketches stay on your machine
+- **Persistent Sketches**: Your sketches are always saved and organized, ready to revisit, remix, or share anytime
+- **Smart Auto-Save**: Your work is automatically saved as you sketch with optimized timing
+- **Reliable File Handling**: Robust error recovery and file validation to keep your work safe
+- **AI-Ready Format**: Structured data that can be version controlled and analyzed by AI
+- **Multi-Editor Support**: Works in any OpenVSX-compatible editor (Cursor IDE, Windsurf, Google Firebase Studio, etc.)
+- **Open Source**: Transparent, auditable code with regular security reviews
 
 ## Installation
 
@@ -128,6 +127,21 @@ Sketch out architecture, component relationships, or algorithm logic:
 - Restart your OpenVSX-compatible editor if sketches become unresponsive
 - Check available system memory
 
+#### **"Unable to Open" File Errors**
+If you get an "Unable to open" error when trying to open a sketch file:
+- **Try renaming the file** to something different (e.g., change "Untitled-1.sketchprompt" to "my-sketch.sketchprompt")
+- **Close and reopen your editor** to clear any cached file paths
+- **Check file permissions** - ensure the file is readable
+- **Avoid special characters** in file names (stick to letters, numbers, hyphens, and underscores)
+- **Move the file** to a different folder if the current location has path issues
+- **Create a new sketch** if the file continues to have problems
+
+**Common causes:**
+- File path resolution issues with certain file names
+- Auto-save timing conflicts during file creation
+- Special characters or problematic file naming patterns
+- File system caching issues
+
 ### Getting More Help
 - Check the [GitHub Issues](https://github.com/pascalx-git/SketchPrompt/issues) for known problems
 - Review the [CHANGELOG.md](CHANGELOG.md) for recent updates and fixes
@@ -172,6 +186,8 @@ MIT
 - **GitHub**: [https://github.com/pascalx-git/SketchPrompt](https://github.com/pascalx-git/SketchPrompt)
 - **Help**: This file or run "SketchPrompt: Help" in any OpenVSX-compatible editor
 - **Release Notes**: [CHANGELOG.md](CHANGELOG.md)
+- **Contact**: [hey@sketch-prompt.com](mailto:hey@sketch-prompt.com)
+- **YouTube**: [https://www.youtube.com/@SketchPrompt](https://www.youtube.com/@SketchPrompt)
 
 ---
 For the latest updates, see the [GitHub repo](https://github.com/pascalx-git/SketchPrompt) or visit [https://sketch-prompt.com](https://sketch-prompt.com)

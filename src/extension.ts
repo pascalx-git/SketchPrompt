@@ -48,7 +48,8 @@ class FeedbackManager {
 }
 
 export async function activate(context: vscode.ExtensionContext) {
-
+	// Store custom editor instances
+	const customEditorInstances = new Map<string, SketchPromptCustomEditor>();
 
 	// Initialize feedback manager
 	const feedbackManager = new FeedbackManager(context);
@@ -154,10 +155,31 @@ export async function activate(context: vscode.ExtensionContext) {
 	});
 	context.subscriptions.push(feedbackDisposable);
 
+	// Register generate preview command
+	let generatePreviewDisposable = vscode.commands.registerCommand('sketchprompt.generatePreview', async () => {
+		const activeEditor = vscode.window.activeTextEditor;
+		if (!activeEditor || !activeEditor.document.fileName.endsWith('.sketchprompt')) {
+			vscode.window.showErrorMessage('Please open a .sketchprompt file to generate a preview.');
+			return;
+		}
+
+		// Find the custom editor instance for this document
+		const customEditor = customEditorInstances.get(activeEditor.document.uri.toString());
+
+		if (customEditor) {
+			// Send message to trigger preview generation
+			customEditor.sendMessageToWebview({ type: 'generatePreview' });
+			vscode.window.showInformationMessage('Generating AI preview...');
+		} else {
+			vscode.window.showErrorMessage('SketchPrompt editor not found. Please open the file in SketchPrompt editor.');
+		}
+	});
+	context.subscriptions.push(generatePreviewDisposable);
+
 	// Register the custom editor for .sketchprompt files
 	const customEditorProvider = vscode.window.registerCustomEditorProvider(
 		SketchPromptCustomEditor.viewType,
-		new SketchPromptCustomEditor(context)
+		new SketchPromptCustomEditor(context, customEditorInstances)
 	);
 	context.subscriptions.push(customEditorProvider);
 }

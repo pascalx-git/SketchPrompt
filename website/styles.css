@@ -194,6 +194,13 @@ body {
     color: #fff !important;
 }
 
+/* Ensure nav button looks exactly like nav link */
+.nav-links .nav-install-btn {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+}
+
 /* Hero Section */
 .hero {
     margin-top: 70px;
@@ -1509,4 +1516,325 @@ section, .features, .usage, .installation, .roadmap, .cta, .footer {
     border-radius: var(--radius-md);
     border-left: 4px solid var(--primary-color);
 } 
+
+/* Editor Selection Styles */
+.editor-selection {
+    margin-top: var(--spacing-xl);
+}
+
+.editor-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    background: var(--bg-primary);
+    border: var(--card-border);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--card-transition);
+}
+
+.editor-option:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-2px);
+}
+
+.editor-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.editor-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    object-fit: contain;
+}
+
+.editor-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.editor-option .install-btn {
+    min-width: 140px;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+}
+
+.editor-note {
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--primary-color);
+}
+
+.editor-note p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.editor-note strong {
+    color: var(--text-primary);
+}
+
+.editor-select-description {
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Responsive design for editor selection */
+@media (max-width: 768px) {
+    .editor-option {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+    
+    .editor-info {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .editor-option .install-btn {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* Editor Fallback Modal */
+.editor-fallback {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.fallback-content {
+    background: var(--bg-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    max-width: 400px;
+    width: 90%;
+    box-shadow: var(--shadow-xl);
+    text-align: center;
+}
+
+.fallback-content h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.fallback-content p {
+    margin-bottom: var(--spacing-xl);
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.fallback-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.fallback-actions .btn {
+    min-width: 120px;
+}
+
+@media (max-width: 480px) {
+    .fallback-content {
+        padding: var(--spacing-xl);
+        margin: var(--spacing-lg);
+    }
+    
+    .fallback-actions {
+        flex-direction: column;
+    }
+    
+    .fallback-actions .btn {
+        width: 100%;
+    }
+}
+
+/* Editor Selection Modal */
+.editor-selection-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background: var(--bg-primary);
+    border-radius: var(--radius-xl);
+    padding: 0;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.modal-description {
+    padding: 0 var(--spacing-xl) var(--spacing-lg);
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.modal-editor-options {
+    padding: 0 var(--spacing-xl) var(--spacing-lg);
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-editor-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    background: var(--bg-primary);
+    border: var(--card-border);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--card-transition);
+}
+
+.modal-editor-option:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-1px);
+}
+
+.modal-editor-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.modal-editor-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    object-fit: contain;
+}
+
+.modal-editor-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.modal-install-btn {
+    min-width: 140px;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+}
+
+.modal-note {
+    padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-xl);
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+.modal-note p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.modal-note strong {
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        margin: var(--spacing-lg);
+        width: calc(100% - 2rem);
+        max-height: 85vh;
+    }
+    
+    .modal-editor-option {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+    
+    .modal-editor-info {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .modal-install-btn {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .modal-editor-options {
+        padding: 0 var(--spacing-lg) var(--spacing-md);
+    }
+}
+
+
 

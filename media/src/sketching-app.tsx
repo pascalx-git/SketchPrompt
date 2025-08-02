@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Tldraw, getSnapshot, loadSnapshot } from 'tldraw';
 import 'tldraw/tldraw.css';
+import { SketchExportService } from './SketchExportService';
 
 // VS Code API
 // https://code.visualstudio.com/api/extension-guides/webview#webview-api
@@ -20,6 +21,76 @@ function SketchPromptApp() {
   const editorRef = useRef<any>(null);
   const [initialSnapshot, setInitialSnapshot] = useState<any | null>(null);
   const [persistenceKey, setPersistenceKey] = useState<string | null>(null);
+  const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
+  const exportService = SketchExportService.getInstance();
+
+  // Preview generation function
+  const generatePreview = useCallback(async () => {
+    if (!editorRef.current || isGeneratingPreview) return;
+    
+    try {
+      setIsGeneratingPreview(true);
+      
+      // Update status to show preview generation
+      vscode?.postMessage({ 
+        type: 'updateStatus', 
+        data: { 
+          text: '$(sync~spin) Generating AI preview...',
+          tooltip: 'Creating preview for AI analysis'
+        }
+      });
+
+      const previewData = await exportService.generatePreview(editorRef.current);
+      
+      // Send preview data to extension
+      vscode?.postMessage({
+        type: 'savePreview',
+        data: {
+          blob: previewData.imageBlob,
+          metadata: previewData.metadata,
+          timestamp: Date.now()
+        }
+      });
+
+      // Update status to show success
+      vscode?.postMessage({ 
+        type: 'updateStatus', 
+        data: { 
+          text: '$(pass-filled) Preview Generated',
+          tooltip: 'AI-ready preview created successfully'
+        }
+      });
+
+    } catch (error) {
+      console.error('Preview generation failed:', error);
+      
+      // Update status to show error
+      vscode?.postMessage({ 
+        type: 'updateStatus', 
+        data: { 
+          text: '$(error) Preview Failed',
+          tooltip: 'Failed to generate preview'
+        }
+      });
+    } finally {
+      setIsGeneratingPreview(false);
+    }
+  }, [isGeneratingPreview]);
+
+  // Debounced preview generation
+  const debouncedPreviewGeneration = useCallback(
+    debounce(generatePreview, 2000),
+    [generatePreview]
+  );
+
+  // Debounce utility function
+  function debounce<T extends (...args: any[]) => void>(fn: T, delay: number): T {
+    let timer: NodeJS.Timeout | null = null;
+    return function(this: any, ...args: any[]) {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    } as T;
+  }
 
   // Enhanced theme detection for VS Code
   const detectVSCodeTheme = (): boolean => {
@@ -71,12 +142,15 @@ function SketchPromptApp() {
         } catch (error) {
           console.error('Failed to load sketch:', error);
         }
+      } else if (message.type === 'generatePreview') {
+        // Handle manual preview generation command
+        generatePreview();
       }
     }
     window.addEventListener('message', handleMessage);
     vscode?.postMessage({ type: 'requestSketch' });
     return () => window.removeEventListener('message', handleMessage);
-  }, []);
+  }, [generatePreview]);
 
   // Enhanced theme detection and monitoring
   useEffect(() => {
@@ -143,11 +217,21 @@ function SketchPromptApp() {
       try {
         const { document, session } = getSnapshot(editor.store);
         vscode?.postMessage({ type: 'saveSketch', data: { document, session } });
+        
+        // Trigger debounced preview generation
+        debouncedPreviewGeneration();
       } catch (error) {
         console.error('Failed to save sketch:', error);
       }
     });
   }
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      exportService.cleanupCache();
+    };
+  }, [exportService]);
 
   return (
     <div style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}>
