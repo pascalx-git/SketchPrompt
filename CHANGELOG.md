@@ -9,6 +9,19 @@ Visual thinking for coding with AI. Sketch ideas and use them in your prompts to
 
 ---
 
+## v0.2.5 – Enhanced Website Navigation & User Experience
+
+**Released:** *Draft - August 14, 2025*
+
+This release improves the website user experience with enhanced navigation functionality and better tab management for the demo section.
+
+### What's New in 0.2.5
+
+- **Improved Demo Access**: Demo content is now easier to find and access from the main navigation
+- **Enhanced Analytics**: Improved analytics and tracking throughout the website for better insights
+
+---
+
 ## v0.2.4 – Universal Editor Support & Enhanced Experience
 
 **Released:** August 1, 2025

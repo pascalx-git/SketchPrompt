@@ -1672,6 +1672,67 @@ section, .features, .usage, .installation, .roadmap, .cta, .footer {
     }
 }
 
+/* Demos Content Styles */
+.demos-content {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+}
+
+.demos-content h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.demos-content p {
+    margin-bottom: var(--spacing-xl);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.video-container iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    border: none;
+    border-radius: var(--radius-lg);
+}
+
+/* Responsive video container */
+@media (max-width: 768px) {
+    .demos-content {
+        padding: var(--spacing-md) 0;
+    }
+    
+    .demos-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .demos-content p {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .video-container {
+        margin: 0 var(--spacing-md);
+    }
+}
+
 /* Editor Selection Modal */
 .editor-selection-modal {
     position: fixed;
@@ -1785,10 +1846,13 @@ section, .features, .usage, .installation, .roadmap, .cta, .footer {
     color: var(--text-primary);
 }
 
-.modal-install-btn {
+.modal-install-btn,
+.modal-visit-btn {
     min-width: 140px;
+    width: 140px;
     font-size: 0.9rem;
     padding: 0.6rem 1.2rem;
+    text-align: center;
 }
 
 .modal-note {

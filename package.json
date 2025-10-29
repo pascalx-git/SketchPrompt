@@ -3,7 +3,7 @@
   "publisher": "PascalX",
   "displayName": "SketchPrompt",
   "description": "Visual thinking for coding with AI. Sketch ideas and use them in your prompts to improve your workflow with AI models. Works in OpenVSX-compatible editors like Cursor, Windsurf, Firebase Studio, etc. Contact: hey@sketch-prompt.com | YouTube: https://www.youtube.com/@SketchPrompt",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "icon": "media/logo.png",
   "repository": {
     "type": "git",
