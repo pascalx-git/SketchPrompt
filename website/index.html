@@ -598,20 +598,29 @@
         }
 
         footer {
-            padding: 3rem 0;
+            padding: 5rem 0 3rem;
             text-align: center;
             border-top: 1px solid #e5e5e5;
             color: #666;
         }
 
+        footer .footer-logo {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 2rem;
+            display: block;
+        }
+
         footer p {
-            margin: 0.25rem 0;
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         footer .footer-links {
-            margin-top: 1rem;
+            margin: 2.5rem 0;
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -620,10 +629,17 @@
             color: #666;
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 0.95rem;
         }
 
         footer .footer-links a:hover {
             color: #1a1a1a;
+        }
+
+        footer .footer-copyright {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            opacity: 0.6;
         }
 
         @media (max-width: 968px) {
@@ -696,6 +712,15 @@
 
             .demo-video p {
                 font-size: 1rem;
+            }
+
+            footer {
+                padding: 3rem 0 2rem;
+            }
+
+            footer .footer-links {
+                gap: 1.5rem;
+                margin: 2rem 0;
             }
         }
 
@@ -1164,6 +1189,7 @@
 
     <div class="container">
         <footer>
+            <img src="images/logo-animated-black-cursor.gif" alt="SketchPrompt" class="footer-logo" onerror="this.src='images/logo.svg'">
             <p>Built for the future of human-AI collaboration</p>
             <div class="footer-links">
                 <a href="https://github.com/pascalx-git/SketchPrompt" target="_blank" rel="noopener noreferrer" data-umami-event="footer-github">GitHub</a>
@@ -1172,7 +1198,7 @@
                 <a href="https://www.youtube.com/@SketchPrompt" target="_blank" rel="noopener noreferrer" data-umami-event="footer-youtube">YouTube</a>
                 <a href="mailto:hey@sketch-prompt.com" data-umami-event="footer-email">Contact</a>
             </div>
-            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 1rem;">SketchPrompt © 2025</p>
+            <p class="footer-copyright">SketchPrompt © 2025</p>
         </footer>
     </div>
 
