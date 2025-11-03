@@ -47,6 +47,64 @@ class FeedbackManager {
 	}
 }
 
+// Create demo sketch content to show users what they can do
+// This function returns the demo content by reading from the bundled resource or workspace
+async function createDemoSketchContent(context: vscode.ExtensionContext): Promise<any> {
+	// First, try to read from the workspace root (for development)
+	const workspaceFolders = vscode.workspace.workspaceFolders;
+	if (workspaceFolders) {
+		const rootPath = workspaceFolders[0].uri.fsPath;
+		const demoTemplatePath = path.join(rootPath, 'SketchPrompt', 'demo.sketchprompt');
+		
+		if (fs.existsSync(demoTemplatePath)) {
+			try {
+				const demoContent = fs.readFileSync(demoTemplatePath, 'utf8');
+				return JSON.parse(demoContent);
+			} catch (error) {
+				console.error('Failed to read demo template from workspace:', error);
+			}
+		}
+	}
+	
+	// Try to read from bundled resources (for production)
+	try {
+		const demoResourceUri = vscode.Uri.joinPath(context.extensionUri, 'resources', 'demo.sketchprompt');
+		const demoContentBytes = await vscode.workspace.fs.readFile(demoResourceUri);
+		const demoContent = Buffer.from(demoContentBytes).toString('utf8');
+		return JSON.parse(demoContent);
+	} catch (error) {
+		console.error('Failed to read demo template from resources:', error);
+	}
+	
+	// Fallback: Return empty object if demo file doesn't exist
+	return {
+		document: {
+			store: {},
+			schema: {
+				schemaVersion: 2,
+				sequences: {}
+			}
+		},
+		session: {
+			version: 0,
+			currentPageId: "page:page",
+			exportBackground: true,
+			isFocusMode: false,
+			isDebugMode: false,
+			isToolLocked: false,
+			isGridMode: false,
+			pageStates: [
+				{
+					pageId: "page:page",
+					camera: { x: 0, y: 0, z: 1 },
+					selectedShapeIds: [],
+					focusedGroupId: null
+				}
+			]
+		}
+	};
+}
+
 export async function activate(context: vscode.ExtensionContext) {
 	// Store custom editor instances
 	const customEditorInstances = new Map<string, SketchPromptCustomEditor>();
@@ -54,7 +112,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	// Initialize feedback manager
 	const feedbackManager = new FeedbackManager(context);
 
-	// On activation, ensure SketchPrompt folder and default file exist
+	// On activation, ensure SketchPrompt folder exists and create demo file if needed
 	const workspaceFolders = vscode.workspace.workspaceFolders;
 	if (workspaceFolders) {
 		const rootPath = workspaceFolders[0].uri.fsPath;
@@ -62,28 +120,17 @@ export async function activate(context: vscode.ExtensionContext) {
 		if (!fs.existsSync(sketchesFolder)) {
 			fs.mkdirSync(sketchesFolder);
 		}
-		// Check for existing .sketchprompt files
-		const files = fs.readdirSync(sketchesFolder).filter(f => f.endsWith('.sketchprompt'));
-		if (files.length === 0) {
-			// Use 'sketch' as the base name
-			let baseName = 'sketch';
-			let defaultName = `${baseName}.sketchprompt`;
-			let i = 1;
-			let defaultPath;
+		
+		// Create demo.sketchprompt file with prefilled content to show users what they can do
+		// Only create it if it doesn't already exist
+		const demoPath = path.join(sketchesFolder, 'demo.sketchprompt');
+		if (!fs.existsSync(demoPath)) {
 			try {
-				while (true) {
-					defaultPath = validateFilePath(sketchesFolder, defaultName);
-					if (!fs.existsSync(defaultPath)) break;
-					defaultName = `${baseName}-${i}.sketchprompt`;
-					i++;
-				}
-				fs.writeFileSync(defaultPath, JSON.stringify({}));
-				const defaultUri = vscode.Uri.file(defaultPath);
-				setTimeout(() => {
-					vscode.commands.executeCommand('vscode.openWith', defaultUri, 'sketchprompt.editor');
-				}, 300);
+				const validatedDemoPath = validateFilePath(sketchesFolder, 'demo.sketchprompt');
+				const demoContent = await createDemoSketchContent(context);
+				fs.writeFileSync(validatedDemoPath, JSON.stringify(demoContent, null, 2));
 			} catch (error) {
-				console.error('Failed to create default sketch file:', error);
+				console.error('Failed to create demo sketch file:', error);
 			}
 		}
 	}

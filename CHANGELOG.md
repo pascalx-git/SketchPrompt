@@ -9,16 +9,17 @@ Visual thinking for coding with AI. Sketch ideas and use them in your prompts to
 
 ---
 
-## v0.2.5 – Enhanced Website Navigation & User Experience
+## v0.2.5 – Demo File & File Creation Fixes
 
-**Released:** *Draft - August 14, 2025*
+**Released:** *November 2, 2025*
 
-This release improves the website user experience with enhanced navigation functionality and better tab management for the demo section.
+This release fixes file creation issues and adds a helpful demo file to help users get started with SketchPrompt. You'll now get a better first-time experience with a prefilled demo that shows what you can do.
 
 ### What's New in 0.2.5
 
-- **Improved Demo Access**: Demo content is now easier to find and access from the main navigation
-- **Enhanced Analytics**: Improved analytics and tracking throughout the website for better insights
+- **Fixed Duplicate File Creation**: When creating a new sketch file, only one file is created instead of two. No more duplicate files when right-clicking to create a new sketch.
+- **Welcome Demo File**: A new `demo.sketchprompt` file is automatically created when you first use SketchPrompt, showing example sketches and helpful tips to get you started.
+- **Improved First-Time Experience**: New users now see example content immediately, making it easier to understand what SketchPrompt can do.
 
 ---
 
