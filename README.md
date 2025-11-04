@@ -1,6 +1,6 @@
 # ![SketchPrompt Logo](media/logo-icon.png) SketchPrompt
 
-[![Version](https://img.shields.io/badge/version-0.2.4-blue.svg?labelColor=%23cccccc&color=%233b82f6)](https://github.com/pascalx-git/SketchPrompt)
+[![Version](https://img.shields.io/badge/version-0.2.5-blue.svg?labelColor=%23cccccc&color=%233b82f6)](https://github.com/pascalx-git/SketchPrompt)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?labelColor=%23cccccc&color=%233b82f6)](LICENSE)
 [![Open VSX Downloads](https://img.shields.io/open-vsx/dt/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6)](https://open-vsx.org/extension/PascalX/SketchPrompt)
 [![Open VSX Rating](https://img.shields.io/open-vsx/stars/PascalX/SketchPrompt?labelColor=%23cccccc&color=%233b82f6)](https://open-vsx.org/extension/PascalX/SketchPrompt)
@@ -257,4 +257,4 @@ We love hearing from our users! Your feedback helps us make SketchPrompt better 
 
 ---
 
-**Version**: 0.2.4 | **Last Updated**: July 31 2024 | **Compatibility**: OpenVSX-compatible editors
+**Version**: 0.2.5 | **Last Updated**: November 2 2024 | **Compatibility**: OpenVSX-compatible editors
