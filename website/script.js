@@ -140,6 +140,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         <button class="modal-install-btn" data-editor="windsurf" data-umami-event="modal-install-windsurf">Install</button>
                     </div>
+                    <div class="modal-editor-option" data-editor="antigravity">
+                        <div class="modal-editor-info">
+                            <img src="https://antigravity.google/favicon.ico" alt="Google Antigravity" class="modal-editor-icon" onerror="this.src='https://www.google.com/favicon.ico'">
+                            <span class="modal-editor-name">Antigravity</span>
+                        </div>
+                        <button class="modal-install-btn" data-editor="antigravity" data-umami-event="modal-install-antigravity">Install</button>
+                    </div>
                     <div class="modal-editor-option" data-editor="firebase-studio">
                         <div class="modal-editor-info">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROklQN6uy2soSSqi6okf-w-yyymRbETduSeA&s" alt="Google Firebase Studio" class="modal-editor-icon" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTQgMTBIMjJMMTQgMTJMMTYgMjJMMTIgMThMMTAgMjJMMTIgMTJMMiAxMEwxMiAyWiIgZmlsbD0iIzMzMyIvPgo8L3N2Zz4K'">
@@ -149,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 <div class="modal-note">
-                    <p><strong>Note:</strong> If your editor isn't listed, you can still install SketchPrompt from your editor's extension marketplace by searching for "SketchPrompt".</p>
+                    <p><strong>Note:</strong> If install doesn't open your editor (or it's not installed yet), use any OpenVSX-compatible editor and add SketchPrompt from its marketplace.</p>
                 </div>
             </div>
         `;
@@ -209,7 +216,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const editorUrls = {
             'cursor': `cursor:extension/${extensionId}`,
             'windsurf': `windsurf:extension/${extensionId}`,
-            'firebase-studio': null // Firebase Studio is web-based, no extension installation
+            'firebase-studio': null, // Firebase Studio is web-based, no extension installation
+            'antigravity': `antigravity:extension/${extensionId}`
+        };
+        
+        const editorInfo = {
+            'cursor': { name: 'Cursor', url: 'https://cursor.sh', marketplace: 'OpenVSX' },
+            'windsurf': { name: 'Windsurf', url: 'https://windsurf.com', marketplace: 'OpenVSX' },
+            'antigravity': { name: 'Antigravity', url: 'https://antigravity.google', marketplace: 'OpenVSX' }
         };
         
         const url = editorUrls[editor];
@@ -217,67 +231,66 @@ document.addEventListener('DOMContentLoaded', function() {
             // Try to open the editor-specific URL
             window.location.href = url;
             
-            // Fallback: Show a message if the editor isn't installed
+            // Show a subtle fallback notification after a delay
+            // This offers alternatives without assuming the protocol handler failed
             setTimeout(() => {
-                // If we're still on the same page after 2 seconds, show fallback
-                if (document.visibilityState === 'visible') {
-                    showEditorFallback(editor);
+                if (editorInfo[editor] && document.visibilityState === 'visible') {
+                    showFallbackNotification(editorInfo[editor]);
                 }
-            }, 2000);
+            }, 4000); // 4 second delay to give browser dialogs time
         }
     }
     
-    function showEditorFallback(editor) {
-        const editorNames = {
-            'cursor': 'Cursor IDE',
-            'windsurf': 'Windsurf',
-            'firebase-studio': 'Google Firebase Studio'
-        };
+    function showFallbackNotification(info) {
+        // Check if a notification is already showing
+        if (document.querySelector('.fallback-notification')) {
+            return;
+        }
         
-        const editorUrls = {
-            'cursor': 'https://cursor.sh',
-            'windsurf': 'https://windsurf.com',
-            'firebase-studio': 'https://firebase.studio'
-        };
-        
-        const editorName = editorNames[editor] || editor;
-        const editorUrl = editorUrls[editor] || '#';
-        
-        // Create a modal notification
-        const fallback = document.createElement('div');
-        fallback.className = 'editor-selection-modal';
-        fallback.innerHTML = `
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>${editorName} not detected</h2>
-                    <button class="modal-close">&times;</button>
-                </div>
-                <p class="modal-description">It looks like ${editorName} isn't installed or running on your system.</p>
-                <div class="fallback-actions">
-                    <a href="${editorUrl}" target="_blank" rel="noopener noreferrer" class="fallback-btn fallback-btn-primary">${editor === 'firebase-studio' ? 'Visit' : 'Download'} ${editorName}</a>
-                    <button class="modal-close fallback-btn fallback-btn-secondary">Close</button>
-                </div>
+        const notification = document.createElement('div');
+        notification.className = 'fallback-notification';
+        notification.innerHTML = `
+            <div class="fallback-notification-content">
+                <span>If install doesn't open your editor (or it's not installed yet), use any OpenVSX-compatible editor and add SketchPrompt from its marketplace.</span>
+                <button class="fallback-notification-close" aria-label="Close">&times;</button>
             </div>
         `;
         
-        document.body.appendChild(fallback);
+        document.body.appendChild(notification);
         
-        // Close button functionality
-        fallback.querySelectorAll('.modal-close').forEach(btn => {
-            btn.addEventListener('click', () => fallback.remove());
-        });
-        
-        // Click outside to close
-        fallback.addEventListener('click', (e) => {
-            if (e.target === fallback) fallback.remove();
-        });
-        
-        // Auto-remove after 10 seconds
+        // Animate in
         setTimeout(() => {
-            if (fallback.parentElement) {
-                fallback.remove();
+            notification.classList.add('show');
+        }, 10);
+        
+        // Close function
+        const closeNotification = () => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+                // Clean up scroll listener
+                if (notification._scrollHandler) {
+                    window.removeEventListener('scroll', notification._scrollHandler);
+                }
+            }, 300);
+        };
+        
+        // Close button
+        notification.querySelector('.fallback-notification-close').addEventListener('click', closeNotification);
+        
+        // Dismiss on scroll down
+        let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHandler = () => {
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            // Only dismiss if scrolling down (not up) and past initial viewport
+            if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
+                closeNotification();
             }
-        }, 10000);
+            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+        };
+        
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        notification._scrollHandler = scrollHandler;
     }
 });
 

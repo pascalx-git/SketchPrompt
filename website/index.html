@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SketchPrompt - Visual Thinking for AI</title>
-    <meta name="description" content="Visual thinking for coding with AI. Sketch ideas and use them in your prompts to improve your workflow with AI models. Works in OpenVSX-compatible editors like Cursor, Windsurf, Firebase Studio, etc.">
-    <meta name="keywords" content="SketchPrompt, visual thinking, AI collaboration, sketching, OpenVSX, Cursor IDE, Windsurf, Firebase Studio">
+    <meta name="description" content="Visual thinking for coding with AI. Sketch ideas and use them in your prompts to improve your workflow with AI models. Works in OpenVSX-compatible editors like Cursor, Windsurf, Firebase Studio, Antigravity, etc.">
+    <meta name="keywords" content="SketchPrompt, visual thinking, AI collaboration, sketching, OpenVSX, Cursor IDE, Windsurf, Firebase Studio, Antigravity">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sketch-prompt.com/">
     <meta property="og:title" content="SketchPrompt - Visual Thinking for AI Collaboration">
-    <meta property="og:description" content="Visual thinking for coding with AI. Sketch ideas and use them in your prompts to improve your workflow with AI models. Works in OpenVSX-compatible editors like Cursor, Windsurf, Firebase Studio, etc.">
+    <meta property="og:description" content="Visual thinking for coding with AI. Sketch ideas and use them in your prompts to improve your workflow with AI models. Works in OpenVSX-compatible editors like Cursor, Windsurf, Firebase Studio, Antigravity, etc.">
     <meta property="og:image" content="https://sketch-prompt.com/images/og-image.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://sketch-prompt.com/">
     <meta property="twitter:title" content="SketchPrompt - Visual Thinking for AI Collaboration">
-    <meta property="twitter:description" content="Visual thinking for coding with AI. Sketch ideas and use them in your prompts to improve your workflow with AI models. Works in OpenVSX-compatible editors like Cursor, Windsurf, Firebase Studio, etc.">
+    <meta property="twitter:description" content="Visual thinking for coding with AI. Sketch ideas and use them in your prompts to improve your workflow with AI models. Works in OpenVSX-compatible editors like Cursor, Windsurf, Firebase Studio, Antigravity, etc.">
     <meta property="twitter:image" content="https://sketch-prompt.com/images/og-image.png">
 
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -926,6 +926,70 @@
             border-color: #d0d0d0;
         }
 
+        /* Fallback Notification Toast */
+        .fallback-notification {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            z-index: 10001;
+            opacity: 0;
+            transition: all 0.3s ease-out;
+            pointer-events: none;
+        }
+
+        .fallback-notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .fallback-notification-content {
+            background: #1a1a1a;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 500px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .fallback-notification-content a {
+            color: #60a5fa;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .fallback-notification-content a:hover {
+            color: #93c5fd;
+        }
+
+        .fallback-notification-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: background 0.2s;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+
+        .fallback-notification-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         @media (max-width: 768px) {
             .modal-content {
                 margin: 1rem;
@@ -954,6 +1018,21 @@
 
             .modal-install-btn {
                 width: 100%;
+            }
+
+            .fallback-notification {
+                left: 1rem;
+                right: 1rem;
+                transform: translateY(100px);
+            }
+
+            .fallback-notification.show {
+                transform: translateY(0);
+            }
+
+            .fallback-notification-content {
+                max-width: none;
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -1084,6 +1163,13 @@
                     <div class="compat-item-left">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROklQN6uy2soSSqi6okf-w-yyymRbETduSeA&s" alt="Firebase Studio" class="compat-logo" onerror="this.style.display='none'">
                         <span>Firebase Studio</span>
+                    </div>
+                    <span class="check">✓</span>
+                </div>
+                <div class="compat-item">
+                    <div class="compat-item-left">
+                        <img src="https://antigravity.google/favicon.ico" alt="Antigravity" class="compat-logo" onerror="this.src='https://www.google.com/favicon.ico'">
+                        <span>Antigravity</span>
                     </div>
                     <span class="check">✓</span>
                 </div>
